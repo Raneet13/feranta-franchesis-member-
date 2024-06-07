@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:feranta_franchise/static/flutter_toast_message/toast_messge.dart';
 
 import '../../configs/app_url.dart';
 import '../../data/network/api_helper.dart';
@@ -96,57 +97,59 @@ class ResisterRepository {
     return response;
   }
 
-  Future resisterOwner({
-    required name,
-    required email,
-    required contact,
-    required altcontact,
-    required state,
-    required city,
-    required pincode,
-    required address1,
-    required license_no,
-    required password,
-    required ac_name,
-    required bank_name,
-    required acc_no,
-    required ifsc,
-    required img,
-    required frontimg,
-    required backimg,
-    required license_img,
-    required adharno,
-    required member_id,
-    required is_driver,
-  }) async {
+  Future resisterOwner(
+      {required member_id,
+      required full_name,
+      required contact_no,
+      required email,
+      required city,
+      required img,
+      required frontimg,
+      required backimg,
+      required license_img,
+      required altcontact,
+      required state,
+      required pincode,
+      required address1,
+      required address2,
+      required adharno,
+      required password,
+      required license_no,
+      required ac_name,
+      required bank_name,
+      required acc_no,
+      required ifsc,
+      required is_driver}) async {
     late var response;
 
     try {
       FormData formData = FormData.fromMap({
-        'full_name': name,
+        'member_id': member_id,
+        'full_name': full_name,
+        'contact_no': contact_no,
         'email': email,
-        'contact_no': contact,
-        'altcontact': altcontact,
-        'state': state,
         'city': city,
-        'pincode': pincode,
-        'address1': address1,
-        'license_no': license_no,
-        'password': password,
-        'ac_name': ac_name,
-        'bank_name': bank_name,
-        'acc_no': acc_no,
-        'ifsc': ifsc,
         'img': img,
         'frontimg': frontimg,
         'backimg': backimg,
         'license_img': license_img,
+        'altcontact': altcontact,
+        'state': state,
+        'pincode': pincode,
+        'address1': address1,
+        'address2': address2,
         'adharno': adharno,
-        'member_id': member_id,
+        'password': password,
+        'license_no': license_no,
+        'ac_name': ac_name,
+        'bank_name': bank_name,
+        'acc_no': acc_no,
+        'ifsc': ifsc,
         'is_driver': is_driver
       });
+
       response = await NetworkApiService()
-          .postApi(url: AppUrl.driverResister, formData: formData);
+          .postApi(url: AppUrl.resisterOwner, formData: formData);
     } catch (e) {
       throw Exception(e);
     }

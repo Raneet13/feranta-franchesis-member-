@@ -14,4 +14,5 @@ class Colo {
   static const Color yellowshade300 = Color(0xFFFFD54F);
   static const Color blackShade45 = Color(0X73000000);
   static const Color blackShade87 = Color(0XDD000000);
+  static const Color primaryColor = Color(0xFFFBD506);
 }

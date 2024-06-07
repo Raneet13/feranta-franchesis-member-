@@ -1,4 +1,4 @@
-package com.example.feranta_franchise
+package member.feranta.`in`
 
 import io.flutter.embedding.android.FlutterActivity
 

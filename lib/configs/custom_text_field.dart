@@ -13,6 +13,7 @@ class CustomTextField extends StatefulWidget {
   final Function? onChanged;
   final Icon? prefix;
   final bool? autofocus;
+  List<TextInputFormatter>? inputFormater;
 
   CustomTextField(
       {required this.hint,
@@ -23,7 +24,8 @@ class CustomTextField extends StatefulWidget {
       this.obscureText = false,
       this.validator,
       this.prefix,
-      this.autofocus = false});
+      this.autofocus = false,
+      this.inputFormater});
 
   _CustomTextFieldState createState() => _CustomTextFieldState();
 }
@@ -50,10 +52,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
         child: TextField(
           keyboardType: widget.KeyBoardType,
           obscureText: widget.obscureText,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            LengthLimitingTextInputFormatter(10),
-          ],
+          style: TextStyle(color: Colors.black54),
+          inputFormatters: widget.inputFormater,
           onChanged: (text) {
             if (widget.onChanged != null) {
               widget.onChanged!(text);

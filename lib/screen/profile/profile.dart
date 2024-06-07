@@ -24,8 +24,11 @@ class _ProfileScrenState extends State<ProfileScren> {
   @override
   void initState() {
     // TODO: implement initState
-    Provider.of<ProfileViewmodel>(context, listen: false).viewProfiledetails();
+
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) =>
+        Provider.of<ProfileViewmodel>(context, listen: false)
+            .viewProfiledetails());
   }
 
   void showLogoutDialog(BuildContext context) {
@@ -39,13 +42,12 @@ class _ProfileScrenState extends State<ProfileScren> {
             content: const Text("Are you sure you want to logout"),
             actions: <Widget>[
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red.shade100),
+                style: ElevatedButton.styleFrom(backgroundColor: Colo.black),
                 child: Text(
                   'No',
                   style: TextStyle(
                       // decoration: TextDecoration.underline,
-                      color: Colors.redAccent),
+                      color: Colo.white),
                 ),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -54,6 +56,7 @@ class _ProfileScrenState extends State<ProfileScren> {
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shadowColor: Colors.black,
+
                     elevation: 4,
                     side: BorderSide(
                         color: Colors.transparent,
@@ -304,7 +307,7 @@ class _ProfileScrenState extends State<ProfileScren> {
                                                     Icons.support_agent,
                                                     size: 20,
                                                   ),
-                                                  title: Text("Customer care",
+                                                  title: Text("Customer Care",
                                                       style: Theme.of(context)
                                                           .textTheme
                                                           .bodyMedium),

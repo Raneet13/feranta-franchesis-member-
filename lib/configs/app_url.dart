@@ -18,7 +18,7 @@ class AppUrl {
   static var profile = '/get-profile-details';
   // static var checkBookingdriver = '/check-booking-status';
   // static var getDriverDetails = '/get-profile-details';
-  // static var myTripAll = '/get-customer-booking-history';
+  static var resisterOwner = '/add-owner';
   static var updateProfile = '/updateProfile';
   // static var allNotification = '/get-all-notification';
   // static var cancelBooking = '/cancel-booking';

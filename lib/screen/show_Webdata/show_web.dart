@@ -11,6 +11,7 @@ class ShowWeb extends StatefulWidget {
 }
 
 class _ShowWebState extends State<ShowWeb> {
+  bool _isLoading = true;
   late final _controller = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
     ..runJavaScript(
@@ -60,13 +61,25 @@ class _ShowWebState extends State<ShowWeb> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller.setNavigationDelegate(NavigationDelegate(
-      onPageFinished: (url) async {
-        _controller.runJavaScript(
-            "document.getElementById('navbar').style.display='none';"
-            "document.getElementsByTagName('footer')[0].style.display='none'"); //uk-background-cover
-      },
-    ));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _controller.setNavigationDelegate(NavigationDelegate(
+        onPageStarted: (String url) {
+          setState(() {
+            _isLoading = true;
+          });
+        },
+        onPageFinished: (url) async {
+          setState(() {
+            _isLoading = false;
+          });
+          _controller.runJavaScript(
+              "document.getElementById('masthead').style.display='none';" //
+              "document.getElementById('colophon').style.display='none';" //
+              "document.getElementById('feranta').style.display='none';" //
+              "document.getElementsByTagName('footer').style.display='none'"); //uk-background-cover
+        },
+      ));
+    });
     //     .setNavigationDelegate(NavigationDelegate(onProgress: (int progress) {
     //   CircularProgressIndicator();
     //   // Update loading bar.
@@ -105,7 +118,9 @@ class _ShowWebState extends State<ShowWeb> {
         body: SafeArea(
             child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
-          child: WebViewWidget(controller: _controller),
+          child: _isLoading
+              ? Center(child: CircularProgressIndicator())
+              : WebViewWidget(controller: _controller),
         )));
   }
 }

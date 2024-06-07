@@ -15,8 +15,20 @@ class CustomerResister extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Resister Customer"),
+        title: Text("Register Customer"),
         centerTitle: true,
+        leading: InkWell(
+          onTap: () {
+            Provider.of<ResisterViewmodel>(context, listen: false)
+              ..isLoading = false
+              ..clearCustomerResistationForm();
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+        ),
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
@@ -150,7 +162,7 @@ class CustomerResister extends StatelessWidget {
                             // label: Text("Enter email"),
                             // floatingLabelAlignment:
                             //     FloatingLabelAlignment.start,
-                            hintText: "ASUTOSH NAYAK",
+                            hintText: "Name",
                             // suffixIcon: Container(
                             //   height: 40,
                             //   color: Colors.amber,
@@ -226,7 +238,7 @@ class CustomerResister extends StatelessWidget {
                             // label: Text("Enter email"),
                             // floatingLabelAlignment:
                             //     FloatingLabelAlignment.start,
-                            hintText: "1234567890",
+                            hintText: "Phone Number",
                             // suffixIcon: Container(
                             //   height: 40,
                             //   color: Colors.amber,
@@ -298,7 +310,7 @@ class CustomerResister extends StatelessWidget {
                             // label: Text("Enter email"),
                             // floatingLabelAlignment:
                             //     FloatingLabelAlignment.start,
-                            hintText: "abc@gmail.com",
+                            hintText: "Email Address",
                             // suffixIcon: Container(
                             //   height: 40,
                             //   color: Colors.amber,
@@ -374,7 +386,7 @@ class CustomerResister extends StatelessWidget {
                             // label: Text("Enter email"),
                             // floatingLabelAlignment:
                             //     FloatingLabelAlignment.start,
-                            hintText: "1234567890",
+                            hintText: "Phone Number",
                             // suffixIcon: Container(
                             //   height: 40,
                             //   color: Colors.amber,

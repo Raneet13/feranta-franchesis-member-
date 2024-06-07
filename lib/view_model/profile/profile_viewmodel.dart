@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:feranta_franchise/repository/profile/profile_repo.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../model/profile/view_profileDetails.dart';
 import '../../static/flutter_toast_message/toast_messge.dart';
@@ -10,22 +12,25 @@ import '../../static/flutter_toast_message/toast_messge.dart';
 class ProfileViewmodel extends ChangeNotifier {
   File? profileImage;
   var profileImageName = '';
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final phoneController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   bool isLoading = false;
   ProfileDetailsModel? profileDetailsModel;
   // MyprofileDetaisModel? myprofileDetaisModel;
   Future insertProfileImage() async {
-    // FilePickerResult? result = await FilePicker.platform.pickFiles();
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'png'],
+    );
 
-    // if (result != null) {
-    //   File file = File(result.files.single.path!);
-    //   profileImage = file;
-    // } else {
-    //   print(result);
-    //   // User canceled the picker
-    // }
+    if (result != null) {
+      File file = File(result.files.single.path!);
+      profileImage = file;
+    } else {
+      // print(result);
+      // User canceled the picker
+    }
     notifyListeners();
   }
 
@@ -73,13 +78,14 @@ class ProfileViewmodel extends ChangeNotifier {
         contact_no: phoneController.text.toString(),
         image: profileImage != null
             ? await MultipartFile.fromFile(profileImage!.path,
-                filename: profileImageName)
+                filename: profileImage!.path.split('/').last)
             : "");
 
     if (allData["error"] != null) {
       ShowToast(msg: allData["response"]["message"].toString());
     } else {
       ShowToast(msg: "Profile Update Sucessfully");
+
       viewProfiledetails();
     }
 

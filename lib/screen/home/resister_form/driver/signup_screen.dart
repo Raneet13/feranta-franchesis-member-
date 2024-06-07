@@ -44,7 +44,6 @@ class _SignUpPageState extends State<SignUpDriverPage> {
   void initState() {
     // TODO: implement initState
 
-    Provider.of<ResisterViewmodel>(context, listen: false).getAllMaster();
     // provider.deliveryBoyLoginProfile;
 
     // address2 = TextEditingController(text: widget.address["adress2"]);
@@ -52,6 +51,9 @@ class _SignUpPageState extends State<SignUpDriverPage> {
     // areaName = widget.address["cityname"];
     // pincode = widget.address["pincode"];
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ResisterViewmodel>(context, listen: false).getAllMaster();
+    });
   }
 
   Validate(input) {
@@ -64,7 +66,9 @@ class _SignUpPageState extends State<SignUpDriverPage> {
   @override
   void dispose() {
     // TODO: implement dispose
-    Provider.of<ResisterViewmodel>(context, listen: false).isLoading = false;
+    Provider.of<ResisterViewmodel>(context, listen: false)
+      ..isLoading = false
+      ..clearResistationForm();
     super.dispose();
   }
 
@@ -76,8 +80,9 @@ class _SignUpPageState extends State<SignUpDriverPage> {
           backgroundColor: Colors.amber[100],
           leading: InkWell(
             onTap: () {
-              Provider.of<ResisterViewmodel>(context, listen: false).isLoading =
-                  false;
+              Provider.of<ResisterViewmodel>(context, listen: false)
+                ..isLoading = false
+                ..clearResistationForm();
               Navigator.pop(context);
             },
             child: Icon(
@@ -125,7 +130,9 @@ class _SignUpPageState extends State<SignUpDriverPage> {
         ),
         body: Consumer<ResisterViewmodel>(builder: (context, val, _) {
           return val.masterModel == null
-              ? SizedBox()
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
               : Form(
                   key: formKey,
                   child: Padding(
@@ -268,7 +275,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter email"),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "ASUTOSH NAYAK",
+                                        hintText: "Name",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -348,7 +355,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter email"),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "abc@feranta.in",
+                                        hintText: "Email",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -432,7 +439,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter Phone No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "123456890",
+                                        hintText: "phone number",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -512,7 +519,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter Phone No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "dr@123",
+                                        hintText: "Password",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -597,7 +604,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter Phone No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "123456890",
+                                        hintText: "Phone number",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -773,9 +780,9 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                 children: [
                                   Text("Enter Aadress"),
                                   SizedBox(
-                                    height: 48,
+                                    // height: 48,
                                     child: TextFormField(
-                                      maxLines: 1,
+                                      maxLines: 4,
                                       controller: val.address1,
                                       keyboardType: TextInputType.emailAddress,
                                       validator: (input) =>
@@ -788,8 +795,8 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         fillColor: Colors.grey.shade200,
                                         filled: true,
                                         errorStyle: TextStyle(fontSize: 0),
-                                        contentPadding:
-                                            EdgeInsets.only(left: 15, right: 5),
+                                        contentPadding: EdgeInsets.only(
+                                            left: 15, right: 5, top: 15),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
@@ -832,8 +839,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter Phone No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText:
-                                            "Rasulgarh, Bhubaneswar, Odisha 751010",
+                                        hintText: "Enter Primary Address",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -917,7 +923,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter Phone No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "12345689012343",
+                                        hintText: "Aadhar Number",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -958,7 +964,8 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               BorderRadius.circular(10)),
                                       child: val.frontimg != null
                                           ? Text("${val.frontimg!.path}")
-                                          : Text("Upload Aadhar font"),
+                                          : const Text(
+                                              "Upload Aadhar front Image"),
                                     ),
                                   )
                                   // SizedBox(
@@ -1044,7 +1051,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               BorderRadius.circular(10)),
                                       child: val.backimg != null
                                           ? Text("${val.backimg!.path}")
-                                          : Text("Upload Aadhar back"),
+                                          : Text("Upload Aadhar back image"),
                                     ),
                                   )
                                 ],
@@ -1121,7 +1128,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter email"),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "1",
+                                        hintText: "Experience Year",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -1202,7 +1209,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Enter Licence No."),
+                                  Text("Enter Licence Number"),
                                   SizedBox(
                                     height: 48,
                                     child: TextFormField(
@@ -1262,7 +1269,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter Vechicle No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "OD 2312",
+                                        hintText: "License Number",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -1307,7 +1314,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               BorderRadius.circular(10)),
                                       child: val.license_img != null
                                           ? Text("${val.license_img!.path}")
-                                          : Text("Upload Licence"),
+                                          : Text("Upload Licence image"),
                                     ),
                                   ),
                                 ],
@@ -1397,7 +1404,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter Vechicle No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "ASUTOSH NAYAK",
+                                        hintText: "Name",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -1479,7 +1486,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter Vechicle No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "234567890909",
+                                        hintText: "Account Number",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -1558,7 +1565,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter Vechicle No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "STATE BANK OF INDIA",
+                                        hintText: "Bank Name",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -1637,7 +1644,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         // label: Text("Enter Vechicle No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "SBIN00123454",
+                                        hintText: "IFSC Code number",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,

@@ -28,6 +28,9 @@ class _EditProfiletlsState extends State<EditProfiletls> {
     // provider.viewProfle();
 
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) =>
+        Provider.of<ProfileViewmodel>(context, listen: false).isLoading =
+            false);
   }
 
   List<Map<String, dynamic>> profile = [
@@ -63,43 +66,43 @@ class _EditProfiletlsState extends State<EditProfiletls> {
                     Container(
                       alignment: Alignment.center,
                       padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: badges.Badge(
-                        // badgeColor: primaryColor,
-                        position:
-                            badges.BadgePosition.custom(bottom: 2, end: 10),
-                        badgeContent: InkWell(
-                          onTap: () async {
-                            await profile.insertProfileImage();
-                          },
-                          child: const Icon(
+                      child: InkWell(
+                        onTap: () async {
+                          await profile.insertProfileImage();
+                        },
+                        child: badges.Badge(
+                          // badgeColor: primaryColor,
+                          position:
+                              badges.BadgePosition.custom(bottom: 2, end: 10),
+                          badgeContent: const Icon(
                             Icons.edit,
                             color: Colors.white,
                             size: 16,
                           ),
+                          child: profile.profileImage != null
+                              ? CircleAvatar(
+                                  radius: 55,
+
+                                  //backgroundImage: NetworkImage(DashStrings.serviceImg),
+                                  backgroundImage:
+                                      FileImage(profile.profileImage!),
+                                  onBackgroundImageError: (e, st) {},
+                                )
+                              //  Image.file(
+                              //   height: ,
+                              //   width: ,
+                              //     profile.profileImage!,
+                              //     fit: BoxFit.fill,
+                              //   )
+                              : CircleAvatar(
+                                  radius: 55,
+
+                                  //backgroundImage: NetworkImage(DashStrings.serviceImg),
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      "${AppUrl.imageUrl}${profile.profileDetailsModel!.response!.userDetails!.profileImage ?? ""}"),
+                                  onBackgroundImageError: (e, st) {},
+                                ),
                         ),
-                        child: profile.profileImage != null
-                            ? CircleAvatar(
-                                radius: 55,
-
-                                //backgroundImage: NetworkImage(DashStrings.serviceImg),
-                                backgroundImage:
-                                    FileImage(profile.profileImage!),
-                                onBackgroundImageError: (e, st) {},
-                              )
-                            //  Image.file(
-                            //   height: ,
-                            //   width: ,
-                            //     profile.profileImage!,
-                            //     fit: BoxFit.fill,
-                            //   )
-                            : CircleAvatar(
-                                radius: 55,
-
-                                //backgroundImage: NetworkImage(DashStrings.serviceImg),
-                                backgroundImage: CachedNetworkImageProvider(
-                                    "${AppUrl.imageUrl}${profile.profileDetailsModel!.response!.userDetails!.profileImage ?? ""}"),
-                                onBackgroundImageError: (e, st) {},
-                              ),
                       ),
                     ),
                     Text(

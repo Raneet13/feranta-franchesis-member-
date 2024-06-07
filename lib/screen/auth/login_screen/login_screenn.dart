@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:feranta_franchise/static/validator/all_textfield_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -46,8 +48,8 @@ class _LognScreenState extends State<LognScreen> {
                 width: double.infinity,
                 child: Center(
                   child: SizedBox(
-                    height: 200,
-                    width: 200,
+                    // height: 200,
+                    // width: 200,
                     child: Image.asset(
                       "assets/logo/feranta_new_logo_.png",
                       fit: BoxFit.fill,
@@ -59,33 +61,20 @@ class _LognScreenState extends State<LognScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "Login",
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      width: mediaQry.width * .60,
-                      child: Text(
-                        "Welcome, to Feranta Franchise login your account using mobile number & password",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
                     SizedBox(
                       height: 56,
                       width: MediaQuery.of(context).size.width * .85,
                       child: CustomTextField(
-                        hint: "Mobile Number",
+                        hint: "Enter Mobile Number",
                         controller:
                             Provider.of<LoginViewmodel>(context, listen: false)
                                 .mobNumber,
+                        inputFormater: <TextInputFormatter>[
+                          LengthLimitingTextInputFormatter(10),
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
                         KeyBoardType: TextInputType.number,
+                        validator: (value) => ValidateAll.validateMobile(value),
                         autofocus: true,
                       ),
                     ),
@@ -109,16 +98,17 @@ class _LognScreenState extends State<LognScreen> {
                               keyboardType: TextInputType.visiblePassword,
                               obscureText: !val.passwordVisible,
                               controller: val.password,
+                              style: TextStyle(color: Colors.black54),
                               decoration: InputDecoration(
                                   hintStyle: TextStyle(
-                                    color: Colors.black38,
+                                    color: Colors.black26,
                                     fontSize: 15,
                                     // fontFamily: "OpenSans",
                                     // fontWeight: FontWeight.w300,
                                     letterSpacing: 0.1,
                                   ),
                                   border: InputBorder.none,
-                                  hintText: "feranta@123",
+                                  hintText: "password",
                                   suffixIcon: InkWell(
                                     onTap: () => val.passwordVisibleupdate(),
                                     child: val.passwordVisible

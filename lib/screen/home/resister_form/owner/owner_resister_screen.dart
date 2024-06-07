@@ -26,7 +26,6 @@ class _SignUpPageState extends State<OwnerResisterPage> {
   void initState() {
     // TODO: implement initState
 
-    Provider.of<ResisterViewmodel>(context, listen: false).getAllMaster();
     // provider.deliveryBoyLoginProfile;
 
     // address2 = TextEditingController(text: widget.address["adress2"]);
@@ -34,6 +33,10 @@ class _SignUpPageState extends State<OwnerResisterPage> {
     // areaName = widget.address["cityname"];
     // pincode = widget.address["pincode"];
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ResisterViewmodel>(context, listen: false).getAllMaster();
+    });
   }
 
   Validate(input) {
@@ -46,7 +49,9 @@ class _SignUpPageState extends State<OwnerResisterPage> {
   @override
   void dispose() {
     // TODO: implement dispose
-    Provider.of<ResisterViewmodel>(context, listen: false).isLoading = false;
+    Provider.of<ResisterViewmodel>(context, listen: false)
+      ..isLoading = false
+      ..clearownerResistationForm();
     super.dispose();
   }
 
@@ -58,8 +63,9 @@ class _SignUpPageState extends State<OwnerResisterPage> {
           backgroundColor: Colors.amber[100],
           leading: InkWell(
             onTap: () {
-              Provider.of<ResisterViewmodel>(context, listen: false).isLoading =
-                  false;
+              Provider.of<ResisterViewmodel>(context, listen: false)
+                ..isLoading = false
+                ..clearownerResistationForm();
               Navigator.pop(context);
             },
             child: Icon(
@@ -68,7 +74,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
             ),
           ),
           title: const Text(
-            "Driver Register Form",
+            "Owner Register Form",
             style: TextStyle(
                 fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
           ),
@@ -87,9 +93,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                     if (loginD.img != null &&
                         loginD.frontimg != null &&
                         loginD.backimg != null &&
-                        loginD.license_img != null &&
                         loginD.pinCode != "") {
-                      await loginD.userRegister(context);
+                      await loginD.ownerRegister(context);
                       ShowToast(msg: "Wait for resistation process");
                     } else {
                       ShowToast(msg: "Enter All the Image Field");
@@ -107,7 +112,9 @@ class _SignUpPageState extends State<OwnerResisterPage> {
         ),
         body: Consumer<ResisterViewmodel>(builder: (context, val, _) {
           return val.masterModel == null
-              ? SizedBox()
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
               : Form(
                   key: formKey,
                   child: Padding(
@@ -126,9 +133,6 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text("User Details")),
                               Container(
                                 height: 100,
                                 width: 100,
@@ -195,7 +199,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                     child: TextFormField(
                                       maxLines: 1,
                                       controller: val.name,
-                                      keyboardType: TextInputType.emailAddress,
+                                      keyboardType: TextInputType.text,
                                       validator: (input) =>
                                           ValidateAll.inputValidate(input),
                                       style: TextStyle(
@@ -250,7 +254,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         // label: Text("Enter email"),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "ASUTOSH NAYAK",
+                                        hintText: "Name",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -330,7 +334,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         // label: Text("Enter email"),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "abc@feranta.in",
+                                        hintText: "Email",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -494,7 +498,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         // label: Text("Enter Phone No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "dr@123",
+                                        hintText: "password",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -514,7 +518,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Enter Alternet Phno."),
+                                  const Text("Enter Alternate Phone number"),
                                   SizedBox(
                                     height: 48,
                                     child: TextFormField(
@@ -579,7 +583,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         // label: Text("Enter Phone No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "123456890",
+                                        hintText: "Mobile Number",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -638,9 +642,11 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                 ),
                               ),
 
-                              SizedBox(
-                                height: 16,
-                              ),
+                              val.state == ""
+                                  ? SizedBox()
+                                  : SizedBox(
+                                      height: 16,
+                                    ),
                               val.state == ""
                                   ? SizedBox()
                                   : Container(
@@ -691,9 +697,11 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       ),
                                     ),
 
-                              SizedBox(
-                                height: 16,
-                              ),
+                              val.state == ""
+                                  ? SizedBox()
+                                  : SizedBox(
+                                      height: 16,
+                                    ),
                               val.city == ""
                                   ? SizedBox()
                                   : Container(
@@ -743,9 +751,11 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       ),
                                     ),
 
-                              SizedBox(
-                                height: 16,
-                              ),
+                              val.state == ""
+                                  ? SizedBox()
+                                  : SizedBox(
+                                      height: 16,
+                                    ),
                               SizedBox(
                                 height: 16,
                               ),
@@ -755,9 +765,9 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                 children: [
                                   Text("Enter Aadress"),
                                   SizedBox(
-                                    height: 48,
+                                    // height: ,
                                     child: TextFormField(
-                                      maxLines: 1,
+                                      maxLines: 4,
                                       controller: val.address1,
                                       keyboardType: TextInputType.emailAddress,
                                       validator: (input) =>
@@ -770,8 +780,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         fillColor: Colors.grey.shade200,
                                         filled: true,
                                         errorStyle: TextStyle(fontSize: 0),
-                                        contentPadding:
-                                            EdgeInsets.only(left: 15, right: 5),
+                                        contentPadding: EdgeInsets.only(
+                                            left: 15, right: 5, top: 15),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
@@ -814,8 +824,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         // label: Text("Enter Phone No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText:
-                                            "Rasulgarh, Bhubaneswar, Odisha 751010",
+                                        hintText: "Present Address",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -899,7 +908,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         // label: Text("Enter Phone No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "12345689012343",
+                                        hintText: "Aadhar Number",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -940,7 +949,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               BorderRadius.circular(10)),
                                       child: val.frontimg != null
                                           ? Text("${val.frontimg!.path}")
-                                          : Text("Upload Aadhar font"),
+                                          : Text("Upload Aadhar front"),
                                     ),
                                   )
                                   // SizedBox(
@@ -1052,7 +1061,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                             children: [
                               Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text("Licence Detais"),
+                                child: Text("Owner Role"),
                               ),
                               SizedBox(
                                 height: 16,
@@ -1100,119 +1109,161 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Enter Licence No."),
-                                  SizedBox(
-                                    height: 48,
-                                    child: TextFormField(
-                                      maxLines: 1,
-                                      controller: val.license_no,
-                                      keyboardType: TextInputType.emailAddress,
-                                      validator: (input) =>
-                                          ValidateAll.inputValidate(input),
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 12,
+                                  Text("Select Role"),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Checkbox(
+                                        value: val.isCheck,
+                                        onChanged: (value) =>
+                                            val.ischeckUpdate(value!),
                                       ),
-                                      decoration: InputDecoration(
-                                        fillColor: Colors.grey.shade200,
-                                        filled: true,
-                                        errorStyle: TextStyle(fontSize: 0),
-                                        contentPadding:
-                                            EdgeInsets.only(left: 15, right: 5),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          borderSide: BorderSide(
-                                            color: Colors.amber, // Border color
-                                            width: 2.0, // Border width
-                                          ),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          borderSide: BorderSide(
-                                            color: Colors
-                                                .grey.shade200, // Border color
-                                            width: 2.0, // Border width
-                                          ),
-                                        ),
-                                        // labelStyle:
-                                        //     Theme.of(context).textTheme.bodyMedium,
-                                        disabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          borderSide: BorderSide(
-                                            color: Colors
-                                                .grey.shade100, // Border color
-                                            width: 2.0, // Border width
-                                          ),
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          borderSide: BorderSide(
-                                            color: Colors
-                                                .grey.shade100, // Border color
-                                            width: 2.0, // Border width
-                                          ),
-                                        ),
-                                        // enabled: true,
-                                        // label: Text("Enter Vechicle No."),
-                                        // floatingLabelAlignment:
-                                        //     FloatingLabelAlignment.start,
-                                        hintText: "OD 2312",
-                                        // suffixIcon: Container(
-                                        //   height: 40,
-                                        //   color: Colors.amber,
-                                        //   alignment: null,
-                                        //   child: Text("Choose Location"),
-                                        // ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        'Are you work as a driver',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium,
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ],
                               ),
-                              SizedBox(
-                                height: 16,
-                              ),
-                              Column(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text("upload licence"),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  InkWell(
-                                    onTap: () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Document_Upload(
-                                                  fileName: "Licence",
-                                                ))),
-                                    child: Container(
-                                      height: 48,
-                                      width: double.infinity,
-                                      padding: EdgeInsets.only(left: 15),
-                                      alignment: Alignment.centerLeft,
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey.shade200,
-                                          border:
-                                              Border.all(color: Colors.black38),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: val.license_img != null
-                                          ? Text("${val.license_img!.path}")
-                                          : Text("Upload Licence"),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 16,
-                              ),
+                              val.isCheck
+                                  ? Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text("Enter Licence No."),
+                                        SizedBox(
+                                          height: 48,
+                                          child: TextFormField(
+                                            maxLines: 1,
+                                            controller: val.license_no,
+                                            keyboardType:
+                                                TextInputType.emailAddress,
+                                            // validator: (input) =>
+                                            //     ValidateAll.inputValidate(input),
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12,
+                                            ),
+                                            decoration: InputDecoration(
+                                              fillColor: Colors.grey.shade200,
+                                              filled: true,
+                                              errorStyle:
+                                                  TextStyle(fontSize: 0),
+                                              contentPadding: EdgeInsets.only(
+                                                  left: 15, right: 5),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(
+                                                  color: Colors
+                                                      .amber, // Border color
+                                                  width: 2.0, // Border width
+                                                ),
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(
+                                                  color: Colors.grey
+                                                      .shade200, // Border color
+                                                  width: 2.0, // Border width
+                                                ),
+                                              ),
+                                              // labelStyle:
+                                              //     Theme.of(context).textTheme.bodyMedium,
+                                              disabledBorder:
+                                                  OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(
+                                                  color: Colors.grey
+                                                      .shade100, // Border color
+                                                  width: 2.0, // Border width
+                                                ),
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                                borderSide: BorderSide(
+                                                  color: Colors.grey
+                                                      .shade100, // Border color
+                                                  width: 2.0, // Border width
+                                                ),
+                                              ),
+                                              // enabled: true,
+                                              // label: Text("Enter Vechicle No."),
+                                              // floatingLabelAlignment:
+                                              //     FloatingLabelAlignment.start,
+                                              hintText: "License Number",
+                                              // suffixIcon: Container(
+                                              //   height: 40,
+                                              //   color: Colors.amber,
+                                              //   alignment: null,
+                                              //   child: Text("Choose Location"),
+                                              // ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : SizedBox(),
+                              val.isCheck
+                                  ? SizedBox(
+                                      height: 16,
+                                    )
+                                  : SizedBox(),
+                              val.isCheck
+                                  ? Column(
+                                      children: [
+                                        Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text("upload licence"),
+                                        ),
+                                        SizedBox(
+                                          height: 4,
+                                        ),
+                                        InkWell(
+                                          onTap: () => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Document_Upload(
+                                                        fileName: "Licence",
+                                                      ))),
+                                          child: Container(
+                                            height: 48,
+                                            width: double.infinity,
+                                            padding: EdgeInsets.only(left: 15),
+                                            alignment: Alignment.centerLeft,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey.shade200,
+                                                border: Border.all(
+                                                    color: Colors.black38),
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: val.license_img != null
+                                                ? Text(
+                                                    "${val.license_img!.path}")
+                                                : const Text(
+                                                    "Upload License image"),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : SizedBox(),
+                              val.isCheck
+                                  ? SizedBox(
+                                      height: 16,
+                                    )
+                                  : SizedBox(),
                             ],
                           ),
                         ),
@@ -1226,7 +1277,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                             children: [
                               Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text("Bank Account Detais"),
+                                child: Text("Bank Account Details"),
                               ),
                               SizedBox(
                                 height: 16,
@@ -1235,7 +1286,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Enter Bank Holder Full name"),
+                                  Text("Enter Bank Holder Name"),
                                   SizedBox(
                                     height: 48,
                                     child: TextFormField(
@@ -1295,7 +1346,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         // label: Text("Enter Vechicle No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "ASUTOSH NAYAK",
+                                        hintText: "Name",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -1314,7 +1365,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Enter Bank Account No."),
+                                  const Text("Enter Bank Account Number"),
                                   SizedBox(
                                     height: 48,
                                     child: TextFormField(
@@ -1377,7 +1428,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         // label: Text("Enter Vechicle No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "234567890909",
+                                        hintText: "Bank Account Number",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -1456,7 +1507,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         // label: Text("Enter Vechicle No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "STATE BANK OF INDIA",
+                                        hintText: "Bank Name",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -1535,7 +1586,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         // label: Text("Enter Vechicle No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "SBIN00123454",
+                                        hintText: "IFSC Code",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -1558,25 +1609,6 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                         ),
 
                         SizedBox(height: 5),
-
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("mention for your role"),
-                            Row(
-                              children: <Widget>[
-                                Checkbox(
-                                  value: val.isCheck,
-                                  onChanged: (bool? value) =>
-                                      val.ischeckUpdate(value!),
-                                ),
-                                Text('Work as a Driver'),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 15),
                       ],
                     ),
                   ),

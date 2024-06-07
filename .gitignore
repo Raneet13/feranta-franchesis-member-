@@ -41,3 +41,15 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# echo "# feranta-franchesis-member-" >> README.md
+# git init
+# git add README.md
+# git commit -m "first commit"
+# git branch -M Ranjeet
+# git remote add origin https://github.com/Raneet13/feranta-franchesis-member-.git
+# git push -u origin Ranjeet
+# push an existing git
+#git add .
+# git remote add origin https://github.com/Raneet13/feranta-franchesis-member-.git
+# git branch -M Ranjeet
+# git push -u origin Ranjeet

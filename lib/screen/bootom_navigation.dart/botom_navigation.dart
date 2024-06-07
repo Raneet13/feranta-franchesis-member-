@@ -56,11 +56,11 @@ class _BottomNavState extends State<BottomNav> {
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
           currentIndex: widget.index,
-          selectedItemColor: Colo.yellow,
-          selectedIconTheme: IconThemeData(color: Colo.yellow),
+          selectedItemColor: Colo.black,
+          selectedIconTheme: IconThemeData(color: Colo.black),
           unselectedIconTheme: IconThemeData(color: Colors.grey.shade300),
           selectedLabelStyle: TextStyle(
-            color: Colo.yellowshade300,
+            color: Colo.black,
           ),
           unselectedFontSize: 12,
           selectedFontSize: 12,
@@ -116,7 +116,7 @@ class _BottomNavState extends State<BottomNav> {
                 height: 25,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.amber.shade100),
+                    color: Colo.primaryColor),
                 child: Icon(
                   Icons.home,
                   size: 20.0, // Use size to control the icon size
@@ -131,9 +131,9 @@ class _BottomNavState extends State<BottomNav> {
                 height: 25,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.amber.shade100),
+                    color: Colo.primaryColor),
                 child: Icon(
-                  Icons.local_taxi_rounded,
+                  Icons.description,
                   size: 20.0, // Use size to control the icon size
                 ),
               ),
@@ -146,7 +146,7 @@ class _BottomNavState extends State<BottomNav> {
                 height: 25,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.amber.shade100),
+                    color: Colo.primaryColor),
                 child: Icon(
                   Icons.account_circle,
                   size: 20.0, // Use size to control the icon size

@@ -48,7 +48,7 @@ class LoginViewmodel extends ChangeNotifier {
   Future submitLogin(BuildContext context) async {
     isloadingTrue();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (mobNumber.text.length != 10 && password.text != null) {
+    if (mobNumber.text.length != 10 && password.text != "") {
       ShowToast(msg: "Enter your 10 digit Mobile number and password");
     } else {
       var data = await AuthApiRepository()

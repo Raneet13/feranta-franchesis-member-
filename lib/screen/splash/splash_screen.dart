@@ -15,21 +15,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    Timer(Duration(seconds: 3), () async {
+
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Timer(Duration(seconds: 3), () async {
 //       await Provider.of<MapLoadViewmodel>(context, listen: false)
 //           .locationEnabledndPermission()
 //           .catchError((_) {
 //         ShowToast(msg: "Something WEnt Wrong");
 //       }).then((_) async {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? userId = await prefs.getString("userId");
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        String? userId = await prefs.getString("userId");
 //         bool? onScreen = await prefs.getBool('onScreen');
-      if (userId != null) {
-        context.pushReplacement('/home', extra: {'id': "0"});
-      } else {
+        if (userId != null) {
+          context.pushReplacement('/home', extra: {'id': "0"});
+        } else {
 //           // context.go('/login');
 //           if (onScreen == true) {
-        context.pushReplacement('/login');
+          context.pushReplacement('/login');
 //           } else
 //             context.go('/on');
 //         }
@@ -41,10 +44,9 @@ class _SplashScreenState extends State<SplashScreen> {
 //       //     AppRoute.onboardScreen, (Route<dynamic> route) => false);\
 //       // Navigator.pushReplacement(
 //       //     context, MaterialPageRoute(builder: (context) => Onboarding()));
-      }
+        }
+      });
     });
-
-    super.initState();
   }
 
   @override

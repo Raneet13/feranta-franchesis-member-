@@ -21,6 +21,7 @@ class ResisterViewmodel extends ChangeNotifier {
   TextEditingController contact = TextEditingController();
   TextEditingController altcontact = TextEditingController();
   TextEditingController address1 = TextEditingController();
+  TextEditingController address2 = TextEditingController();
   TextEditingController license_no = TextEditingController();
   TextEditingController resister_password = TextEditingController();
   TextEditingController ac_name = TextEditingController();
@@ -53,7 +54,10 @@ class ResisterViewmodel extends ChangeNotifier {
 
   //resister fuction
   Future insertLogo() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'png'],
+    );
 
     if (result != null) {
       File file = File(result.files.single.path!);
@@ -66,7 +70,10 @@ class ResisterViewmodel extends ChangeNotifier {
   }
 
   Future insertDemoImage() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'png'],
+    );
 
     if (result != null) {
       File file = File(result.files.single.path!);
@@ -98,21 +105,21 @@ class ResisterViewmodel extends ChangeNotifier {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = await prefs.getString("userId");
     var allData = await ResisterRepository().resisterDriver(
-        name: name.text,
-        email: email.text,
-        contact: contact.text,
-        altcontact: altcontact.text,
+        name: name.text.toString(),
+        email: email.text.toString(),
+        contact: contact.text.toString(),
+        altcontact: altcontact.text.toString(),
         state: state,
         city: city,
         pincode: pinCode,
-        address1: address1.text,
-        license_no: license_no.text,
-        password: resister_password.text,
-        ac_name: ac_name.text,
-        bank_name: bank_name.text,
-        acc_no: acc_no.text,
-        ifsc: ifsc.text,
-        exp_year: exp_year.text,
+        address1: address1.text.toString(),
+        license_no: license_no.text.toString(),
+        password: resister_password.text.toString(),
+        ac_name: ac_name.text.toString(),
+        bank_name: bank_name.text.toString(),
+        acc_no: acc_no.text.toString(),
+        ifsc: ifsc.text.toString(),
+        exp_year: exp_year.text.toString(),
         img: img != null
             ? await MultipartFile.fromFile(img!.path,
                 filename: img!.path.split('/').last)
@@ -129,18 +136,17 @@ class ResisterViewmodel extends ChangeNotifier {
             ? await MultipartFile.fromFile(license_img!.path,
                 filename: license_img!.path.split('/').last)
             : "",
-        adharno: ahdarno.text,
+        adharno: ahdarno.text.toString(),
         member_id: userId!);
     if (allData["error"] == null) {
-      ShowToast(msg: "Driver Resister Sucessfully");
+      ShowToast(msg: "${allData["response"]["success"].toString()}");
       Navigator.pop(context);
       clearResistationForm();
     } else {
-      // ShowToast(msg: allData["response"]["message"]);
-      // print(allData);
+      ShowToast(msg: "${allData["response"].keys.toString()} must be unique");
     }
     isloadingFalse();
-    // clearResistationForm();
+    clearResistationForm();
     // isLoadingupdateFalse();
     notifyListeners();
   } //img,frontimg,backimg,license_img
@@ -216,15 +222,15 @@ class ResisterViewmodel extends ChangeNotifier {
             : "",
         wp_contact: caltcontact.text.toString());
     if (allData["error"] == null) {
-      ShowToast(msg: "Customer Resister Sucessfully");
       Navigator.pop(context);
       clearCustomerResistationForm();
+      ShowToast(msg: "${allData["response"]["success"].toString()}");
+      // print(allData);
     } else {
-      // ShowToast(msg: allData["response"]["message"]);
-      print(allData);
+      ShowToast(msg: "${allData["response"].keys.toString()} must be unique");
     }
     isloadingFalse();
-    // clearResistationForm();
+    clearCustomerResistationForm();
     // isLoadingupdateFalse();
     notifyListeners();
   } //img,frontimg,backimg,license_img
@@ -251,20 +257,20 @@ class ResisterViewmodel extends ChangeNotifier {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = await prefs.getString("userId");
     var allData = await ResisterRepository().resisterOwner(
-        name: name.text,
-        email: email.text,
-        contact: contact.text,
-        altcontact: altcontact.text,
+        full_name: name.text.toString(),
+        email: email.text.toString(),
+        contact_no: contact.text.toString(),
+        altcontact: altcontact.text.toString(),
         state: state,
         city: city,
         pincode: pinCode,
-        address1: address1.text,
-        license_no: license_no.text,
-        password: resister_password.text,
-        ac_name: ac_name.text,
-        bank_name: bank_name.text,
-        acc_no: acc_no.text,
-        ifsc: ifsc.text,
+        address1: address1.text.toString(),
+        license_no: license_no.text.toString(),
+        password: resister_password.text.toString(),
+        ac_name: ac_name.text.toString(),
+        bank_name: bank_name.text.toString(),
+        acc_no: acc_no.text.toString(),
+        ifsc: ifsc.text.toString(),
         img: img != null
             ? await MultipartFile.fromFile(img!.path,
                 filename: img!.path.split('/').last)
@@ -281,23 +287,44 @@ class ResisterViewmodel extends ChangeNotifier {
             ? await MultipartFile.fromFile(license_img!.path,
                 filename: license_img!.path.split('/').last)
             : "",
-        adharno: ahdarno.text,
-        member_id: userId!,
-        is_driver: isCheck ? null : "1");
+        adharno: ahdarno.text.toString(),
+        is_driver: isCheck ? "1" : "0",
+        member_id: userId,
+        address2: address2.text.toString());
     if (allData["error"] == null) {
-      ShowToast(msg: "owner Resister Sucessfully");
+      ShowToast(msg: "${allData["response"]["success"].toString()}");
+      // ShowToast(msg: "You Resister Sucessfully");
       Navigator.pop(context);
-      clearResistationForm();
     } else {
-      // ShowToast(msg: allData["response"]["message"]);
+      ShowToast(msg: "${allData["response"].keys.toString()} must be unique");
       // print(allData);
     }
+
+    clearownerResistationForm();
     isloadingFalse();
-    // clearResistationForm();
-    // isLoadingupdateFalse();
     notifyListeners();
   } //img,frontimg,backimg,license_img
-//owner function clear
+
+  clearownerResistationForm() {
+    name.text = "";
+    email.text = "";
+    contact.text = "";
+    altcontact.text = "";
+    ahdarno.text = "";
+    address1.text = "";
+    license_no.text = "";
+    resister_password.text = "";
+    ac_name.text = "";
+    bank_name.text = "";
+    acc_no.text = "";
+    ifsc.text = "";
+    exp_year.text = "";
+    img = null;
+    frontimg = null;
+    backimg = null;
+    license_img = null;
+    notifyListeners();
+  }
 
   isloadingTrue() {
     isLoading = true;
