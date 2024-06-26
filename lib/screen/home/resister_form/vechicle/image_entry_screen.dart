@@ -1,21 +1,21 @@
 import 'dart:io';
 import 'package:feranta_franchise/view_model/resister/all_resister_viewmodel.dart';
+import 'package:feranta_franchise/view_model/vechicle_viewwModel/vechicle_view_model.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../static/flutter_toast_message/toast_messge.dart';
-import '../../../view_model/auth/login-viewmodel.dart';
+import '../../../../static/flutter_toast_message/toast_messge.dart';
 
-class Document_Upload extends StatefulWidget {
+class ImageEntryPdf extends StatefulWidget {
   String fileName;
-  Document_Upload({required this.fileName, super.key});
+  ImageEntryPdf({required this.fileName, super.key});
 
   @override
-  State<Document_Upload> createState() => _Document_UploadState();
+  State<ImageEntryPdf> createState() => _ImageEntryPdfState();
 }
 
-class _Document_UploadState extends State<Document_Upload> {
+class _ImageEntryPdfState extends State<ImageEntryPdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +30,7 @@ class _Document_UploadState extends State<Document_Upload> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
-        child: Consumer<ResisterViewmodel>(builder: (context, val, _) {
+        child: Consumer<VehicleViewmodel>(builder: (context, val, _) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,7 @@ class _Document_UploadState extends State<Document_Upload> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   InkWell(
-                    onTap: () => val.insertDemoImage(context),
+                    onTap: () => val.insertDemoImage(),
                     child: val.seeDemo != null
                         ? Image.file(
                             height: 150,
@@ -68,7 +68,7 @@ class _Document_UploadState extends State<Document_Upload> {
                   // ),
                   // InkWell(
                   //   onTap: () async {
-                  //     val.insertDemoImage(context);
+                  //     val.insertDemoImage();
                   //     //   FilePickerResult? result =
                   //     //       await FilePicker.platform.pickFiles();
 

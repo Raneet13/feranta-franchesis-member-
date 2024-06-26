@@ -66,9 +66,7 @@ class _LognScreenState extends State<LognScreen> {
                       width: MediaQuery.of(context).size.width * .85,
                       child: CustomTextField(
                         hint: "Enter Mobile Number",
-                        controller:
-                            Provider.of<LoginViewmodel>(context, listen: false)
-                                .mobNumber,
+                        controller: val.mobNumber,
                         inputFormater: <TextInputFormatter>[
                           LengthLimitingTextInputFormatter(10),
                           FilteringTextInputFormatter.digitsOnly,

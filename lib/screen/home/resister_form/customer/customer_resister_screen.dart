@@ -1,21 +1,47 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:feranta_franchise/configs/app_url.dart';
 import 'package:feranta_franchise/static/validator/all_textfield_validator.dart';
 import 'package:feranta_franchise/view_model/resister/all_resister_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:provider/provider.dart';
+import '../../../../model/past_record/all_record_model.dart';
 import '../../../../static/flutter_toast_message/toast_messge.dart';
 
-class CustomerResister extends StatelessWidget {
-  CustomerResister({super.key});
+class CustomerResister extends StatefulWidget {
+  UserList? customerDetails;
+  CustomerResister({this.customerDetails, super.key});
+
+  @override
+  State<CustomerResister> createState() => _CustomerResisterState();
+}
+
+class _CustomerResisterState extends State<CustomerResister> {
   GlobalKey<FormState> formKey = new GlobalKey();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.customerDetails != null) {
+        if (widget.customerDetails == null) {
+          Provider.of<ResisterViewmodel>(context, listen: false)
+            ..isLoading = false
+            ..clearCustomerResistationForm()
+            ..initCustomerDet(widget.customerDetails!);
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Register Customer"),
+        title: Text(
+            "${widget.customerDetails != null ? "Update" : "Registration"} Customer"),
         centerTitle: true,
         leading: InkWell(
           onTap: () {
@@ -39,7 +65,10 @@ class CustomerResister extends StatelessWidget {
                 //     Provider.of<LoginViewmodel>(context, listen: false);
                 // .userRegister();
                 if (formKey.currentState!.validate()) {
-                  if (customer.customerImage != null) {
+                  if (widget.customerDetails != null) {
+                    await customer.updatecustomerRegisterView(
+                        context, widget.customerDetails!.id);
+                  } else if (customer.customerImage != null) {
                     await customer.customerRegister(context);
                   } else {
                     ShowToast(msg: "Enter profile image");
@@ -51,7 +80,8 @@ class CustomerResister extends StatelessWidget {
               },
               child: customer.isLoading
                   ? CircularProgressIndicator()
-                  : Text("Register"));
+                  : Text(
+                      "${widget.customerDetails != null ? "Update" : "Registration"}"));
         }),
       ),
       body: Consumer<ResisterViewmodel>(builder: (context, customer, _) {
@@ -63,6 +93,19 @@ class CustomerResister extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Row(
+                    children: [
+                      Text("Enter Logo"),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 12,
+                        color: Colors.red,
+                      )
+                    ],
+                  ),
                   Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(vertical: 10),
@@ -94,12 +137,18 @@ class CustomerResister extends StatelessWidget {
                           //     customer.profileImage!,
                           //     fit: BoxFit.fill,
                           //   )
-                          : const CircleAvatar(
-                              radius: 55,
-                              //backgroundImage: NetworkImage(DashStrings.serviceImg),
-                              // backgroundImage:
-                              //     AssetImage('assets/images/appLauncherIcon.jpeg'),
-                            ),
+                          : widget.customerDetails != null
+                              ? CircleAvatar(
+                                  radius: 55,
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      "${AppUrl.imageUrl}${widget.customerDetails!.profileImage}")
+                                  // backgroundImage:
+                                  //     AssetImage('assets/images/appLauncherIcon.jpeg'),
+                                  )
+                              : CircleAvatar(
+                                  radius: 55,
+                                  backgroundImage:
+                                      CachedNetworkImageProvider("")),
                     ),
                   ),
                   SizedBox(
@@ -109,7 +158,19 @@ class CustomerResister extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Enter Name"),
+                      Row(
+                        children: [
+                          Text("Enter Name"),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(
+                            Icons.star,
+                            size: 12,
+                            color: Colors.red,
+                          )
+                        ],
+                      ),
                       SizedBox(
                         height: 48,
                         child: TextFormField(
@@ -181,7 +242,19 @@ class CustomerResister extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Enter Phone No"),
+                      Row(
+                        children: [
+                          Text("Enter Phone Number"),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(
+                            Icons.star,
+                            size: 12,
+                            color: Colors.red,
+                          )
+                        ],
+                      ),
                       SizedBox(
                         height: 48,
                         child: TextFormField(
@@ -257,7 +330,19 @@ class CustomerResister extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Enter Email Address"),
+                      Row(
+                        children: [
+                          Text("Enter Email Address"),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(
+                            Icons.star,
+                            size: 12,
+                            color: Colors.red,
+                          )
+                        ],
+                      ),
                       SizedBox(
                         height: 48,
                         child: TextFormField(
@@ -329,7 +414,19 @@ class CustomerResister extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Enter WhatsApp no"),
+                      Row(
+                        children: [
+                          Text("Enter WhatsApp Number"),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(
+                            Icons.star,
+                            size: 12,
+                            color: Colors.red,
+                          )
+                        ],
+                      ),
                       SizedBox(
                         height: 48,
                         child: TextFormField(

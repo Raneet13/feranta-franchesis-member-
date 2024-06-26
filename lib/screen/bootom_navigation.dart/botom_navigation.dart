@@ -1,3 +1,5 @@
+import 'package:feranta_franchise/view_model/auth/login-viewmodel.dart';
+import 'package:feranta_franchise/view_model/map_viewmodel/mao_view_modedl_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -40,6 +42,12 @@ class _BottomNavState extends State<BottomNav> {
     //         _selectedIndex = widget.index!;
     //       })
     //     : _selectedIndex = 0;
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      Provider.of<LoginViewmodel>(context, listen: false).checkCheckinOutTrue();
+      // await Provider.of<MapViewModelProvider>(context, listen: false)
+      //     .locationPermissionRequest();
+    });
+    ;
     super.initState();
   }
 
@@ -79,16 +87,18 @@ class _BottomNavState extends State<BottomNav> {
                 //     .removeMarkerndpathWithDestPath();
                 context.go('/pastRecord', extra: {'id': "1"});
                 break;
+
               case 2:
                 // Provider.of<MapLoadViewmodel>(context, listen: false)
                 //     .removeMarkerndpathWithDestPath();
-                context.push('/profie', extra: {'id': "2"});
+                context.go('/attendance', extra: {'id': "2"});
                 break;
-              // case 3:
-              //   Provider.of<MapLoadViewmodel>(context, listen: false)
-              //       .removeMarkerndpathWithDestPath();
-              //   context.go('/more', extra: {'id': "3"});
-              //   break;
+              case 3:
+                // Provider.of<MapLoadViewmodel>(context, listen: false)
+                //     .removeMarkerndpathWithDestPath();
+                context.push('/profie', extra: {'id': "3"});
+                break;
+
               default:
                 // Provider.of<MapLoadViewmodel>(context, listen: false)
                 //     .removeMarkerndpathWithDestPath();
@@ -134,6 +144,21 @@ class _BottomNavState extends State<BottomNav> {
                     color: Colo.primaryColor),
                 child: Icon(
                   Icons.description,
+                  size: 20.0, // Use size to control the icon size
+                ),
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'attendance',
+              activeIcon: Container(
+                width: 40,
+                height: 25,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colo.primaryColor),
+                child: Icon(
+                  Icons.person,
                   size: 20.0, // Use size to control the icon size
                 ),
               ),

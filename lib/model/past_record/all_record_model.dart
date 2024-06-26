@@ -53,7 +53,7 @@ class Response {
 class UserList {
   String? id;
   String? fullName;
-  dynamic userName;
+  String? userName;
   String? password;
   String? email;
   String? contactNo;
@@ -72,17 +72,31 @@ class UserList {
   dynamic gstImage;
   String? adharFont;
   String? adharBack;
-  dynamic adharNo;
+  String? adharNo;
   String? userType;
   String? isDriver;
   String? licenseNo;
+  String? licenseExpireDate;
   String? licenseImg;
   String? cityId;
   dynamic areaId;
   String? stateId;
   String? pin;
   String? address1;
-  dynamic address2;
+  String? address2;
+  String? branchName;
+  String? block;
+  String? ditrict;
+  String? fatherName;
+  dynamic spouseName;
+  String? motherName;
+  String? nomineeName;
+  String? nomineeRltn;
+  String? nomineeAdd;
+  String? nomineeDob;
+  String? dob;
+  String? bloodGroup;
+  String? cheque;
   dynamic commition;
   dynamic bannerImage;
   dynamic logoImage;
@@ -100,6 +114,7 @@ class UserList {
   dynamic merchantAgrrement;
   String? deviceToken;
   dynamic franchiseId;
+  String? isAdmin;
   String? createdBy;
   String? createdDate;
   String? updatedDate;
@@ -130,6 +145,7 @@ class UserList {
       this.userType,
       this.isDriver,
       this.licenseNo,
+      this.licenseExpireDate,
       this.licenseImg,
       this.cityId,
       this.areaId,
@@ -137,6 +153,19 @@ class UserList {
       this.pin,
       this.address1,
       this.address2,
+      this.branchName,
+      this.block,
+      this.ditrict,
+      this.fatherName,
+      this.spouseName,
+      this.motherName,
+      this.nomineeName,
+      this.nomineeRltn,
+      this.nomineeAdd,
+      this.nomineeDob,
+      this.dob,
+      this.bloodGroup,
+      this.cheque,
       this.commition,
       this.bannerImage,
       this.logoImage,
@@ -154,6 +183,7 @@ class UserList {
       this.merchantAgrrement,
       this.deviceToken,
       this.franchiseId,
+      this.isAdmin,
       this.createdBy,
       this.createdDate,
       this.updatedDate});
@@ -184,6 +214,7 @@ class UserList {
     userType = json['user_type'];
     isDriver = json['is_driver'];
     licenseNo = json['license_no'];
+    licenseExpireDate = json['license_expire_date'];
     licenseImg = json['license_img'];
     cityId = json['city_id'];
     areaId = json['area_id'];
@@ -191,6 +222,19 @@ class UserList {
     pin = json['pin'];
     address1 = json['address1'];
     address2 = json['address2'];
+    branchName = json['branch_name'];
+    block = json['block'];
+    ditrict = json['ditrict'];
+    fatherName = json['father_name'];
+    spouseName = json['spouse_name'];
+    motherName = json['mother_name'];
+    nomineeName = json['nominee_name'];
+    nomineeRltn = json['nominee_rltn'];
+    nomineeAdd = json['nominee_add'];
+    nomineeDob = json['nominee_dob'];
+    dob = json['dob'];
+    bloodGroup = json['blood_group'];
+    cheque = json['cheque'];
     commition = json['commition'];
     bannerImage = json['banner_image'];
     logoImage = json['logo_image'];
@@ -208,6 +252,7 @@ class UserList {
     merchantAgrrement = json['merchant_agrrement'];
     deviceToken = json['device_token'];
     franchiseId = json['franchise_id'];
+    isAdmin = json['is_admin'];
     createdBy = json['created_by'];
     createdDate = json['created_date'];
     updatedDate = json['updated_date'];
@@ -240,6 +285,7 @@ class UserList {
     data['user_type'] = this.userType;
     data['is_driver'] = this.isDriver;
     data['license_no'] = this.licenseNo;
+    data['license_expire_date'] = this.licenseExpireDate;
     data['license_img'] = this.licenseImg;
     data['city_id'] = this.cityId;
     data['area_id'] = this.areaId;
@@ -247,6 +293,19 @@ class UserList {
     data['pin'] = this.pin;
     data['address1'] = this.address1;
     data['address2'] = this.address2;
+    data['branch_name'] = this.branchName;
+    data['block'] = this.block;
+    data['ditrict'] = this.ditrict;
+    data['father_name'] = this.fatherName;
+    data['spouse_name'] = this.spouseName;
+    data['mother_name'] = this.motherName;
+    data['nominee_name'] = this.nomineeName;
+    data['nominee_rltn'] = this.nomineeRltn;
+    data['nominee_add'] = this.nomineeAdd;
+    data['nominee_dob'] = this.nomineeDob;
+    data['dob'] = this.dob;
+    data['blood_group'] = this.bloodGroup;
+    data['cheque'] = this.cheque;
     data['commition'] = this.commition;
     data['banner_image'] = this.bannerImage;
     data['logo_image'] = this.logoImage;
@@ -264,6 +323,7 @@ class UserList {
     data['merchant_agrrement'] = this.merchantAgrrement;
     data['device_token'] = this.deviceToken;
     data['franchise_id'] = this.franchiseId;
+    data['is_admin'] = this.isAdmin;
     data['created_by'] = this.createdBy;
     data['created_date'] = this.createdDate;
     data['updated_date'] = this.updatedDate;

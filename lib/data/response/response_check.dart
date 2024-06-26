@@ -4,8 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:feranta_franchise/data/response/exception.dart';
 
 dynamic checkREsponse(response) {
-  // print(response.statusCode);
-  print(response.data);
   if (response.statusCode == 201) {
     var data = response.data;
     // ShowToast(msg: data);

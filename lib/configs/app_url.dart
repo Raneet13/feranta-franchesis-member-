@@ -13,15 +13,23 @@ class AppUrl {
   static var getallMaster = '/get-all-master';
   static var getList = '/get-list';
   static var customerRegistation = '/add-customer';
-  // static var sendLivelocation = '/send-live-location';
-  // static var book_service_request = '/book-service';
+  static var asigndriverOtp = '/send-otp-to-assign-driver';
+  static var verifyAsignVechicleOTP = '/verify-otp-for-driver-assign';
   static var profile = '/get-profile-details';
   // static var checkBookingdriver = '/check-booking-status';
   // static var getDriverDetails = '/get-profile-details';
   static var resisterOwner = '/add-owner';
   static var updateProfile = '/updateProfile';
-  // static var allNotification = '/get-all-notification';
-  // static var cancelBooking = '/cancel-booking';
+  static var memberCheckinout = '/member-checkin-checkout';
+  static var getmemeberCheckINOUtHistory = '/get-member-checkin-data';
+  static var getAllOwner = '/get-memberwise-owner-list';
+  static var getVehicle = '/get-memberwise-vehicle-list';
+  static var updatedrOwcus = '/update-user-details';
+  static var addVehicle = '/add-vehicle';
+  static var editVehicle = '/edit-vehicle';
+  static var update_boarding_mmber = '/update-user-details';
+  static var edit_vechicle = '/edit-vehicle';
+  static var getvehicleList = '/get-memberwise-driver-list';
 
   ///book-service
 

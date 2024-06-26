@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'screen/attendance/attendance_screen.dart';
 import 'screen/auth/login_screen/login_screenn.dart';
 import 'screen/auth/login_screen/otp_field.dart';
 import 'screen/bootom_navigation.dart/botom_navigation.dart';
@@ -8,6 +9,8 @@ import 'screen/home/home_screen.dart';
 import 'screen/home/resister_form/customer/customer_resister_screen.dart';
 import 'screen/home/resister_form/owner/owner_resister_screen.dart';
 import 'screen/home/resister_form/driver/signup_screen.dart';
+import 'screen/home/resister_form/vechicle/image_entry_screen.dart';
+import 'screen/home/resister_form/vechicle/vechicle_register_screen.dart';
 import 'screen/past_record/past_record-screen.dart';
 import 'screen/profile/edit_profile.dart';
 import 'screen/profile/profile.dart';
@@ -48,15 +51,17 @@ class AppRoute {
           return LognScreen();
         },
       ),
-      // GoRoute(
-      //     path: '/otpVerify',
-      //     name: "verifyOtp",
-      //     parentNavigatorKey: _rootNavigatorKey,
-      //     builder: (context, state) {
-      //       Map<String, dynamic>? parameter =
-      //           state.extra as Map<String, dynamic>?;
-      //       return OtpVerify();
-      //     }),
+      GoRoute(
+          path: '/imageupload',
+          name: "imageupload",
+          parentNavigatorKey: _rootNavigatorKey,
+          builder: (context, state) {
+            Map<String, dynamic>? parameter =
+                state.extra as Map<String, dynamic>?;
+            return ImageEntryPdf(
+              fileName: parameter!['file'],
+            );
+          }),
       //it need for shellroute of nested route
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
@@ -84,70 +89,97 @@ class AppRoute {
                 path: 'resister_driver',
                 name: "resister_driver",
                 parentNavigatorKey: _shellNavigatorKey,
-                builder: (context, state) => SignUpDriverPage(),
+                builder: (context, state) {
+                  Map<String, dynamic>? parameter =
+                      state.extra as Map<String, dynamic>?;
+                  return SignUpDriverPage(
+                    driverDetails: parameter!['driver'] ?? null,
+                  );
+                },
               ),
               GoRoute(
                 path: 'customerResister',
                 name: "customerResister",
                 parentNavigatorKey: _shellNavigatorKey,
-                builder: (context, state) => CustomerResister(),
+                builder: (context, state) {
+                  Map<String, dynamic>? parameter =
+                      state.extra as Map<String, dynamic>?;
+                  return CustomerResister(
+                    customerDetails: parameter!['customer'] ?? null,
+                  );
+                },
               ),
               GoRoute(
                 path: 'ownerResister',
                 name: "ownerResister",
                 parentNavigatorKey: _shellNavigatorKey,
-                builder: (context, state) => OwnerResisterPage(),
+                builder: (context, state) {
+                  Map<String, dynamic>? parameter =
+                      state.extra as Map<String, dynamic>?;
+                  return OwnerResisterPage(
+                    ownerDetails: parameter!['owner'] ?? null,
+                  );
+                },
+              ), //AttendanceScreen
+              //
+
+              // GoRoute(
+              //     path: 'getowner',
+              //     name: "getowner",
+              //     parentNavigatorKey: _shellNavigatorKey,
+              //     builder: (context, state) => GetownerAll(),
+              //     routes: [
+
+              //     ]),
+              GoRoute(
+                path: 'addVehicle', //home/addVehicle
+                name: "addVehicle",
+                parentNavigatorKey: _shellNavigatorKey,
+                builder: (context, state) {
+                  Map<String, dynamic>? parameter =
+                      state.extra as Map<String, dynamic>?;
+                  return AddVechicle(
+                    vehicleDetails: parameter!['vehicle'],
+                  );
+                },
               ),
+              // GoRoute(
+              //   path: 'pickup',
+              //   name: "Pickup",
+              //   parentNavigatorKey: _shellNavigatorKey,
+              //   builder: (context, state) => const PickUpLocation(),
+              // ),
+              // GoRoute(
+              //   path: 'dest',
+              //   name: "Destination",
+              //   parentNavigatorKey: _shellNavigatorKey,
+              //   builder: (context, state) => const DestinationLocation(),
+              // ),
+              // GoRoute(
+              //   path: 'bookingsr1',
+              //   name: "BookingScreen1",
+              //   parentNavigatorKey: _shellNavigatorKey,
+              //   builder: (context, state) => const BookingScreenfirst(),
+              // ), //DriverFindScreen() ConfrmRideBooking
+              // //  GoRoute(
+              // //   path: 'searchDriver',
+              // //   name: "searchDriver",
+              // //   parentNavigatorKey: _shellNavigatorKey,
+              // //   builder: (context, state) => const searchDriver(),
+              // // ),
 
-              //         GoRoute(
-              //           path: 'rideCancel',
-              //           name: "rideCancel",
-              //           parentNavigatorKey: _shellNavigatorKey,
-              //           builder: (context, state) => CancellationReasonsScreen(),
-              //         ),
-              //         GoRoute(
-              //           path: 'driverchat',
-              //           name: "chatDriver",
-              //           parentNavigatorKey: _shellNavigatorKey,
-              //           builder: (context, state) => ChatScreen(),
-              //         ),
-              //         GoRoute(
-              //           path: 'pickup',
-              //           name: "Pickup",
-              //           parentNavigatorKey: _shellNavigatorKey,
-              //           builder: (context, state) => const PickUpLocation(),
-              //         ),
-              //         GoRoute(
-              //           path: 'dest',
-              //           name: "Destination",
-              //           parentNavigatorKey: _shellNavigatorKey,
-              //           builder: (context, state) => const DestinationLocation(),
-              //         ),
-              //         GoRoute(
-              //           path: 'bookingsr1',
-              //           name: "BookingScreen1",
-              //           parentNavigatorKey: _shellNavigatorKey,
-              //           builder: (context, state) => const BookingScreenfirst(),
-              //         ), //DriverFindScreen() ConfrmRideBooking
-              //         //  GoRoute(
-              //         //   path: 'searchDriver',
-              //         //   name: "searchDriver",
-              //         //   parentNavigatorKey: _shellNavigatorKey,
-              //         //   builder: (context, state) => const searchDriver(),
-              //         // ),
-
-              //         GoRoute(
-              //             path: 'driverfindscr',
-              //             name: "driverfindScr",
-              //             parentNavigatorKey: _shellNavigatorKey,
-              //             builder: (context, state) =>
-              //                 const DriverFindScreen()), //DriverFindScreen() ConfrmRideBooking
-              //         GoRoute(
-              //           path: 'conformBooking',
-              //           name: "conformBooking",
-              //           parentNavigatorKey: _shellNavigatorKey,
-              //           builder: (context, state) => const ConfrmRideBooking(),
-              //         ), //
+              // GoRoute(
+              //     path: 'driverfindscr',
+              //     name: "driverfindScr",
+              //     parentNavigatorKey: _shellNavigatorKey,
+              //     builder: (context, state) =>
+              //         const DriverFindScreen()), //DriverFindScreen() ConfrmRideBooking
+              // GoRoute(
+              //   path: 'conformBooking',
+              //   name: "conformBooking",
+              //   parentNavigatorKey: _shellNavigatorKey,
+              //   builder: (context, state) => const ConfrmRideBooking(),
+              // ), //
             ],
           ),
 
@@ -164,6 +196,12 @@ class AppRoute {
             //     builder: (context, state) => const FullDetaisTrip(),
             //   ),
             // ]
+          ),
+          GoRoute(
+            path: '/attendance',
+            name: "attendance",
+            // parentNavigatorKey: _shellNavigatorKey,
+            builder: (context, state) => AttendanceScreen(),
           ),
           //     //FullDetaisTrip()
           GoRoute(

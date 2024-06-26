@@ -30,9 +30,19 @@ class Response {
   List<State>? state;
   List<City>? city;
   List<Pincode>? pincode;
+  List<BloodGroup>? bloodGroup;
+  List<Districts>? districts;
+  List<Blocks>? blocks;
 
   Response(
-      {this.message, this.vehicleType, this.state, this.city, this.pincode});
+      {this.message,
+      this.vehicleType,
+      this.state,
+      this.city,
+      this.pincode,
+      this.bloodGroup,
+      this.districts,
+      this.blocks});
 
   Response.fromJson(Map<String, dynamic> json) {
     message = json['message'];
@@ -60,6 +70,24 @@ class Response {
         pincode!.add(new Pincode.fromJson(v));
       });
     }
+    if (json['blood_group'] != null) {
+      bloodGroup = <BloodGroup>[];
+      json['blood_group'].forEach((v) {
+        bloodGroup!.add(new BloodGroup.fromJson(v));
+      });
+    }
+    if (json['districts'] != null) {
+      districts = <Districts>[];
+      json['districts'].forEach((v) {
+        districts!.add(new Districts.fromJson(v));
+      });
+    }
+    if (json['blocks'] != null) {
+      blocks = <Blocks>[];
+      json['blocks'].forEach((v) {
+        blocks!.add(new Blocks.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -76,6 +104,15 @@ class Response {
     }
     if (this.pincode != null) {
       data['pincode'] = this.pincode!.map((v) => v.toJson()).toList();
+    }
+    if (this.bloodGroup != null) {
+      data['blood_group'] = this.bloodGroup!.map((v) => v.toJson()).toList();
+    }
+    if (this.districts != null) {
+      data['districts'] = this.districts!.map((v) => v.toJson()).toList();
+    }
+    if (this.blocks != null) {
+      data['blocks'] = this.blocks!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -213,6 +250,63 @@ class Pincode {
     data['status'] = this.status;
     data['created_date'] = this.createdDate;
     data['updated_date'] = this.updatedDate;
+    return data;
+  }
+}
+
+class BloodGroup {
+  String? id;
+  String? bloodGroup;
+
+  BloodGroup({this.id, this.bloodGroup});
+
+  BloodGroup.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    bloodGroup = json['blood_group'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['blood_group'] = this.bloodGroup;
+    return data;
+  }
+}
+
+class Districts {
+  String? id;
+  String? districtName;
+
+  Districts({this.id, this.districtName});
+
+  Districts.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    districtName = json['district_name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['district_name'] = this.districtName;
+    return data;
+  }
+}
+
+class Blocks {
+  String? id;
+  String? blockName;
+
+  Blocks({this.id, this.blockName});
+
+  Blocks.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    blockName = json['block_name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['block_name'] = this.blockName;
     return data;
   }
 }

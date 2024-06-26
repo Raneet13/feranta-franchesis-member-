@@ -20,6 +20,45 @@ class AuthApiRepository {
     return response;
   }
 
+  Future checkInOut(
+      {required member_id,
+      required image,
+      required type,
+      required lat,
+      required lng}) async {
+    late var response;
+
+    try {
+      FormData formData = FormData.fromMap({
+        'member_id': member_id,
+        'image': image,
+        'type': type,
+        'lat': lat,
+        'lng': lng
+      });
+      response = await NetworkApiService()
+          .postApi(url: AppUrl.memberCheckinout, formData: formData);
+    } catch (e) {
+      throw Exception(e);
+    }
+    return response;
+  }
+
+  Future allcheckInOutHistory({
+    required member_id,
+  }) async {
+    late var response;
+
+    try {
+      FormData formData = FormData.fromMap({'member_id': member_id});
+      response = await NetworkApiService()
+          .postApi(url: AppUrl.getmemeberCheckINOUtHistory, formData: formData);
+    } catch (e) {
+      throw Exception(e);
+    }
+    return response;
+  }
+
   // Future verifyotpHome({required phoneNo, required otp}) async {
   //   late var response;
 

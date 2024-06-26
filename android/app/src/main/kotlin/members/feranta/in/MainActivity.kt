@@ -1,4 +1,4 @@
-package member.feranta.`in`
+package members.feranta.`in`
 
 import io.flutter.embedding.android.FlutterActivity
 
