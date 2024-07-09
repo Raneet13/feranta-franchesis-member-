@@ -97,20 +97,20 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                 ..clearResistationForm();
               Navigator.pop(context);
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.black,
             ),
           ),
           title: Text(
             "Driver ${widget.driverDetails != null ? "Update" : "Registration"} Form",
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
           ),
           centerTitle: true,
         ),
         bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
           child: Consumer<ResisterViewmodel>(builder: (context, loginD, _) {
             return ElevatedButton(
                 onPressed: () async {
@@ -133,7 +133,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                     } else {
                       ShowToast(
                           msg:
-                              "Add Logo, license expiry,City, Aadhar Front, back& also Check Criminal record and Terms of Before Registration");
+                              "Add Logo, licence expiry,City, Aadhaar Front Side, Back Side & also Check Criminal record and Terms of Before Registration");
                     }
                   }
                   // } else {
@@ -141,26 +141,26 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                   // }
                 },
                 child: loginD.isLoading
-                    ? CircularProgressIndicator()
+                    ? const CircularProgressIndicator()
                     : Text(
-                        "${widget.driverDetails != null ? "update" : "Registration"}"));
+                        "${widget.driverDetails != null ? "update" : "Register"}"));
           }),
         ),
         body: Consumer<ResisterViewmodel>(builder: (context, val, _) {
           return val.masterModel == null
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : Form(
                   key: formKey,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     child: ListView(
                       shrinkWrap: true,
                       primary: true,
                       // physics: AlwaysScrollableScrollPhysics(),
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Padding(
@@ -177,19 +177,19 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         Theme.of(context).textTheme.bodyLarge,
                                   )),
                               Container(
-                                padding: EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                     color: Colo.white,
                                     boxShadow: [
-                                      BoxShadow(
+                                      const BoxShadow(
                                           color: Colors.black26, blurRadius: 2)
                                     ],
                                     borderRadius: BorderRadius.circular(15)),
                                 child: Column(
                                   children: [
-                                    Row(
+                                    const Row(
                                       children: [
-                                        Text("Enter Logo"),
+                                        Text(" Upload Profile Pic"),
                                         SizedBox(
                                           width: 5,
                                         ),
@@ -251,7 +251,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               child: InkWell(
                                                 onTap: () =>
                                                     val.insertLogo(context),
-                                                child: Material(
+                                                child: const Material(
                                                   color: Colors.white,
                                                   child: Icon(
                                                     Icons.edit,
@@ -263,7 +263,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -272,7 +272,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
                                             Text("Enter Name"),
                                             SizedBox(
@@ -295,7 +295,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             validator: (value) =>
                                                 ValidateAll.inputValidate(
                                                     value),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -303,13 +303,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -362,7 +363,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -371,7 +372,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
@@ -379,11 +380,11 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             SizedBox(
                                               width: 5,
                                             ),
-                                            // Icon(
-                                            //   Icons.star,
-                                            //   size: 12,
-                                            //   color: Colors.red,
-                                            // )
+                                            Icon(
+                                              Icons.star,
+                                              size: 12,
+                                              color: Colors.red,
+                                            )
                                           ],
                                         ),
                                         SizedBox(
@@ -393,7 +394,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             controller: val.email,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -401,13 +402,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -460,7 +462,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -469,7 +471,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
@@ -499,7 +501,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               FilteringTextInputFormatter
                                                   .digitsOnly,
                                             ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -507,13 +509,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -566,7 +569,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -575,7 +578,8 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Alternet Phone Number"),
+                                        const Text(
+                                            "Enter Alternate Phone Number"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -588,7 +592,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               FilteringTextInputFormatter
                                                   .digitsOnly,
                                             ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -596,13 +600,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -655,7 +660,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
 
@@ -665,7 +670,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Date Of Birth"),
+                                        const Text("Enter Date Of Birth"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -682,7 +687,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             //   FilteringTextInputFormatter
                                             //       .digitsOnly,
                                             // ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -690,13 +695,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -737,18 +743,18 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               // label: Text("Enter Phone No."),
                                               // floatingLabelAlignment:
                                               //     FloatingLabelAlignment.start,
-                                              hintText: "Select DateOf Birth",
+                                              hintText: "Select Date Of Birth",
                                               suffixIcon: InkWell(
                                                   onTap: () =>
                                                       val.selectDate(context),
-                                                  child: Icon(
+                                                  child: const Icon(
                                                       Icons.calendar_month)),
                                             ),
                                           ),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -757,7 +763,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Father Name"),
+                                        const Text("Enter Father Name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -765,7 +771,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             controller: val.father_name,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -773,13 +779,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -832,7 +839,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -841,7 +848,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Mother Name"),
+                                        const Text("Enter Mother Name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -849,7 +856,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             controller: val.mother_name,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -857,13 +864,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -916,7 +924,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Row(
@@ -935,7 +943,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                 onChanged: (int? value) => val
                                                     .updateMariedType(value!),
                                               ),
-                                              Text('Married')
+                                              const Text('Married')
                                             ],
                                           ),
                                         ),
@@ -949,7 +957,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                 onChanged: (int? value) => val
                                                     .updateMariedType(value!),
                                               ),
-                                              Text('Unmarried')
+                                              const Text('Unmarried')
                                             ],
                                           ),
                                         )
@@ -958,10 +966,10 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       ],
                                     ),
                                     val.married_type == 1
-                                        ? SizedBox(
+                                        ? const SizedBox(
                                             height: 16,
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
                                     val.married_type == 1
                                         ? Column(
                                             mainAxisAlignment:
@@ -969,7 +977,8 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text("Enter Wife/Spouse Name"),
+                                              const Text(
+                                                  "Enter Wife/Spouse Name"),
                                               SizedBox(
                                                 height: 48,
                                                 child: TextFormField(
@@ -979,7 +988,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                       .emailAddress,
                                                   // validator: (input) =>
                                                   //     ValidateAll.inputValidate(input),
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 12,
                                                   ),
@@ -987,17 +996,18 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                     fillColor:
                                                         Colors.grey.shade200,
                                                     filled: true,
-                                                    errorStyle:
-                                                        TextStyle(fontSize: 0),
+                                                    errorStyle: const TextStyle(
+                                                        fontSize: 0),
                                                     contentPadding:
-                                                        EdgeInsets.only(
+                                                        const EdgeInsets.only(
                                                             left: 15, right: 5),
                                                     focusedBorder:
                                                         OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.0),
-                                                      borderSide: BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color: Colors
                                                             .amber, // Border color
                                                         width:
@@ -1058,12 +1068,12 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               ),
                                             ],
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
                                     val.married_type == 1
-                                        ? SizedBox(
+                                        ? const SizedBox(
                                             height: 16,
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
 
                                     Column(
                                       mainAxisAlignment:
@@ -1071,7 +1081,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Address"),
+                                        const Text("Enter Address"),
                                         SizedBox(
                                           // height: 48,
                                           child: TextFormField(
@@ -1079,7 +1089,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             controller: val.address1,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -1087,13 +1097,16 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5, top: 15),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15,
+                                                      right: 5,
+                                                      top: 15),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -1146,7 +1159,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     // Column(
@@ -1236,7 +1249,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                     // ),
                                     Container(
                                       height: 48,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           // color: Colors.grey.shade300,
@@ -1250,7 +1263,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text("Select State"),
+                                          const Text("Select State"),
                                           DropdownButton<chooselocation.State>(
                                             // value:val.state==""? val
                                             //     .masterModel!.response!.state!.first:val.state,
@@ -1273,17 +1286,18 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                 .toList(),
 
                                             // add extra sugar..
-                                            icon: Icon(Icons.arrow_drop_down),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down),
                                             iconSize: 42,
-                                            underline: SizedBox(),
+                                            underline: const SizedBox(),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       crossAxisAlignment:
@@ -1299,7 +1313,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                     ),
                                     Container(
                                       height: 48,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           // color: Colors.grey.shade300,
@@ -1313,7 +1327,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text("Select City"),
+                                          const Text("Select City"),
                                           DropdownButton<chooselocation.City>(
                                             // value:val.City==""? val
                                             //     .masterModel!.response!.City!.first:val.City,
@@ -1340,20 +1354,21 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                 .toList(),
 
                                             // add extra sugar..
-                                            icon: Icon(Icons.arrow_drop_down),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down),
                                             iconSize: 42,
-                                            underline: SizedBox(),
+                                            underline: const SizedBox(),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
 
                                     Container(
                                       height: 48,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           // color: Colors.grey.shade300,
@@ -1367,7 +1382,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text("Select District"),
+                                          const Text("Select District"),
                                           DropdownButton<
                                               chooselocation.Districts>(
                                             // value:val.state==""? val
@@ -1395,20 +1410,21 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                 .toList(),
 
                                             // add extra sugar..
-                                            icon: Icon(Icons.arrow_drop_down),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down),
                                             iconSize: 42,
-                                            underline: SizedBox(),
+                                            underline: const SizedBox(),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
 
                                     Container(
                                       height: 48,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           // color: Colors.grey.shade300,
@@ -1422,7 +1438,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text("Select Block"),
+                                          const Text("Select Block"),
                                           DropdownButton<chooselocation.Blocks>(
                                             // value:val.City==""? val
                                             //     .masterModel!.response!.City!.first:val.City,
@@ -1450,14 +1466,15 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                 .toList(),
 
                                             // add extra sugar..
-                                            icon: Icon(Icons.arrow_drop_down),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down),
                                             iconSize: 42,
-                                            underline: SizedBox(),
+                                            underline: const SizedBox(),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
 
@@ -1467,7 +1484,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Village Name"),
+                                        const Text("Enter Village Name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -1481,7 +1498,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             //   FilteringTextInputFormatter
                                             //       .digitsOnly,
                                             // ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -1489,13 +1506,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -1548,7 +1566,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -1557,7 +1575,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter PinCode Number"),
+                                        const Text("Enter Pin Code Number"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -1570,7 +1588,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               FilteringTextInputFormatter
                                                   .digitsOnly,
                                             ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -1578,13 +1596,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -1637,7 +1656,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
 
@@ -1647,9 +1666,9 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
-                                            Text("Enter Aadhar no"),
+                                            Text("Enter Aadhaar Number"),
                                             SizedBox(
                                               width: 5,
                                             ),
@@ -1675,7 +1694,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               FilteringTextInputFormatter
                                                   .digitsOnly,
                                             ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -1683,13 +1702,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -1730,7 +1750,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               // label: Text("Enter Phone No."),
                                               // floatingLabelAlignment:
                                               //     FloatingLabelAlignment.start,
-                                              hintText: "Aadhar Number",
+                                              hintText: "Aadhaar Number",
                                               // suffixIcon: Container(
                                               //   height: 40,
                                               //   color: Colors.amber,
@@ -1742,7 +1762,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -1751,9 +1771,9 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
-                                            Text("Enter Aadhar Front Side"),
+                                            Text("Enter Aadhaar Front Side"),
                                             SizedBox(
                                               width: 5,
                                             ),
@@ -1776,7 +1796,8 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: Container(
                                             height: 48,
                                             width: double.infinity,
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding:
+                                                const EdgeInsets.only(left: 15),
                                             alignment: Alignment.centerLeft,
                                             decoration: BoxDecoration(
                                                 color: Colors.grey.shade200,
@@ -1790,12 +1811,12 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                     ? Text(
                                                         "${val.frontimg_update!}")
                                                     : const Text(
-                                                        "Upload Aadhar Front Side Image"),
+                                                        "Upload Aadhaar Front Side Image"),
                                           ),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -1804,9 +1825,9 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
-                                            Text("Enter Aadhar back Side"),
+                                            Text("Enter Aadhaar back Side"),
                                             SizedBox(
                                               width: 5,
                                             ),
@@ -1828,7 +1849,8 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: Container(
                                             height: 48,
                                             width: double.infinity,
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding:
+                                                const EdgeInsets.only(left: 15),
                                             alignment: Alignment.centerLeft,
                                             decoration: BoxDecoration(
                                                 color: Colors.grey.shade200,
@@ -1841,18 +1863,18 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                 : val.backimg_update != null
                                                     ? Text(
                                                         "${val.backimg_update}")
-                                                    : Text(
-                                                        "Upload Aadhar back Side image"),
+                                                    : const Text(
+                                                        "Upload Aadhaar back Side image"),
                                           ),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Container(
                                       height: 48,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           // color: Colors.grey.shade300,
@@ -1891,14 +1913,15 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                 .toList(),
 
                                             // add extra sugar..
-                                            icon: Icon(Icons.arrow_drop_down),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down),
                                             iconSize: 42,
-                                            underline: SizedBox(),
+                                            underline: const SizedBox(),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -1907,7 +1930,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Cheque image"),
+                                        const Text("Enter Cheque image"),
                                         InkWell(
                                           onTap: () => Navigator.push(
                                               context,
@@ -1918,7 +1941,8 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: Container(
                                             height: 48,
                                             width: double.infinity,
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding:
+                                                const EdgeInsets.only(left: 15),
                                             alignment: Alignment.centerLeft,
                                             decoration: BoxDecoration(
                                                 color: Colors.grey.shade200,
@@ -1931,26 +1955,26 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                 : val.cheque_update != null
                                                     ? Text(
                                                         "${val.cheque_update}")
-                                                    : Text(
+                                                    : const Text(
                                                         "Upload cheque image"),
                                           ),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                   ],
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 16,
                               ),
                               // select type of cab by choosing option
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
 
@@ -1958,30 +1982,30 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                         //   "Document Details",
                         //   style: Theme.of(context).textTheme.bodyLarge,
                         // ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 8, right: 8),
+                          padding: const EdgeInsets.only(left: 8, right: 8),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "Vehicle Detail",
+                                  "Driver Details",
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 16,
                               ),
                               Container(
-                                padding: EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                     color: Colo.white,
                                     boxShadow: [
-                                      BoxShadow(
+                                      const BoxShadow(
                                           color: Colors.black26, blurRadius: 2)
                                     ],
                                     borderRadius: BorderRadius.circular(15)),
@@ -1993,7 +2017,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
                                             Text(
                                                 "Enter Driving Licence Number"),
@@ -2017,7 +2041,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             validator: (value) =>
                                                 ValidateAll.inputValidate(
                                                     value),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -2025,13 +2049,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -2072,7 +2097,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               // floatingLabelAlignment:
                                               //     FloatingLabelAlignment.start,
                                               hintText:
-                                                  "Driving License Number",
+                                                  "Driving Licence Number",
                                               // suffixIcon: Container(
                                               //   height: 40,
                                               //   color: Colors.amber,
@@ -2084,16 +2109,16 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
                                       children: [
-                                        Align(
+                                        const Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text("Upload Driving licence"),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 4,
                                         ),
                                         InkWell(
@@ -2107,7 +2132,8 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: Container(
                                             height: 48,
                                             width: double.infinity,
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding:
+                                                const EdgeInsets.only(left: 15),
                                             alignment: Alignment.centerLeft,
                                             decoration: BoxDecoration(
                                                 color: Colors.grey.shade200,
@@ -2121,13 +2147,13 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                 : val.license_img_update != null
                                                     ? Text(
                                                         "${val.license_img_update}")
-                                                    : Text(
+                                                    : const Text(
                                                         "Upload Driving Licence image"),
                                           ),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -2136,7 +2162,8 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Driving Year of Exprience"),
+                                        const Text(
+                                            "Enter Driving Year of Exprience"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -2149,7 +2176,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               FilteringTextInputFormatter
                                                   .digitsOnly,
                                             ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -2157,13 +2184,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -2223,10 +2251,10 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
                                             Text(
-                                                "Enter Driving License Expiry Date"),
+                                                "Enter Driving Licence Expiry Date"),
                                             SizedBox(
                                               width: 5,
                                             ),
@@ -2254,7 +2282,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             //   FilteringTextInputFormatter
                                             //       .digitsOnly,
                                             // ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -2262,13 +2290,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -2310,24 +2339,24 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               // floatingLabelAlignment:
                                               //     FloatingLabelAlignment.start,
                                               hintText:
-                                                  "Driving License Expiry Date",
+                                                  "Driving Licence Expiry Date",
                                               suffixIcon: InkWell(
                                                   onTap: () =>
                                                       val.driverLicenseExpiry(
                                                           context),
-                                                  child: Icon(
+                                                  child: const Icon(
                                                       Icons.calendar_month)),
                                             ),
                                           ),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Container(
                                       height: 48,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           color: Colors.grey.shade300,
@@ -2340,7 +2369,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text("Select License Type"),
+                                          const Text("Select Licence Type"),
                                           DropdownButton<String>(
                                             // value:val.state==""? val
                                             //     .masterModel!.response!.state!.first:val.state,
@@ -2360,14 +2389,15 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                 .toList(),
 
                                             // add extra sugar..
-                                            icon: Icon(Icons.arrow_drop_down),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down),
                                             iconSize: 42,
-                                            underline: SizedBox(),
+                                            underline: const SizedBox(),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     //
@@ -2639,11 +2669,11 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 8, right: 8),
+                          padding: const EdgeInsets.only(left: 8, right: 8),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -2654,15 +2684,15 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 16,
                               ),
                               Container(
-                                padding: EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                     color: Colo.white,
                                     boxShadow: [
-                                      BoxShadow(
+                                      const BoxShadow(
                                           color: Colors.black26, blurRadius: 2)
                                     ],
                                     borderRadius: BorderRadius.circular(15)),
@@ -2674,7 +2704,8 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Bank Holder Full name"),
+                                        const Text(
+                                            "Enter Bank Holder Full name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -2682,7 +2713,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             controller: val.ac_name,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -2690,13 +2721,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -2748,7 +2780,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -2757,7 +2789,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Bank Account No."),
+                                        const Text("Enter Bank Account No."),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -2770,7 +2802,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               FilteringTextInputFormatter
                                                   .digitsOnly,
                                             ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -2778,13 +2810,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -2836,7 +2869,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -2845,7 +2878,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Bank Name"),
+                                        const Text("Enter Bank Name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -2853,7 +2886,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             controller: val.bank_name,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -2861,13 +2894,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -2919,7 +2953,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -2928,7 +2962,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter BANK Branch Name"),
+                                        const Text("Enter BANK Branch Name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -2936,7 +2970,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             controller: val.branch_name,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -2944,13 +2978,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -3002,7 +3037,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -3011,7 +3046,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter BANK IFSC Code"),
+                                        const Text("Enter BANK IFSC Code"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -3019,7 +3054,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             controller: val.ifsc,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -3027,13 +3062,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -3091,11 +3127,11 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 8, right: 8),
+                          padding: const EdgeInsets.only(left: 8, right: 8),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -3106,15 +3142,15 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 16,
                               ),
                               Container(
-                                padding: EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                     color: Colo.white,
                                     boxShadow: [
-                                      BoxShadow(
+                                      const BoxShadow(
                                           color: Colors.black26, blurRadius: 2)
                                     ],
                                     borderRadius: BorderRadius.circular(15)),
@@ -3126,7 +3162,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Nominee Name"),
+                                        const Text("Enter Nominee Name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -3134,7 +3170,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             controller: val.nomineeName,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -3142,13 +3178,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -3200,7 +3237,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -3209,15 +3246,15 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                            "Enter Relationship With The Nominator"),
+                                        const Text(
+                                            "Enter Relationship With The Nominee"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
                                             maxLines: 1,
                                             controller: val.nomineeRelationship,
                                             keyboardType: TextInputType.text,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -3225,13 +3262,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -3271,7 +3309,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               // label: Text("Enter Vechicle No."),
                                               // floatingLabelAlignment:
                                               //     FloatingLabelAlignment.start,
-                                              hintText: "Relatinship",
+                                              hintText: "Relationship",
                                               // suffixIcon: Container(
                                               //   height: 40,
                                               //   color: Colors.amber,
@@ -3283,7 +3321,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -3292,8 +3330,8 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                            "Enter Permanent Address Of Nominator"),
+                                        const Text(
+                                            "Enter Permanent Address Of Nominee"),
                                         SizedBox(
                                           // height: 48,
                                           child: TextFormField(
@@ -3301,7 +3339,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             controller: val.nomineeAddress,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -3309,13 +3347,16 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      top: 10,
+                                                      left: 15,
+                                                      right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -3367,7 +3408,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -3376,8 +3417,8 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                            "Enter Date Of Birth Of Nominator"),
+                                        const Text(
+                                            "Enter Date Of Birth Of Nominee"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -3395,7 +3436,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             //   FilteringTextInputFormatter
                                             //       .digitsOnly,
                                             // ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -3403,13 +3444,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -3456,7 +3498,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                   onTap: () =>
                                                       val.selectNomineeBirth(
                                                           context),
-                                                  child: Icon(
+                                                  child: const Icon(
                                                       Icons.calendar_month)),
                                             ),
                                           ),
@@ -3469,7 +3511,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Container(
@@ -3484,7 +3526,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                 value: val.termsCheck,
                                 onChanged: (value) => val.updateTerms(value!),
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -3500,7 +3542,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                 'id': '2',
                                                 'url': AppUrl.ferantaTerms
                                               }),
-                                      child: Text(
+                                      child: const Text(
                                         "Read More",
                                         style: TextStyle(
                                             color: Colors.blue,
@@ -3513,7 +3555,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Container(
@@ -3529,7 +3571,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                 onChanged: (value) =>
                                     val.updateCriminal(value!),
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Text(
                                 'No criminal record',
                                 style: Theme.of(context).textTheme.bodySmall,

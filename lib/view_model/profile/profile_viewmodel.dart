@@ -6,6 +6,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../configs/imageCompress_function.dart';
 import '../../model/profile/view_profileDetails.dart';
 import '../../static/flutter_toast_message/toast_messge.dart';
 
@@ -25,7 +26,10 @@ class ProfileViewmodel extends ChangeNotifier {
     );
 
     if (result != null) {
-      File file = File(result.files.single.path!);
+      var compressImage =
+          await compressFile(file: File(result.files.single.path!));
+      File file = File(compressImage!.path);
+
       profileImage = file;
     } else {
       // print(result);

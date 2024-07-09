@@ -1,5 +1,6 @@
 import 'package:feranta_franchise/screen/past_record/vechicle/show_bottom_driverList.dart';
 import 'package:feranta_franchise/screen/past_record/vechicle/show_verify_otp_driver.dart';
+import 'package:feranta_franchise/screen/past_record/vechicle/vehicle_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -22,7 +23,8 @@ class _VechicleListWidgetState extends State<VechicleListWidget> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Provider.of<VehicleViewmodel>(context, listen: false)
-          .allVechicleListViewModel();
+        ..allVechicleListViewModel()
+        ..getAllMaster();
     });
   }
 
@@ -78,208 +80,208 @@ class _VechicleListWidgetState extends State<VechicleListWidget> {
                                     shrinkWrap: true,
                                     itemCount: vehicle.datewseRecord!.length,
                                     itemBuilder: (context, inde) {
-                                      return Container(
-                                        // margin: EdgeInsets.all(10),
-                                        padding: EdgeInsets.all(10),
-                                        margin: EdgeInsets.only(
-                                            top: 8, left: 15, right: 15),
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: Colors.black,
-                                                  blurRadius: 2)
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          // mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            SizedBox(
-                                              child: Column(
-                                                // mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      SizedBox(
-                                                          width:
-                                                              mediaQuery.width *
-                                                                  0.3,
-                                                          child: Text(
-                                                              'Date & Time: ')),
-                                                      Text(
-                                                        DateFormat(
-                                                                'dd/MM/yyyy  hh:mm a')
-                                                            .format(DateTime
-                                                                .parse(vehicle
-                                                                    .datewseRecord![
-                                                                        inde]
-                                                                    .createAt!))
-                                                            .toString(),
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  // Row(
-                                                  //   children: [
-                                                  //     SizedBox(
-                                                  //         width: mediaQuery.width * 0.3,
-                                                  //         child: Text('Franchise')),
-                                                  //     Text(
-                                                  //       "Sahu Motor",
-                                                  //       style: TextStyle(
-                                                  //           fontWeight: FontWeight.bold),
-                                                  //     ),
-                                                  //   ],
-                                                  // ),
-                                                ],
-                                              ),
-                                            ),
-                                            Divider(
-                                              color: Colors.black26,
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                    width:
-                                                        mediaQuery.width * 0.3,
-                                                    child: Text(
-                                                      'ID',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .labelSmall,
-                                                    )),
-                                                Text(
-                                                  "${vehicle.datewseRecord![inde].id ?? ""}",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium,
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                    width:
-                                                        mediaQuery.width * 0.3,
-                                                    child: Text(
-                                                      'Vechicle Number',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .labelSmall,
-                                                    )),
-                                                Text(
-                                                  "${vehicle.datewseRecord![inde].regdNo ?? ""}",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium,
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                    width:
-                                                        mediaQuery.width * 0.3,
-                                                    child: Text(
-                                                      'Engine Number',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .labelSmall,
-                                                    )),
-                                                Text(
-                                                  "${vehicle.datewseRecord![inde].engineNo ?? ""}",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium,
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SizedBox(
-                                                    width:
-                                                        mediaQuery.width * 0.3,
-                                                    child: Text(
-                                                      'Chassis Number',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .labelSmall,
-                                                    )),
-                                                Text(
-                                                  "${vehicle.datewseRecord![inde].chassisNo ?? ""}",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyMedium,
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Material(
-                                                  color: Colors.amber[100],
-                                                  shape: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      borderSide:
-                                                          BorderSide.none),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 8, right: 8),
-                                                    child: Text(
-                                                      "${vehicle.datewseRecord![inde].toJson().containsValue("") || vehicle.datewseRecord![inde].toJson().containsValue(null) ? "Incomplete" : "Complete"}",
-                                                      style: TextStyle(
-                                                          color: Colors.amber,
-                                                          fontSize: 12),
-                                                    ),
-                                                  ),
-                                                ),
-                                                TextButton(
-                                                  onPressed: () {
-                                                    // if (record
-                                                    //         .datewseRecord![
-                                                    //             inde]
-                                                    //         .userType ==
-                                                    //     "3") {
-                                                    context.push(
-                                                        '/home/addVehicle',
-                                                        extra: {
-                                                          'id': "0",
-                                                          'vehicle': vehicle
-                                                                  .datewseRecord![
-                                                              inde]
-                                                        });
-                                                    // } else {
-                                                    //   ShowToast(
-                                                    //       msg:
-                                                    //           "You are not Owner");
-                                                    // }
-                                                  },
-                                                  child: Text("Edit",
-                                                      style: TextStyle(
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .underline)),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
+                                      return vehicleViewWidget(
+                                        SingleVehicle:
+                                            vehicle.datewseRecord![inde],
                                       );
+                                      // return vehicleViewWidget(context,
+                                      //     vehicle.datewseRecord![inde]);
+                                      // return Container(
+                                      //   // margin: EdgeInsets.all(10),
+                                      //   padding: EdgeInsets.all(10),
+                                      //   margin: EdgeInsets.only(
+                                      //       top: 8, left: 15, right: 15),
+                                      //   decoration: BoxDecoration(
+                                      //       color: Colors.white,
+                                      //       boxShadow: [
+                                      //         BoxShadow(
+                                      //             color: Colors.black,
+                                      //             blurRadius: 2)
+                                      //       ],
+                                      //       borderRadius:
+                                      //           BorderRadius.circular(12)),
+                                      //   child: Column(
+                                      //     mainAxisAlignment:
+                                      //         MainAxisAlignment.start,
+                                      //     crossAxisAlignment:
+                                      //         CrossAxisAlignment.center,
+                                      //     // mainAxisSize: MainAxisSize.min,
+                                      //     children: [
+                                      //       SizedBox(
+                                      //         child: Column(
+                                      //           // mainAxisSize: MainAxisSize.max,
+                                      //           children: [
+                                      //             Row(
+                                      //               children: [
+                                      //                 SizedBox(
+                                      //                     width:
+                                      //                         mediaQuery.width *
+                                      //                             0.3,
+                                      //                     child: Text(
+                                      //                         'Date & Time: ')),
+                                      //                 Text(
+                                      //                   DateFormat(
+                                      //                           'dd/MM/yyyy  hh:mm a')
+                                      //                       .format(DateTime
+                                      //                           .parse(vehicle
+                                      //                               .datewseRecord![
+                                      //                                   inde]
+                                      //                               .createAt!))
+                                      //                       .toString(),
+                                      //                   style: TextStyle(
+                                      //                       fontWeight:
+                                      //                           FontWeight
+                                      //                               .bold),
+                                      //                 ),
+                                      //               ],
+                                      //             ),
+                                      //             // Row(
+                                      //             //   children: [
+                                      //             //     SizedBox(
+                                      //             //         width: mediaQuery.width * 0.3,
+                                      //             //         child: Text('Franchise')),
+                                      //             //     Text(
+                                      //             //       "Sahu Motor",
+                                      //             //       style: TextStyle(
+                                      //             //           fontWeight: FontWeight.bold),
+                                      //             //     ),
+                                      //             //   ],
+                                      //             // ),
+                                      //           ],
+                                      //         ),
+                                      //       ),
+                                      //       Divider(
+                                      //         color: Colors.black26,
+                                      //       ),
+                                      //       Row(
+                                      //         children: [
+                                      //           SizedBox(
+                                      //               width:
+                                      //                   mediaQuery.width * 0.3,
+                                      //               child: Text(
+                                      //                 'Vehicle Type',
+                                      //                 style: Theme.of(context)
+                                      //                     .textTheme
+                                      //                     .labelSmall,
+                                      //               )),
+                                      //           Text(
+                                      //             "${vehicle.datewseRecord![inde].bookingType == null || vehicle.datewseRecord![inde].bookingType == "" ? "" : vehicle.vehicleType[int.parse(vehicle.datewseRecord![inde].bookingType ?? "") - 1] ?? ""}",
+                                      //             style: Theme.of(context)
+                                      //                 .textTheme
+                                      //                 .bodyMedium,
+                                      //           ),
+                                      //         ],
+                                      //       ),
+                                      //       Row(
+                                      //         children: [
+                                      //           SizedBox(
+                                      //               width:
+                                      //                   mediaQuery.width * 0.3,
+                                      //               child: Text(
+                                      //                 'Vehicle Type',
+                                      //                 style: Theme.of(context)
+                                      //                     .textTheme
+                                      //                     .labelSmall,
+                                      //               )),
+                                      //           Text(
+                                      //             "${vehicle.datewseRecord![inde].typeId ?? ""}",
+                                      //             style: Theme.of(context)
+                                      //                 .textTheme
+                                      //                 .bodyMedium,
+                                      //           ),
+                                      //         ],
+                                      //       ),
+                                      //       Row(
+                                      //         children: [
+                                      //           SizedBox(
+                                      //               width:
+                                      //                   mediaQuery.width * 0.3,
+                                      //               child: Text(
+                                      //                 'Vehicle Number',
+                                      //                 style: Theme.of(context)
+                                      //                     .textTheme
+                                      //                     .labelSmall,
+                                      //               )),
+                                      //           Text(
+                                      //             "${vehicle.datewseRecord![inde].regdNo ?? ""}",
+                                      //             style: Theme.of(context)
+                                      //                 .textTheme
+                                      //                 .bodyMedium,
+                                      //           ),
+                                      //         ],
+                                      //       ),
+                                      //       Row(
+                                      //         mainAxisAlignment:
+                                      //             MainAxisAlignment
+                                      //                 .spaceBetween,
+                                      //         crossAxisAlignment:
+                                      //             CrossAxisAlignment.center,
+                                      //         children: [
+                                      //           Material(
+                                      //             color: Colors.amber[100],
+                                      //             shape: OutlineInputBorder(
+                                      //                 borderRadius:
+                                      //                     BorderRadius.circular(
+                                      //                         10),
+                                      //                 borderSide:
+                                      //                     BorderSide.none),
+                                      //             child: Padding(
+                                      //               padding:
+                                      //                   const EdgeInsets.only(
+                                      //                       left: 8, right: 8),
+                                      //               child: Text(
+                                      //                 "${vehicle.datewseRecord![inde].toJson().containsValue("") || vehicle.datewseRecord![inde].toJson().containsValue(null) ? "Incomplete" : "Complete"}",
+                                      //                 style: TextStyle(
+                                      //                     color: vehicle
+                                      //                                 .datewseRecord![
+                                      //                                     inde]
+                                      //                                 .toJson()
+                                      //                                 .containsValue(
+                                      //                                     "") ||
+                                      //                             vehicle
+                                      //                                 .datewseRecord![
+                                      //                                     inde]
+                                      //                                 .toJson()
+                                      //                                 .containsValue(
+                                      //                                     null)
+                                      //                         ? Colo.black
+                                      //                         : Colors.green,
+                                      //                     fontSize: 12),
+                                      //               ),
+                                      //             ),
+                                      //           ),
+                                      //           TextButton(
+                                      //             onPressed: () {
+                                      //               // if (record
+                                      //               //         .datewseRecord![
+                                      //               //             inde]
+                                      //               //         .userType ==
+                                      //               //     "3") {
+                                      //               context.push(
+                                      //                   '/home/addVehicle',
+                                      //                   extra: {
+                                      //                     'id': "0",
+                                      //                     'vehicle': vehicle
+                                      //                             .datewseRecord![
+                                      //                         inde]
+                                      //                   });
+                                      //               // } else {
+                                      //               //   ShowToast(
+                                      //               //       msg:
+                                      //               //           "You are not Owner");
+                                      //               // }
+                                      //             },
+                                      //             child: Text("Edit",
+                                      //                 style: TextStyle(
+                                      //                     decoration:
+                                      //                         TextDecoration
+                                      //                             .underline)),
+                                      //           ),
+                                      //         ],
+                                      //       )
+                                      //     ],
+                                      //   ),
+                                      // );
                                     })
                             : RefreshIndicator(
                                 onRefresh: () => Provider.of<VehicleViewmodel>(
@@ -292,360 +294,11 @@ class _VechicleListWidgetState extends State<VechicleListWidget> {
                                     itemCount: vehicle.vechcleRecordModel!
                                         .response!.vehicleList!.length,
                                     itemBuilder: (context, int) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          // Provider.of<DriverViewmodel>(context, listen: false)
-                                          //     .defaultPanelState = PanelState.CLOSED; //fullDtlsTrip
-                                          // context.push('/mytrip/fullDtlsTrip', extra: {'id': "1"});
-
-                                          /// context.push('/home/driverfindscr', extra: {'id': "0"});
-                                        },
-                                        child: Container(
-                                          // margin: EdgeInsets.all(10),
-                                          padding: EdgeInsets.all(10),
-                                          margin: EdgeInsets.only(
-                                              top: 8, left: 15, right: 15),
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: Colors.black,
-                                                    blurRadius: 2)
-                                              ],
-                                              borderRadius:
-                                                  BorderRadius.circular(12)),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            // mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              SizedBox(
-                                                child: Column(
-                                                  // mainAxisSize: MainAxisSize.max,
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        SizedBox(
-                                                            width: mediaQuery
-                                                                    .width *
-                                                                0.3,
-                                                            child: Text(
-                                                                'Date & Time: ')),
-                                                        Text(
-                                                          DateFormat(
-                                                                  'dd/MM/yyyy  hh:mm a')
-                                                              .format(DateTime
-                                                                  .parse(vehicle
-                                                                      .vechcleRecordModel!
-                                                                      .response!
-                                                                      .vehicleList![
-                                                                          int]
-                                                                      .createAt!))
-                                                              .toString(),
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    // Row(
-                                                    //   children: [
-                                                    //     SizedBox(
-                                                    //         width: mediaQuery.width * 0.3,
-                                                    //         child: Text('Franchise')),
-                                                    //     Text(
-                                                    //       "Sahu Motor",
-                                                    //       style: TextStyle(
-                                                    //           fontWeight: FontWeight.bold),
-                                                    //     ),
-                                                    //   ],
-                                                    // ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Divider(
-                                                color: Colors.black26,
-                                              ),
-                                              Align(
-                                                alignment:
-                                                    Alignment.centerRight,
-                                                child: ElevatedButton.icon(
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 5,
-                                                                    right: 5),
-                                                            minimumSize: Size(0,
-                                                                0), // Minimum size set to zero
-                                                            tapTargetSize:
-                                                                MaterialTapTargetSize
-                                                                    .shrinkWrap,
-                                                            backgroundColor: vehicle
-                                                                            .vechcleRecordModel!
-                                                                            .response!
-                                                                            .vehicleList![
-                                                                                int]
-                                                                            .driverId ==
-                                                                        null ||
-                                                                    vehicle
-                                                                            .vechcleRecordModel!
-                                                                            .response!
-                                                                            .vehicleList![int]
-                                                                            .driverId ==
-                                                                        ""
-                                                                ? Colo.primaryColor
-                                                                : Colors.green.shade200
-                                                            // padding: EdgeInsets
-                                                            //     .zero,
-
-                                                            ),
-                                                    onPressed: () async {
-                                                      await vehicle
-                                                        ..allDriverListViewModel();
-                                                      showModalBottomSheetDriverList(
-                                                          context: context,
-                                                          vehicleId: vehicle
-                                                                  .vechcleRecordModel!
-                                                                  .response!
-                                                                  .vehicleList![
-                                                                      int]
-                                                                  .id ??
-                                                              "",
-                                                          ownerID: vehicle
-                                                                  .vechcleRecordModel!
-                                                                  .response!
-                                                                  .vehicleList![
-                                                                      int]
-                                                                  .vendorId ??
-                                                              "");
-                                                    },
-                                                    icon: Text(
-                                                      "${vehicle.vechcleRecordModel!.response!.vehicleList![int].driverId == null || vehicle.vechcleRecordModel!.response!.vehicleList![int].driverId == "" ? "Assign" : "Assigned"}",
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyMedium,
-                                                    ),
-                                                    label: Icon(Icons.local_taxi)),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: mediaQuery.width *
-                                                          0.3,
-                                                      child: Text(
-                                                        'ID',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall,
-                                                      )),
-                                                  Text(
-                                                    "${vehicle.vechcleRecordModel!.response!.vehicleList![int].id ?? ""}",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyMedium,
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: mediaQuery.width *
-                                                          0.3,
-                                                      child: Text(
-                                                        'Vechicle Number',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall,
-                                                      )),
-                                                  Text(
-                                                    "${vehicle.vechcleRecordModel!.response!.vehicleList![int].regdNo ?? ""}",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyMedium,
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: mediaQuery.width *
-                                                          0.3,
-                                                      child: Text(
-                                                        'Engine Number',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall,
-                                                      )),
-                                                  Text(
-                                                    "${vehicle.vechcleRecordModel!.response!.vehicleList![int].engineNo ?? ""}",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyMedium,
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: mediaQuery.width *
-                                                          0.3,
-                                                      child: Text(
-                                                        'Chassis Number',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall,
-                                                      )),
-                                                  Text(
-                                                    "${vehicle.vechcleRecordModel!.response!.vehicleList![int].chassisNo ?? ""}",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyMedium,
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: mediaQuery.width *
-                                                          0.3,
-                                                      child: Text(
-                                                        'Owner Name',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall,
-                                                      )),
-                                                  Text(
-                                                    "${vehicle.vechcleRecordModel!.response!.vehicleList![int].ownerName ?? ""}",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyMedium,
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: mediaQuery.width *
-                                                          0.3,
-                                                      child: Text(
-                                                        'Owner Contact',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall,
-                                                      )),
-                                                  Text(
-                                                    "${vehicle.vechcleRecordModel!.response!.vehicleList![int].ownerNumber ?? ""}",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyMedium,
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: mediaQuery.width *
-                                                          0.3,
-                                                      child: Text(
-                                                        'Drivver Name',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall,
-                                                      )),
-                                                  Text(
-                                                    "${vehicle.vechcleRecordModel!.response!.vehicleList![int].driverName ?? ""}",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyMedium,
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                      width: mediaQuery.width *
-                                                          0.3,
-                                                      child: Text(
-                                                        'Driver Phone',
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelSmall,
-                                                      )),
-                                                  Text(
-                                                    "${vehicle.vechcleRecordModel!.response!.vehicleList![int].driverNumber ?? ""}",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyMedium,
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Material(
-                                                    color: Colors.amber[100],
-                                                    shape: OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        borderSide:
-                                                            BorderSide.none),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 8,
-                                                              right: 8),
-                                                      child: Text(
-                                                        "${vehicle.vechcleRecordModel!.response!.vehicleList![int].toJson().containsValue("") || vehicle.vechcleRecordModel!.response!.vehicleList![int].toJson().containsValue(null) ? "Incomplete" : "Complete"}",
-                                                        style: TextStyle(
-                                                            color: Colors.amber,
-                                                            fontSize: 12),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () {
-                                                      // if (vehicle.vechcleRecordModel!.response!.vehicleList! [
-                                                      //             int]
-                                                      //         .userType ==
-                                                      //     "3") {
-                                                      context.push(
-                                                          '/home/addVehicle',
-                                                          extra: {
-                                                            'id': "0",
-                                                            'vehicle': vehicle
-                                                                .vechcleRecordModel!
-                                                                .response!
-                                                                .vehicleList![int]
-                                                          });
-                                                      // } else {
-                                                      //   ShowToast(
-                                                      //       msg:
-                                                      //           "You are not Owner");
-                                                      // }
-                                                    },
-                                                    child: Text(
-                                                      "Edit",
-                                                      style: TextStyle(
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .underline),
-                                                    ),
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      );
+                                      return vehicleViewWidget(
+                                          SingleVehicle: vehicle
+                                              .vechcleRecordModel!
+                                              .response!
+                                              .vehicleList![int]);
                                     }),
                               ),
                       ),

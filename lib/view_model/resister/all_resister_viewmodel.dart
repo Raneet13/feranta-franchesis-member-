@@ -183,7 +183,8 @@ class ResisterViewmodel extends ChangeNotifier {
     final pickedFile = await _picker.pickImage(source: source);
 
     if (pickedFile != null) {
-      seeDemo = File(pickedFile.path);
+      var compressImage = await compressFile(file: File(pickedFile.path));
+      seeDemo = File(compressImage!.path);
 
       notifyListeners();
     } else {
@@ -531,17 +532,58 @@ class ResisterViewmodel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future customererLogo() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+  Future customererLogo(BuildContext context) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            content: Text("Choose the medium of your Image"),
+            actions: <Widget>[
+              ListTile(
+                leading: Icon(Icons.photo_library),
+                title: Text('Photo Library'),
+                onTap: () {
+                  _pickImagelogoCus(ImageSource.gallery);
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.photo_camera),
+                title: Text('Camera'),
+                onTap: () {
+                  _pickImagelogoCus(ImageSource.camera);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
 
-    if (result != null) {
-      File file = File(result.files.single.path!);
-      customerImage = file;
+    // FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    // if (result != null) {
+    //   File file = File(result.files.single.path!);
+    //   customerImage = file;
+    // } else {
+    //   // print(result);
+    //   // User canceled the picker
+    // }
+    // notifyListeners();
+  }
+
+  Future<void> _pickImagelogoCus(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      var compressImage = await compressFile(file: File(pickedFile.path));
+
+      customerImage = File(compressImage!.path);
+
+      notifyListeners();
     } else {
-      // print(result);
-      // User canceled the picker
+      ShowToast(msg: 'No image selected.');
     }
-    notifyListeners();
   }
 
   customerRegister(BuildContext context) async {
@@ -715,60 +757,60 @@ class ResisterViewmodel extends ChangeNotifier {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = await prefs.getString("userId");
     var allData = await ResisterRepository().updateResisterOwner(
-      ownerty: ownertr,
-      user_id: userid.toString(),
-      full_name: name.text.toString(),
-      email: email.text.toString(),
-      contact_no: contact.text.toString(),
-      altcontact: altcontact.text.toString(),
-      state: stateID,
-      city: cityID,
-      pincode: pincode.text,
-      address1: address1.text.toString(),
-      license_no: license_no.text.toString(),
-      password: resister_password.text.toString(),
-      ac_name: ac_name.text.toString(),
-      bank_name: bank_name.text.toString(),
-      acc_no: acc_no.text.toString(),
-      ifsc: ifsc.text.toString(),
-      img: img != null
-          ? await MultipartFile.fromFile(img!.path,
-              filename: img!.path.split('/').last)
-          : "",
-      frontimg: frontimg != null
-          ? await MultipartFile.fromFile(frontimg!.path,
-              filename: frontimg!.path.split('/').last)
-          : "",
-      backimg: backimg != null
-          ? await MultipartFile.fromFile(backimg!.path,
-              filename: backimg!.path.split('/').last)
-          : "",
-      license_img: license_img != null
-          ? await MultipartFile.fromFile(license_img!.path,
-              filename: license_img!.path.split('/').last)
-          : "",
-      adharno: ahdarno.text.toString(),
-      is_driver: isCheck ? "1" : "0",
-      member_id: userId,
-      address2: villageName.text.toString(), //uppdate
-      branch_name: branch_name.text.toString(),
-      block: blockID,
-      ditrict: ditrictID,
-      father_name: father_name.text.toString(),
-      blood_group: blood_groupID,
-      cheque: cheque != null
-          ? await MultipartFile.fromFile(cheque!.path,
-              filename: cheque!.path.split('/').last)
-          : "",
-      spouse_name: wife_name.text.toString(),
-      license_expire_date: drivingExpiryController.text.toString(),
-      dob: dobController.text.toString(),
-      mother_name: mother_name.text.toString(),
-      nominee_name: nomineeName.text.toString(),
-      nominee_rltn: nomineeRelationship.text.toString(),
-      nominee_add: nomineeAddress.text.toString(),
-      nominee_dob: dobNomineeController.text.toString(),
-    );
+        ownerty: ownertr,
+        user_id: userid.toString(),
+        full_name: name.text.toString(),
+        email: email.text.toString(),
+        contact_no: contact.text.toString(),
+        altcontact: altcontact.text.toString(),
+        state: stateID,
+        city: cityID,
+        pincode: pincode.text,
+        address1: address1.text.toString(),
+        license_no: license_no.text.toString(),
+        password: resister_password.text.toString(),
+        ac_name: ac_name.text.toString(),
+        bank_name: bank_name.text.toString(),
+        acc_no: acc_no.text.toString(),
+        ifsc: ifsc.text.toString(),
+        img: img != null
+            ? await MultipartFile.fromFile(img!.path,
+                filename: img!.path.split('/').last)
+            : "",
+        frontimg: frontimg != null
+            ? await MultipartFile.fromFile(frontimg!.path,
+                filename: frontimg!.path.split('/').last)
+            : "",
+        backimg: backimg != null
+            ? await MultipartFile.fromFile(backimg!.path,
+                filename: backimg!.path.split('/').last)
+            : "",
+        license_img: license_img != null
+            ? await MultipartFile.fromFile(license_img!.path,
+                filename: license_img!.path.split('/').last)
+            : "",
+        adharno: ahdarno.text.toString(),
+        is_driver: isCheck ? "1" : "0",
+        member_id: userId,
+        address2: villageName.text.toString(), //uppdate
+        branch_name: branch_name.text.toString(),
+        block: blockID,
+        ditrict: ditrictID,
+        father_name: father_name.text.toString(),
+        blood_group: blood_groupID,
+        cheque: cheque != null
+            ? await MultipartFile.fromFile(cheque!.path,
+                filename: cheque!.path.split('/').last)
+            : "",
+        spouse_name: wife_name.text.toString(),
+        license_expire_date: drivingExpiryController.text.toString(),
+        dob: dobController.text.toString(),
+        mother_name: mother_name.text.toString(),
+        nominee_name: nomineeName.text.toString(),
+        nominee_rltn: nomineeRelationship.text.toString(),
+        nominee_add: nomineeAddress.text.toString(),
+        nominee_dob: dobNomineeController.text.toString(),
+        licenceType: licenseTpeSelect == "MCWG" ? "1" : "2");
     if (allData["error"] == null) {
       ShowToast(msg: "${allData["response"]["success"].toString()}");
       // ShowToast(msg: "You Resister Sucessfully");
@@ -875,15 +917,10 @@ class ResisterViewmodel extends ChangeNotifier {
     pincode.text = owner.pin ?? "";
 
     cheque = null;
-    exp_year.text = "";
+    exp_year.text = owner.expYear ?? "";
 
-    drivingExpiryController.text = "";
-    engineNumberField.text = "";
-    vechicleRc = null;
-    vechicleInsurancef = null;
-    vechicleInsurancet = null;
-    fitnessCertificate = null;
-    polutionCertificate = null;
+    drivingExpiryController.text = owner.licenseExpireDate ?? "";
+
     branch_name.text = owner.branchName ?? "";
     nomineeName.text = owner.nomineeName ?? '';
     nomineeAddress.text = owner.nomineeAdd ?? "";
@@ -925,6 +962,11 @@ class ResisterViewmodel extends ChangeNotifier {
     owner.cheque == "" || owner.cheque == null
         ? null
         : cheque_update = owner.cheque;
+    licenseTpeSelect = owner.licenseType == null
+        ? ""
+        : owner.licenseType == "1"
+            ? licenseTyppe[0]
+            : licenseTyppe[1];
     notifyListeners();
   }
 
@@ -1008,59 +1050,59 @@ class ResisterViewmodel extends ChangeNotifier {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userId = await prefs.getString("userId");
     var allData = await ResisterRepository().updateresisterDriver(
-      userI: userI,
-      name: name.text.toString(),
-      email: email.text.toString(),
-      contact: contact.text.toString(),
-      altcontact: altcontact.text.toString(),
-      state: stateID,
-      city: cityID,
-      pincode: pincode.text,
-      address1: address1.text.toString(),
-      address2: villageName.text,
-      license_no: license_no.text.toString(),
-      password: resister_password.text.toString(),
-      ac_name: ac_name.text.toString(),
-      bank_name: bank_name.text.toString(),
-      acc_no: acc_no.text.toString(),
-      ifsc: ifsc.text.toString(),
-      exp_year: exp_year.text.toString(),
-      img: img != null
-          ? await MultipartFile.fromFile(img!.path,
-              filename: img!.path.split('/').last)
-          : "",
-      frontimg: frontimg != null
-          ? await MultipartFile.fromFile(frontimg!.path,
-              filename: frontimg!.path.split('/').last)
-          : "",
-      backimg: backimg != null
-          ? await MultipartFile.fromFile(backimg!.path,
-              filename: backimg!.path.split('/').last)
-          : "",
-      license_img: license_img != null
-          ? await MultipartFile.fromFile(license_img!.path,
-              filename: license_img!.path.split('/').last)
-          : "",
-      adharno: ahdarno.text.toString(),
-      member_id: userId!,
-      branch_name: branch_name.text.toString(),
-      block: blockID,
-      ditrict: ditrictID,
-      father_name: father_name.text.toString(),
-      blood_group: blood_groupID,
-      cheque: cheque != null
-          ? await MultipartFile.fromFile(cheque!.path,
-              filename: cheque!.path.split('/').last)
-          : "",
-      spouse_name: wife_name.text.toString(),
-      license_expire_date: drivingExpiryController.text.toString(),
-      dob: dobController.text.toString(),
-      mother_name: mother_name.text.toString(),
-      nominee_name: nomineeName.text.toString(),
-      nominee_rltn: nomineeRelationship.text.toString(),
-      nominee_add: nomineeAddress.text.toString(),
-      nominee_dob: dobNomineeController.text.toString(),
-    );
+        userI: userI,
+        name: name.text.toString(),
+        email: email.text.toString(),
+        contact: contact.text.toString(),
+        altcontact: altcontact.text.toString(),
+        state: stateID,
+        city: cityID,
+        pincode: pincode.text,
+        address1: address1.text.toString(),
+        address2: villageName.text,
+        license_no: license_no.text.toString(),
+        password: resister_password.text.toString(),
+        ac_name: ac_name.text.toString(),
+        bank_name: bank_name.text.toString(),
+        acc_no: acc_no.text.toString(),
+        ifsc: ifsc.text.toString(),
+        exp_year: exp_year.text.toString(),
+        img: img != null
+            ? await MultipartFile.fromFile(img!.path,
+                filename: img!.path.split('/').last)
+            : "",
+        frontimg: frontimg != null
+            ? await MultipartFile.fromFile(frontimg!.path,
+                filename: frontimg!.path.split('/').last)
+            : "",
+        backimg: backimg != null
+            ? await MultipartFile.fromFile(backimg!.path,
+                filename: backimg!.path.split('/').last)
+            : "",
+        license_img: license_img != null
+            ? await MultipartFile.fromFile(license_img!.path,
+                filename: license_img!.path.split('/').last)
+            : "",
+        adharno: ahdarno.text.toString(),
+        member_id: userId!,
+        branch_name: branch_name.text.toString(),
+        block: blockID,
+        ditrict: ditrictID,
+        father_name: father_name.text.toString(),
+        blood_group: blood_groupID,
+        cheque: cheque != null
+            ? await MultipartFile.fromFile(cheque!.path,
+                filename: cheque!.path.split('/').last)
+            : "",
+        spouse_name: wife_name.text.toString(),
+        license_expire_date: drivingExpiryController.text.toString(),
+        dob: dobController.text.toString(),
+        mother_name: mother_name.text.toString(),
+        nominee_name: nomineeName.text.toString(),
+        nominee_rltn: nomineeRelationship.text.toString(),
+        nominee_add: nomineeAddress.text.toString(),
+        nominee_dob: dobNomineeController.text.toString(),
+        licenceType: licenseTpeSelect == "MCWG" ? "1" : "2");
     if (allData["error"] == null) {
       ShowToast(msg: "${allData["response"]["success"].toString()}");
       await Provider.of<RecordViewmodel>(context, listen: false)
@@ -1068,7 +1110,9 @@ class ResisterViewmodel extends ChangeNotifier {
       clearResistationForm();
       Navigator.pop(context);
     } else {
-      ShowToast(msg: "${allData["response"].keys.toString()} must be unique");
+      ShowToast(
+          msg:
+              "${allData["response"]["message"].keys.toString()} must be unique");
     }
     isloadingFalse();
     //clearResistationForm();

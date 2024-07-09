@@ -5,10 +5,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../configs/imageCompress_function.dart';
 import '../../model/resister/master_model.dart';
 import '../../model/vechicle/all_owner_model.dart';
 import '../../model/vechicle/assign_vechicle_driver_otp.dart';
@@ -31,6 +33,7 @@ class VehicleViewmodel extends ChangeNotifier {
   TextEditingController driverFind = TextEditingController();
   List<Driverlist>? allFindDriverList;
   int? select_DriverIndex;
+  var strCab = "";
   //add Vechicle form  field
   //vehicle_type,
   TextEditingController otpController = TextEditingController();
@@ -267,8 +270,8 @@ class VehicleViewmodel extends ChangeNotifier {
         vehicle_type: vechiceCabCategry == ""
             ? vechiceLiftCategry != ""
                 ? vechiceLiftCategry == "bike"
-                    ? "1"
-                    : "2"
+                    ? "2"
+                    : "1"
                 : "1"
             : vechiceCategryID,
         insurance_img: insurance_img != null
@@ -313,6 +316,7 @@ class VehicleViewmodel extends ChangeNotifier {
       ShowToast(msg: "Vechicle Add Sucessfully");
       await allVechicleListViewModel();
       clearDriverAddDett();
+      context.pop();
     } else {
       ShowToast(
           msg: "${allData['response']['message'].keys.toString()} required");
@@ -336,8 +340,8 @@ class VehicleViewmodel extends ChangeNotifier {
         vehicle_type: vechiceCabCategry == ""
             ? vechiceLiftCategry != ""
                 ? vechiceLiftCategry == "bike"
-                    ? "1"
-                    : "2"
+                    ? "2"
+                    : "1"
                 : "1"
             : vechiceCategryID,
         insurance_img: insurance_img != null
@@ -379,13 +383,14 @@ class VehicleViewmodel extends ChangeNotifier {
             : "",
         driver_id: driverId);
     if (allData["error"] == null) {
-      ShowToast(msg: "Vechicle Add Sucessfully");
+      ShowToast(msg: "Vechicle update Successfully");
       clearDriverAddDett();
       await allVechicleListViewModel();
+      context.pop();
     } else {
       ShowToast(
           msg: "${allData['response']['message'].keys.toString()} required");
-      print(allData);
+      // print(allData);
     }
     isLoadingupdateFalse();
     notifyListeners();
@@ -395,8 +400,10 @@ class VehicleViewmodel extends ChangeNotifier {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
-      File file = File(result.files.single.path!);
-      seeDemo = file;
+      var compressImage =
+          await compressFile(file: File(result.files.single.path!));
+
+      seeDemo = File(compressImage!.path);
     } else {
       // print(result);
       // User canceled the picker
@@ -623,6 +630,32 @@ class VehicleViewmodel extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<String> findLiftTypeDets(String Ownerght) async {
+    // var selectStt =
+    //     await liftSub.where((element) => element == OwnerII).toList();
+    // if (selectStt.length != 0) {
+    var tye = liftSub[int.parse(Ownerght) - 1];
+    // ownerId = selectStt[0].id!;
+    // ownerFind.text = selectStt[0].fullName!;
+    // }
+    return tye;
+    // notifyListeners();
+  }
+
+  findCabTypeDets(String OwnerII) {
+    // late String vechtype;
+    var selectStt = masterModel?.response?.vehicleType!
+        .where((element) => element.id == OwnerII)
+        .toList();
+    if (selectStt?.length != 0) {
+      strCab = selectStt![0].typeName!;
+    } else
+      // vechtype = "";
+      // return vechtype;
+
+      notifyListeners();
+  }
+
   ownerNameInit(String OwnerII) async {
     print(ownerModel!.toJson());
     var selectStt = await ownerModel!.response!.ownerlist!
@@ -713,8 +746,10 @@ class VehicleViewmodel extends ChangeNotifier {
         owner_id: userId, driver_id: driver_id, vehicle_id: vehicle_id);
     if (allData["error"] == null) {
       vechicleAsignDriver = asignDriverOtp.fromJson(allData);
+      otpController.text = vechicleAsignDriver!.response!.otp.toString();
+
       // allVechicleModel = getAllVechicleModel.fromJson(allData);
-      ShowToast(msg: vechicleAsignDriver!.response!.otp.toString());
+      // ShowToast(msg: vechicleAsignDriver!.response!.otp.toString());
     } else {
       print(allData);
       ShowToast(msg: "Error to load Drivers list");

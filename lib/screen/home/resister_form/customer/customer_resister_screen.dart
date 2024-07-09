@@ -25,12 +25,14 @@ class _CustomerResisterState extends State<CustomerResister> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (widget.customerDetails != null) {
-        if (widget.customerDetails == null) {
-          Provider.of<ResisterViewmodel>(context, listen: false)
-            ..isLoading = false
-            ..clearCustomerResistationForm()
-            ..initCustomerDet(widget.customerDetails!);
-        }
+        Provider.of<ResisterViewmodel>(context, listen: false)
+          ..isLoading = false
+          ..clearCustomerResistationForm()
+          ..initCustomerDet(widget.customerDetails!);
+      } else {
+        Provider.of<ResisterViewmodel>(context, listen: false)
+          ..isLoading = false
+          ..clearCustomerResistationForm();
       }
     });
   }
@@ -41,7 +43,7 @@ class _CustomerResisterState extends State<CustomerResister> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-            "${widget.customerDetails != null ? "Update" : "Registration"} Customer"),
+            "${widget.customerDetails != null ? "Update" : "Register"} Customer"),
         centerTitle: true,
         leading: InkWell(
           onTap: () {
@@ -50,14 +52,14 @@ class _CustomerResisterState extends State<CustomerResister> {
               ..clearCustomerResistationForm();
             Navigator.pop(context);
           },
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back,
             color: Colors.black,
           ),
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+        padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
         child: Consumer<ResisterViewmodel>(builder: (context, customer, _) {
           return ElevatedButton(
               onPressed: () async {
@@ -75,27 +77,27 @@ class _CustomerResisterState extends State<CustomerResister> {
                   }
                   // ShowToast(msg: "Form is validate");
                 } else {
-                  ShowToast(msg: "Fill all the detais");
+                  ShowToast(msg: "Fill all the details");
                 }
               },
               child: customer.isLoading
-                  ? CircularProgressIndicator()
+                  ? const CircularProgressIndicator()
                   : Text(
                       "${widget.customerDetails != null ? "Update" : "Registration"}"));
         }),
       ),
       body: Consumer<ResisterViewmodel>(builder: (context, customer, _) {
         return SingleChildScrollView(
-          padding: EdgeInsets.only(left: 20, right: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: Form(
               key: formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
+                  const Row(
                     children: [
-                      Text("Enter Logo"),
+                      Text(" Upload Profile Pic"),
                       SizedBox(
                         width: 5,
                       ),
@@ -114,7 +116,7 @@ class _CustomerResisterState extends State<CustomerResister> {
                       position: badges.BadgePosition.custom(bottom: 2, end: 10),
                       badgeContent: InkWell(
                         onTap: () async {
-                          await customer.customererLogo();
+                          await customer.customererLogo(context);
                         },
                         child: const Icon(
                           Icons.edit,
@@ -137,28 +139,28 @@ class _CustomerResisterState extends State<CustomerResister> {
                           //     customer.profileImage!,
                           //     fit: BoxFit.fill,
                           //   )
-                          : widget.customerDetails != null
+                          : customer.customerImage_update != null
                               ? CircleAvatar(
                                   radius: 55,
                                   backgroundImage: CachedNetworkImageProvider(
-                                      "${AppUrl.imageUrl}${widget.customerDetails!.profileImage}")
+                                      "${AppUrl.imageUrl}${customer.customerImage_update}")
                                   // backgroundImage:
                                   //     AssetImage('assets/images/appLauncherIcon.jpeg'),
                                   )
-                              : CircleAvatar(
+                              : const CircleAvatar(
                                   radius: 55,
                                   backgroundImage:
                                       CachedNetworkImageProvider("")),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Text("Enter Name"),
                           SizedBox(
@@ -179,18 +181,19 @@ class _CustomerResisterState extends State<CustomerResister> {
                           keyboardType: TextInputType.emailAddress,
                           validator: (input) =>
                               ValidateAll.inputValidate(input),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 12,
                           ),
                           decoration: InputDecoration(
                             fillColor: Colors.grey.shade200,
                             filled: true,
-                            errorStyle: TextStyle(fontSize: 0),
-                            contentPadding: EdgeInsets.only(left: 15, right: 5),
+                            errorStyle: const TextStyle(fontSize: 0),
+                            contentPadding:
+                                const EdgeInsets.only(left: 15, right: 5),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.amber, // Border color
                                 width: 2.0, // Border width
                               ),
@@ -235,14 +238,14 @@ class _CustomerResisterState extends State<CustomerResister> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Text("Enter Phone Number"),
                           SizedBox(
@@ -267,18 +270,19 @@ class _CustomerResisterState extends State<CustomerResister> {
                             LengthLimitingTextInputFormatter(10),
                             FilteringTextInputFormatter.digitsOnly,
                           ],
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 12,
                           ),
                           decoration: InputDecoration(
                             fillColor: Colors.grey.shade200,
                             filled: true,
-                            errorStyle: TextStyle(fontSize: 0),
-                            contentPadding: EdgeInsets.only(left: 15, right: 5),
+                            errorStyle: const TextStyle(fontSize: 0),
+                            contentPadding:
+                                const EdgeInsets.only(left: 15, right: 5),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.amber, // Border color
                                 width: 2.0, // Border width
                               ),
@@ -323,14 +327,14 @@ class _CustomerResisterState extends State<CustomerResister> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Text("Enter Email Address"),
                           SizedBox(
@@ -351,18 +355,19 @@ class _CustomerResisterState extends State<CustomerResister> {
                           keyboardType: TextInputType.emailAddress,
                           validator: (input) =>
                               ValidateAll.validateEmail(input),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 12,
                           ),
                           decoration: InputDecoration(
                             fillColor: Colors.grey.shade200,
                             filled: true,
-                            errorStyle: TextStyle(fontSize: 0),
-                            contentPadding: EdgeInsets.only(left: 15, right: 5),
+                            errorStyle: const TextStyle(fontSize: 0),
+                            contentPadding:
+                                const EdgeInsets.only(left: 15, right: 5),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.amber, // Border color
                                 width: 2.0, // Border width
                               ),
@@ -407,14 +412,14 @@ class _CustomerResisterState extends State<CustomerResister> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Text("Enter WhatsApp Number"),
                           SizedBox(
@@ -439,18 +444,19 @@ class _CustomerResisterState extends State<CustomerResister> {
                             LengthLimitingTextInputFormatter(10),
                             FilteringTextInputFormatter.digitsOnly,
                           ],
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 12,
                           ),
                           decoration: InputDecoration(
                             fillColor: Colors.grey.shade200,
                             filled: true,
-                            errorStyle: TextStyle(fontSize: 0),
-                            contentPadding: EdgeInsets.only(left: 15, right: 5),
+                            errorStyle: const TextStyle(fontSize: 0),
+                            contentPadding:
+                                const EdgeInsets.only(left: 15, right: 5),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.amber, // Border color
                                 width: 2.0, // Border width
                               ),
@@ -495,7 +501,7 @@ class _CustomerResisterState extends State<CustomerResister> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 16,
                   ),
                 ],

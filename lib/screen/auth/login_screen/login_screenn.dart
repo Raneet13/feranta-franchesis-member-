@@ -106,7 +106,7 @@ class _LognScreenState extends State<LognScreen> {
                                     letterSpacing: 0.1,
                                   ),
                                   border: InputBorder.none,
-                                  hintText: "password",
+                                  hintText: "Password",
                                   suffixIcon: InkWell(
                                     onTap: () => val.passwordVisibleupdate(),
                                     child: val.passwordVisible

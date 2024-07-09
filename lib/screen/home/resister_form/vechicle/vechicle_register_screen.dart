@@ -54,6 +54,7 @@ class _AddVechicleState extends State<AddVechicle> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await Provider.of<VehicleViewmodel>(context, listen: false)
+        ..isLoading = false
         ..getAllMaster()
         ..allDriverListViewModel()
         ..allOwnerListViewModel().then((value) async {
@@ -97,7 +98,7 @@ class _AddVechicleState extends State<AddVechicle> {
             ),
           ),
           title: Text(
-            "${widget.vehicleDetails != null ? "Update" : "Add"}  Vechicle",
+            "${widget.vehicleDetails != null ? "Update" : "Add"}  Vehicle",
             style: TextStyle(
                 fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
           ),
@@ -118,7 +119,6 @@ class _AddVechicleState extends State<AddVechicle> {
                                 if (widget.vehicleDetails != null) {
                                   loginD.updateCabView(context, loginD.ownerId,
                                       widget.vehicleDetails!.id.toString());
-                                  ShowToast(msg: "UpdateVechicle");
                                 } else if (loginD.vechiceCabCategry != "" ||
                                     loginD.ownerId != null) {
                                   loginD.addCab(
@@ -256,7 +256,7 @@ class _AddVechicleState extends State<AddVechicle> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      const Text("Enter Vechicle Number"),
+                                      const Text("Enter Vehicle Number"),
                                       Icon(
                                         Icons.star,
                                         color: Colors.red,
@@ -324,7 +324,7 @@ class _AddVechicleState extends State<AddVechicle> {
                                         // label: Text("Enter email"),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "Vechicle Number",
+                                        hintText: "Vehicle Number",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -607,7 +607,7 @@ class _AddVechicleState extends State<AddVechicle> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Enter Vechicle Make"),
+                                  Text("Enter Vehicle Make"),
                                   SizedBox(
                                     height: 48,
                                     child: TextFormField(
@@ -666,7 +666,7 @@ class _AddVechicleState extends State<AddVechicle> {
                                         // label: Text("Enter email"),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "Vechicle Make",
+                                        hintText: "Vehicle Make",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -690,7 +690,7 @@ class _AddVechicleState extends State<AddVechicle> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Text("Enter Vechicle Model Name"),
+                                      Text("Enter Vehicle Model Name"),
                                       Icon(
                                         Icons.star,
                                         color: Colors.red,
@@ -777,7 +777,7 @@ class _AddVechicleState extends State<AddVechicle> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text("Enter Vechicle Body"),
+                                  const Text("Enter Vehicle Body"),
                                   SizedBox(
                                     height: 48,
                                     child: TextFormField(
@@ -836,7 +836,7 @@ class _AddVechicleState extends State<AddVechicle> {
                                         // label: Text("Enter Phone No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "Vechicle Body",
+                                        hintText: "Vehicle Body",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -856,7 +856,7 @@ class _AddVechicleState extends State<AddVechicle> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Enter Vechicle Cubic Capacity (CC)"),
+                                  Text("Enter Vehicle Cubic Capacity (CC)"),
                                   SizedBox(
                                     height: 48,
                                     child: TextFormField(
@@ -934,7 +934,7 @@ class _AddVechicleState extends State<AddVechicle> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Enter Passenger Sit"),
+                                  Text("Enter Passenger Seat"),
                                   SizedBox(
                                     height: 48,
                                     child: TextFormField(
@@ -993,7 +993,7 @@ class _AddVechicleState extends State<AddVechicle> {
                                         // label: Text("Enter Phone No."),
                                         // floatingLabelAlignment:
                                         //     FloatingLabelAlignment.start,
-                                        hintText: "Vechicle Sit",
+                                        hintText: "Vehicle Seat",
                                         // suffixIcon: Container(
                                         //   height: 40,
                                         //   color: Colors.amber,
@@ -1070,8 +1070,7 @@ class _AddVechicleState extends State<AddVechicle> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              const Text(
-                                                  "Select Vechicle Type"),
+                                              const Text("Select Vehicle Type"),
                                               DropdownButton<
                                                   master.VehicleType>(
                                                 // value:val.state==""? val
@@ -1129,8 +1128,7 @@ class _AddVechicleState extends State<AddVechicle> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              const Text(
-                                                  "Select Vechicle Type"),
+                                              const Text("Select Vehicle Type"),
                                               DropdownButton<String>(
                                                 // value:val.state==""? val
                                                 //     .masterModel!.response!.state!.first:val.state,

@@ -80,20 +80,20 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                 ..clearownerResistationForm();
               Navigator.pop(context);
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.black,
             ),
           ),
           title: Text(
             "Owner ${widget.ownerDetails != null ? "Update" : "Registration"} Form",
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),
           ),
           centerTitle: true,
         ),
         bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
           child: Consumer<ResisterViewmodel>(builder: (context, loginD, _) {
             return ElevatedButton(
                 onPressed: () async {
@@ -115,7 +115,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                     } else {
                       ShowToast(
                           msg:
-                              "give logo, Aadhar Front,Aadhar Back, City, also Check Criminal Record And Terms First before submit");
+                              "give logo, Aadhaar Front,Aadhaar Back, City, also Check Criminal Record And Terms First before submit");
                     }
                   }
                   // } else {
@@ -123,26 +123,26 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                   // }
                 },
                 child: loginD.isLoading
-                    ? CircularProgressIndicator()
+                    ? const CircularProgressIndicator()
                     : Text(
-                        "${widget.ownerDetails != null ? "update" : "Registration"}"));
+                        "${widget.ownerDetails != null ? "update" : "Register"}"));
           }),
         ),
         body: Consumer<ResisterViewmodel>(builder: (context, val, _) {
           return val.masterModel == null
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : Form(
                   key: formKey,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     child: ListView(
                       shrinkWrap: true,
                       primary: true,
                       // physics: AlwaysScrollableScrollPhysics(),
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Padding(
@@ -157,11 +157,11 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         Theme.of(context).textTheme.bodyLarge,
                                   )),
                               Container(
-                                padding: EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                     color: Colo.white,
                                     boxShadow: [
-                                      BoxShadow(
+                                      const BoxShadow(
                                           color: Colors.black26, blurRadius: 2)
                                     ],
                                     borderRadius: BorderRadius.circular(15)),
@@ -169,9 +169,9 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Row(
+                                    const Row(
                                       children: [
-                                        Text("Enter Logo"),
+                                        Text(" Upload Profile Pic"),
                                         SizedBox(
                                           width: 5,
                                         ),
@@ -233,7 +233,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               child: InkWell(
                                                 onTap: () =>
                                                     val.insertLogo(context),
-                                                child: Material(
+                                                child: const Material(
                                                   color: Colors.white,
                                                   child: Icon(
                                                     Icons.edit,
@@ -245,7 +245,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -254,7 +254,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
@@ -275,7 +275,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             validator: (value) =>
                                                 ValidateAll.inputValidate(
                                                     value),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -283,13 +283,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -342,7 +343,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -351,16 +352,16 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
                                             Text("Enter Email"),
-                                            // Icon(
-                                            //   Icons.star,
-                                            //   color: Colors.red,
-                                            //   size: 12,
-                                            // )
+                                            Icon(
+                                              Icons.star,
+                                              color: Colors.red,
+                                              size: 12,
+                                            )
                                           ],
                                         ),
                                         SizedBox(
@@ -373,7 +374,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             // validator: (input) =>
                                             //     ValidateAll.validateEmail(
                                             //         input),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -381,13 +382,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -440,7 +442,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -449,9 +451,9 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
-                                            Text("Enter Phone Nuber"),
+                                            Text("Enter Phone Number"),
                                             Icon(
                                               Icons.star,
                                               color: Colors.red,
@@ -471,7 +473,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               FilteringTextInputFormatter
                                                   .digitsOnly,
                                             ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -479,13 +481,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -538,7 +541,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     // Column(
@@ -647,7 +650,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               FilteringTextInputFormatter
                                                   .digitsOnly,
                                             ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -655,13 +658,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -714,7 +718,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -723,7 +727,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Date Of Birth"),
+                                        const Text("Enter Date Of Birth"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -740,7 +744,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             //   FilteringTextInputFormatter
                                             //       .digitsOnly,
                                             // ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -748,13 +752,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -795,18 +800,18 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               // label: Text("Enter Phone No."),
                                               // floatingLabelAlignment:
                                               //     FloatingLabelAlignment.start,
-                                              hintText: "Select DateOf Birth",
+                                              hintText: "Select Date Of Birth",
                                               suffixIcon: InkWell(
                                                   onTap: () =>
                                                       val.selectDate(context),
-                                                  child: Icon(
+                                                  child: const Icon(
                                                       Icons.calendar_month)),
                                             ),
                                           ),
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -815,7 +820,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Father Name"),
+                                        const Text("Enter Father Name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -823,7 +828,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             controller: val.father_name,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -831,13 +836,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -890,7 +896,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -899,7 +905,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Mother Name"),
+                                        const Text("Enter Mother Name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -907,7 +913,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             controller: val.mother_name,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -915,13 +921,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -974,7 +981,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Row(
@@ -993,7 +1000,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                 onChanged: (int? value) => val
                                                     .updateMariedType(value!),
                                               ),
-                                              Text('Married')
+                                              const Text('Married')
                                             ],
                                           ),
                                         ),
@@ -1007,7 +1014,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                 onChanged: (int? value) => val
                                                     .updateMariedType(value!),
                                               ),
-                                              Text('Unmarried')
+                                              const Text('Unmarried')
                                             ],
                                           ),
                                         )
@@ -1016,10 +1023,10 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       ],
                                     ),
                                     val.married_type == 1
-                                        ? SizedBox(
+                                        ? const SizedBox(
                                             height: 16,
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
                                     val.married_type == 1
                                         ? Column(
                                             mainAxisAlignment:
@@ -1027,7 +1034,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text("Enter Wife/Spouse Name"),
+                                              const Text(
+                                                  "Enter Wife/Spouse Name"),
                                               SizedBox(
                                                 height: 48,
                                                 child: TextFormField(
@@ -1037,7 +1045,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                       .emailAddress,
                                                   // validator: (input) =>
                                                   //     ValidateAll.inputValidate(input),
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 12,
                                                   ),
@@ -1045,17 +1053,18 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                     fillColor:
                                                         Colors.grey.shade200,
                                                     filled: true,
-                                                    errorStyle:
-                                                        TextStyle(fontSize: 0),
+                                                    errorStyle: const TextStyle(
+                                                        fontSize: 0),
                                                     contentPadding:
-                                                        EdgeInsets.only(
+                                                        const EdgeInsets.only(
                                                             left: 15, right: 5),
                                                     focusedBorder:
                                                         OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.0),
-                                                      borderSide: BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color: Colors
                                                             .amber, // Border color
                                                         width:
@@ -1116,12 +1125,12 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               ),
                                             ],
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
                                     val.married_type == 1
-                                        ? SizedBox(
+                                        ? const SizedBox(
                                             height: 16,
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
 
                                     Column(
                                       mainAxisAlignment:
@@ -1129,7 +1138,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Aadress"),
+                                        const Text("Enter Address"),
                                         SizedBox(
                                           // height: ,
                                           child: TextFormField(
@@ -1137,7 +1146,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             controller: val.address1,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -1145,13 +1154,16 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5, top: 15),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15,
+                                                      right: 5,
+                                                      top: 15),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -1204,13 +1216,13 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     // select type of cab by choosing option
                                     Container(
                                       height: 48,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           // color: Colors.grey.shade300,
@@ -1224,7 +1236,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text("Select State"),
+                                          const Text("Select State"),
                                           DropdownButton<chooselocation.State>(
                                             // value:val.state==""? val
                                             //     .masterModel!.response!.state!.first:val.state,
@@ -1247,18 +1259,19 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                 .toList(),
 
                                             // add extra sugar..
-                                            icon: Icon(Icons.arrow_drop_down),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down),
                                             iconSize: 42,
-                                            underline: SizedBox(),
+                                            underline: const SizedBox(),
                                           ),
                                         ],
                                       ),
                                     ),
 
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
-                                    Row(
+                                    const Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       crossAxisAlignment:
@@ -1274,7 +1287,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                     ),
                                     Container(
                                       height: 48,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           // color: Colors.grey.shade300,
@@ -1288,7 +1301,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text("Select City"),
+                                          const Text("Select City"),
                                           DropdownButton<chooselocation.City>(
                                             // value:val.City==""? val
                                             //     .masterModel!.response!.City!.first:val.City,
@@ -1315,20 +1328,21 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                 .toList(),
 
                                             // add extra sugar..
-                                            icon: Icon(Icons.arrow_drop_down),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down),
                                             iconSize: 42,
-                                            underline: SizedBox(),
+                                            underline: const SizedBox(),
                                           ),
                                         ],
                                       ),
                                     ),
 
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Container(
                                       height: 48,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           // color: Colors.grey.shade300,
@@ -1342,7 +1356,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text("Select District"),
+                                          const Text("Select District"),
                                           DropdownButton<
                                               chooselocation.Districts>(
                                             // value:val.state==""? val
@@ -1370,20 +1384,21 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                 .toList(),
 
                                             // add extra sugar..
-                                            icon: Icon(Icons.arrow_drop_down),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down),
                                             iconSize: 42,
-                                            underline: SizedBox(),
+                                            underline: const SizedBox(),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
 
                                     Container(
                                       height: 48,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           // color: Colors.grey.shade300,
@@ -1397,7 +1412,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text("Select Block"),
+                                          const Text("Select Block"),
                                           DropdownButton<chooselocation.Blocks>(
                                             // value:val.City==""? val
                                             //     .masterModel!.response!.City!.first:val.City,
@@ -1425,16 +1440,17 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                 .toList(),
 
                                             // add extra sugar..
-                                            icon: Icon(Icons.arrow_drop_down),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down),
                                             iconSize: 42,
-                                            underline: SizedBox(),
+                                            underline: const SizedBox(),
                                           ),
                                         ],
                                       ),
                                     ),
                                     val.block == ""
-                                        ? SizedBox()
-                                        : SizedBox(
+                                        ? const SizedBox()
+                                        : const SizedBox(
                                             height: 16,
                                           ),
 
@@ -1444,7 +1460,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Village Name"),
+                                        const Text("Enter Village Name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -1458,7 +1474,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             //   FilteringTextInputFormatter
                                             //       .digitsOnly,
                                             // ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -1466,13 +1482,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -1525,7 +1542,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -1534,7 +1551,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter PinCode Number"),
+                                        const Text("Enter Pin Code Number"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -1547,7 +1564,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               FilteringTextInputFormatter
                                                   .digitsOnly,
                                             ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -1555,13 +1572,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -1614,7 +1632,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
 
@@ -1624,9 +1642,9 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
-                                            Text("Enter Aadhar no"),
+                                            Text("Enter Aadhaar Number"),
                                             SizedBox(
                                               width: 5,
                                             ),
@@ -1652,7 +1670,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             validator: (input) =>
                                                 ValidateAll.validateAadhar(
                                                     input),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -1660,13 +1678,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -1707,7 +1726,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               // label: Text("Enter Phone No."),
                                               // floatingLabelAlignment:
                                               //     FloatingLabelAlignment.start,
-                                              hintText: "Aadhar Number",
+                                              hintText: "Aadhaar Number",
                                               // suffixIcon: Container(
                                               //   height: 40,
                                               //   color: Colors.amber,
@@ -1719,7 +1738,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
 
@@ -1729,9 +1748,9 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
-                                            Text("Enter Aadhar font"),
+                                            Text("Enter Aadhaar Front Side"),
                                             SizedBox(
                                               width: 5,
                                             ),
@@ -1754,7 +1773,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                           child: Container(
                                             height: 48,
                                             width: double.infinity,
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding:
+                                                const EdgeInsets.only(left: 15),
                                             alignment: Alignment.centerLeft,
                                             decoration: BoxDecoration(
                                                 color: Colors.grey.shade200,
@@ -1767,8 +1787,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                 : val.frontimg_update != null
                                                     ? Text(
                                                         "${val.frontimg_update!}")
-                                                    : Text(
-                                                        "Upload Aadhar front"),
+                                                    : const Text(
+                                                        "Upload Aadhaar Front Side"),
                                           ),
                                         )
                                         // SizedBox(
@@ -1825,7 +1845,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         // ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -1834,9 +1854,9 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
-                                            Text("Enter Aadhar back"),
+                                            Text("Enter Aadhaar Back Side"),
                                             SizedBox(
                                               width: 5,
                                             ),
@@ -1858,7 +1878,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                           child: Container(
                                             height: 48,
                                             width: double.infinity,
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding:
+                                                const EdgeInsets.only(left: 15),
                                             alignment: Alignment.centerLeft,
                                             decoration: BoxDecoration(
                                                 color: Colors.grey.shade200,
@@ -1871,18 +1892,18 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                 : val.backimg_update != null
                                                     ? Text(
                                                         "${val.backimg_update}")
-                                                    : Text(
-                                                        "Upload Aadhar back"),
+                                                    : const Text(
+                                                        "Upload Aadhaar Back Side"),
                                           ),
                                         )
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Container(
                                       height: 48,
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       decoration: BoxDecoration(
                                           // color: Colors.grey.shade300,
@@ -1921,14 +1942,15 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                 .toList(),
 
                                             // add extra sugar..
-                                            icon: Icon(Icons.arrow_drop_down),
+                                            icon: const Icon(
+                                                Icons.arrow_drop_down),
                                             iconSize: 42,
-                                            underline: SizedBox(),
+                                            underline: const SizedBox(),
                                           ),
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                   ],
@@ -1937,30 +1959,30 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 8, right: 8),
+                          padding: const EdgeInsets.only(left: 8, right: 8),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "Vechicle Detais",
+                                  "Driver Details",
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 16,
                               ),
                               Container(
-                                padding: EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                     color: Colo.white,
                                     boxShadow: [
-                                      BoxShadow(
+                                      const BoxShadow(
                                           color: Colors.black26, blurRadius: 2)
                                     ],
                                     borderRadius: BorderRadius.circular(15)),
@@ -1972,7 +1994,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Select Role"),
+                                        const Text("Select Role"),
                                         Container(
                                           decoration: BoxDecoration(
                                               color: Colors.grey.shade200,
@@ -1989,7 +2011,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                 onChanged: (value) =>
                                                     val.ischeckUpdate(value!),
                                               ),
-                                              SizedBox(width: 10),
+                                              const SizedBox(width: 10),
                                               Text(
                                                 'Are you work as a driver',
                                                 style: Theme.of(context)
@@ -2002,8 +2024,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       ],
                                     ),
                                     val.isCheck
-                                        ? SizedBox(height: 16)
-                                        : SizedBox(),
+                                        ? const SizedBox(height: 16)
+                                        : const SizedBox(),
                                     val.isCheck
                                         ? Column(
                                             mainAxisAlignment:
@@ -2011,7 +2033,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
                                                       "Enter Driving Licence Number"),
@@ -2032,7 +2054,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                   controller: val.license_no,
                                                   keyboardType:
                                                       TextInputType.text,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 12,
                                                   ),
@@ -2040,17 +2062,18 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                     fillColor:
                                                         Colors.grey.shade200,
                                                     filled: true,
-                                                    errorStyle:
-                                                        TextStyle(fontSize: 0),
+                                                    errorStyle: const TextStyle(
+                                                        fontSize: 0),
                                                     contentPadding:
-                                                        EdgeInsets.only(
+                                                        const EdgeInsets.only(
                                                             left: 15, right: 5),
                                                     focusedBorder:
                                                         OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.0),
-                                                      borderSide: BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color: Colors
                                                             .amber, // Border color
                                                         width:
@@ -2099,7 +2122,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                     // floatingLabelAlignment:
                                                     //     FloatingLabelAlignment.start,
                                                     hintText:
-                                                        "Driving License Number",
+                                                        "Driving Licence Number",
                                                     // suffixIcon: Container(
                                                     //   height: 40,
                                                     //   color: Colors.amber,
@@ -2111,21 +2134,21 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               ),
                                             ],
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
                                     val.isCheck
-                                        ? SizedBox(
+                                        ? const SizedBox(
                                             height: 16,
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
                                     val.isCheck
                                         ? Column(
                                             children: [
-                                              Align(
+                                              const Align(
                                                 alignment: Alignment.centerLeft,
                                                 child: Text(
-                                                    "Upload Driving licence"),
+                                                    "Upload Driving Licence"),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 4,
                                               ),
                                               InkWell(
@@ -2141,7 +2164,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                   height: 48,
                                                   width: double.infinity,
                                                   padding:
-                                                      EdgeInsets.only(left: 15),
+                                                      const EdgeInsets.only(
+                                                          left: 15),
                                                   alignment:
                                                       Alignment.centerLeft,
                                                   decoration: BoxDecoration(
@@ -2160,18 +2184,18 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                               null
                                                           ? Text(
                                                               "${val.license_img_update!}")
-                                                          : Text(
+                                                          : const Text(
                                                               "Upload Driving Licence image"),
                                                 ),
                                               ),
                                             ],
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
                                     val.isCheck
-                                        ? SizedBox(
+                                        ? const SizedBox(
                                             height: 16,
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
                                     val.isCheck
                                         ? Column(
                                             mainAxisAlignment:
@@ -2179,7 +2203,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
+                                              const Text(
                                                   "Enter Driving Year of Exprience"),
                                               SizedBox(
                                                 height: 48,
@@ -2194,7 +2218,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                     FilteringTextInputFormatter
                                                         .digitsOnly,
                                                   ],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 12,
                                                   ),
@@ -2202,17 +2226,18 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                     fillColor:
                                                         Colors.grey.shade200,
                                                     filled: true,
-                                                    errorStyle:
-                                                        TextStyle(fontSize: 0),
+                                                    errorStyle: const TextStyle(
+                                                        fontSize: 0),
                                                     contentPadding:
-                                                        EdgeInsets.only(
+                                                        const EdgeInsets.only(
                                                             left: 15, right: 5),
                                                     focusedBorder:
                                                         OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.0),
-                                                      borderSide: BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color: Colors
                                                             .amber, // Border color
                                                         width:
@@ -2273,6 +2298,65 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               ),
                                             ],
                                           )
+                                        : const SizedBox(),
+                                    val.isCheck
+                                        ? Container(
+                                            height: 48,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10, vertical: 5),
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey.shade300,
+                                                border: Border.all(
+                                                    color: Colo.black),
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            // color: Colors.grey.shade300,
+                                            // dropdown below..
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                const Text(
+                                                    "Select Licence Type"),
+                                                DropdownButton<String>(
+                                                  // value:val.state==""? val
+                                                  //     .masterModel!.response!.state!.first:val.state,
+                                                  hint: Text(
+                                                      val.licenseTpeSelect),
+                                                  onChanged: (newValue) =>
+                                                      val.updateLicenseType(
+                                                          newValue!),
+                                                  items: val.licenseTyppe
+                                                      .map<
+                                                              DropdownMenuItem<
+                                                                  String>>(
+                                                          (value) =>
+                                                              DropdownMenuItem<
+                                                                  String>(
+                                                                value: value,
+                                                                child: Text(
+                                                                  value
+                                                                      .toString(),
+                                                                  maxLines: 2,
+                                                                ),
+                                                              ))
+                                                      .toList(),
+
+                                                  // add extra sugar..
+                                                  icon: const Icon(
+                                                      Icons.arrow_drop_down),
+                                                  iconSize: 42,
+                                                  underline: const SizedBox(),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : SizedBox(),
+                                    val.isCheck
+                                        ? const SizedBox(
+                                            height: 16,
+                                          )
                                         : SizedBox(),
 
                                     val.isCheck
@@ -2282,10 +2366,10 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Row(
+                                              const Row(
                                                 children: [
                                                   Text(
-                                                      "Enter Driving License Expiry Date"),
+                                                      "Enter Driving Licence Expiry Date"),
                                                   SizedBox(
                                                     width: 5,
                                                   ),
@@ -2313,7 +2397,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                   //   FilteringTextInputFormatter
                                                   //       .digitsOnly,
                                                   // ],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 12,
                                                   ),
@@ -2321,17 +2405,18 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                     fillColor:
                                                         Colors.grey.shade200,
                                                     filled: true,
-                                                    errorStyle:
-                                                        TextStyle(fontSize: 0),
+                                                    errorStyle: const TextStyle(
+                                                        fontSize: 0),
                                                     contentPadding:
-                                                        EdgeInsets.only(
+                                                        const EdgeInsets.only(
                                                             left: 15, right: 5),
                                                     focusedBorder:
                                                         OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.0),
-                                                      borderSide: BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color: Colors
                                                             .amber, // Border color
                                                         width:
@@ -2381,20 +2466,20 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                     // floatingLabelAlignment:
                                                     //     FloatingLabelAlignment.start,
                                                     hintText:
-                                                        "Driving License Expiry Date",
+                                                        "Driving Licence Expiry Date",
                                                     suffixIcon: InkWell(
                                                         onTap: () => val
                                                             .driverLicenseExpiry(
                                                                 context),
-                                                        child: Icon(Icons
+                                                        child: const Icon(Icons
                                                             .calendar_month)),
                                                   ),
                                                 ),
                                               ),
                                             ],
                                           )
-                                        : SizedBox(),
-                                    SizedBox(
+                                        : const SizedBox(),
+                                    const SizedBox(
                                       height: 16,
                                     ),
 
@@ -2665,11 +2750,11 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 8, right: 8),
+                          padding: const EdgeInsets.only(left: 8, right: 8),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -2680,15 +2765,15 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 16,
                               ),
                               Container(
-                                padding: EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                     color: Colo.white,
                                     boxShadow: [
-                                      BoxShadow(
+                                      const BoxShadow(
                                           color: Colors.black26, blurRadius: 2)
                                     ],
                                     borderRadius: BorderRadius.circular(15)),
@@ -2700,7 +2785,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Bank Account Holder Name"),
+                                        const Text(
+                                            "Enter Bank Account Holder Name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -2708,7 +2794,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             controller: val.ac_name,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -2716,13 +2802,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -2774,7 +2861,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -2796,7 +2883,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               FilteringTextInputFormatter
                                                   .digitsOnly,
                                             ],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -2804,13 +2891,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -2862,7 +2950,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -2871,7 +2959,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Bank Name"),
+                                        const Text("Enter Bank Name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -2879,7 +2967,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             controller: val.bank_name,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -2887,13 +2975,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -2945,7 +3034,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -2954,7 +3043,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter Bank Branch Name"),
+                                        const Text("Enter Bank Branch Name"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -2962,7 +3051,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             controller: val.branch_name,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -2970,13 +3059,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -3028,7 +3118,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Column(
@@ -3037,7 +3127,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text("Enter BANK IFSC Code"),
+                                        const Text("Enter BANK IFSC Code"),
                                         SizedBox(
                                           height: 48,
                                           child: TextFormField(
@@ -3045,7 +3135,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             controller: val.ifsc,
                                             keyboardType:
                                                 TextInputType.emailAddress,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                             ),
@@ -3053,13 +3143,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               fillColor: Colors.grey.shade200,
                                               filled: true,
                                               errorStyle:
-                                                  TextStyle(fontSize: 0),
-                                              contentPadding: EdgeInsets.only(
-                                                  left: 15, right: 5),
+                                                  const TextStyle(fontSize: 0),
+                                              contentPadding:
+                                                  const EdgeInsets.only(
+                                                      left: 15, right: 5),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10.0),
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors
                                                       .amber, // Border color
                                                   width: 2.0, // Border width
@@ -3114,7 +3205,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 16,
                               ),
                             ],
@@ -3122,7 +3213,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                         ),
                         val.isCheck
                             ? Padding(
-                                padding: EdgeInsets.only(left: 8, right: 8),
+                                padding:
+                                    const EdgeInsets.only(left: 8, right: 8),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -3135,15 +3227,15 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             .bodyLarge,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 16,
                                     ),
                                     Container(
-                                      padding: EdgeInsets.all(12),
+                                      padding: const EdgeInsets.all(12),
                                       decoration: BoxDecoration(
                                           color: Colo.white,
                                           boxShadow: [
-                                            BoxShadow(
+                                            const BoxShadow(
                                                 color: Colors.black26,
                                                 blurRadius: 2)
                                           ],
@@ -3157,7 +3249,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text("Enter Nominee Name"),
+                                              const Text("Enter Nominee Name"),
                                               SizedBox(
                                                 height: 48,
                                                 child: TextFormField(
@@ -3165,7 +3257,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                   controller: val.nomineeName,
                                                   keyboardType: TextInputType
                                                       .emailAddress,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 12,
                                                   ),
@@ -3173,17 +3265,18 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                     fillColor:
                                                         Colors.grey.shade200,
                                                     filled: true,
-                                                    errorStyle:
-                                                        TextStyle(fontSize: 0),
+                                                    errorStyle: const TextStyle(
+                                                        fontSize: 0),
                                                     contentPadding:
-                                                        EdgeInsets.only(
+                                                        const EdgeInsets.only(
                                                             left: 15, right: 5),
                                                     focusedBorder:
                                                         OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.0),
-                                                      borderSide: BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color: Colors
                                                             .amber, // Border color
                                                         width:
@@ -3243,7 +3336,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 16,
                                           ),
                                           Column(
@@ -3252,8 +3345,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                  "Enter Relationship With The Nominator"),
+                                              const Text(
+                                                  "Enter Relationship With The Nominee"),
                                               SizedBox(
                                                 height: 48,
                                                 child: TextFormField(
@@ -3262,7 +3355,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                       val.nomineeRelationship,
                                                   keyboardType:
                                                       TextInputType.text,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 12,
                                                   ),
@@ -3270,17 +3363,18 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                     fillColor:
                                                         Colors.grey.shade200,
                                                     filled: true,
-                                                    errorStyle:
-                                                        TextStyle(fontSize: 0),
+                                                    errorStyle: const TextStyle(
+                                                        fontSize: 0),
                                                     contentPadding:
-                                                        EdgeInsets.only(
+                                                        const EdgeInsets.only(
                                                             left: 15, right: 5),
                                                     focusedBorder:
                                                         OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.0),
-                                                      borderSide: BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color: Colors
                                                             .amber, // Border color
                                                         width:
@@ -3328,7 +3422,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                     // label: Text("Enter Vechicle No."),
                                                     // floatingLabelAlignment:
                                                     //     FloatingLabelAlignment.start,
-                                                    hintText: "Relatinship",
+                                                    hintText: "Relationship",
                                                     // suffixIcon: Container(
                                                     //   height: 40,
                                                     //   color: Colors.amber,
@@ -3340,7 +3434,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 16,
                                           ),
                                           Column(
@@ -3349,8 +3443,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                  "Enter Permanent Address Of Nominator"),
+                                              const Text(
+                                                  "Enter Permanent Address Of Nominee"),
                                               SizedBox(
                                                 // height: 48,
                                                 child: TextFormField(
@@ -3359,7 +3453,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                       val.nomineeAddress,
                                                   keyboardType: TextInputType
                                                       .emailAddress,
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 12,
                                                   ),
@@ -3367,17 +3461,20 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                     fillColor:
                                                         Colors.grey.shade200,
                                                     filled: true,
-                                                    errorStyle:
-                                                        TextStyle(fontSize: 0),
+                                                    errorStyle: const TextStyle(
+                                                        fontSize: 0),
                                                     contentPadding:
-                                                        EdgeInsets.only(
-                                                            left: 15, right: 5),
+                                                        const EdgeInsets.only(
+                                                            top: 10,
+                                                            left: 15,
+                                                            right: 5),
                                                     focusedBorder:
                                                         OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.0),
-                                                      borderSide: BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color: Colors
                                                             .amber, // Border color
                                                         width:
@@ -3438,7 +3535,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 16,
                                           ),
                                           Column(
@@ -3447,8 +3544,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                  "Enter Date Of Birth Of Nominator"),
+                                              const Text(
+                                                  "Enter Date Of Birth Of Nominee"),
                                               SizedBox(
                                                 height: 48,
                                                 child: TextFormField(
@@ -3467,7 +3564,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                   //   FilteringTextInputFormatter
                                                   //       .digitsOnly,
                                                   // ],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 12,
                                                   ),
@@ -3475,17 +3572,18 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                     fillColor:
                                                         Colors.grey.shade200,
                                                     filled: true,
-                                                    errorStyle:
-                                                        TextStyle(fontSize: 0),
+                                                    errorStyle: const TextStyle(
+                                                        fontSize: 0),
                                                     contentPadding:
-                                                        EdgeInsets.only(
+                                                        const EdgeInsets.only(
                                                             left: 15, right: 5),
                                                     focusedBorder:
                                                         OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.0),
-                                                      borderSide: BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color: Colors
                                                             .amber, // Border color
                                                         width:
@@ -3540,7 +3638,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                         onTap: () => val
                                                             .selectNomineeBirth(
                                                                 context),
-                                                        child: Icon(Icons
+                                                        child: const Icon(Icons
                                                             .calendar_month)),
                                                   ),
                                                 ),
@@ -3553,8 +3651,8 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                   ],
                                 ),
                               )
-                            : SizedBox(),
-                        SizedBox(
+                            : const SizedBox(),
+                        const SizedBox(
                           height: 16,
                         ),
                         Container(
@@ -3569,7 +3667,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                 value: val.termsCheck,
                                 onChanged: (value) => val.updateTerms(value!),
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -3585,7 +3683,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                 'id': '2',
                                                 'url': AppUrl.ferantaTerms
                                               }),
-                                      child: Text(
+                                      child: const Text(
                                         "Read More",
                                         style: TextStyle(
                                             color: Colors.blue,
@@ -3598,7 +3696,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         Container(
@@ -3614,7 +3712,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                 onChanged: (value) =>
                                     val.updateCriminal(value!),
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Text(
                                 'No criminal record',
                                 style: Theme.of(context).textTheme.bodySmall,
@@ -3622,7 +3720,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                       ],
                     ),
                   ),

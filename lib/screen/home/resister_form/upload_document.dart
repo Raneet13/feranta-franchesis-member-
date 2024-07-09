@@ -115,7 +115,7 @@ class _Document_UploadState extends State<Document_Upload> {
                     child: const Text(
                       "Submit",
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     )),

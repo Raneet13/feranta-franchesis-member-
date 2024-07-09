@@ -30,7 +30,7 @@ class CustomTheme {
         displayMedium: TextStyle(
             color: Colors.grey, fontSize: 16, fontWeight: FontWeight.bold),
         displaySmall: TextStyle(
-            color: Colors.grey, fontSize: 12, fontWeight: FontWeight.bold),
+            color: Colo.black, fontSize: 12, fontWeight: FontWeight.bold),
         headlineLarge: TextStyle(),
         headlineMedium: TextStyle(),
         headlineSmall: TextStyle(),
@@ -64,7 +64,7 @@ class CustomTheme {
               shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                   side: BorderSide.none)),
-              foregroundColor: MaterialStatePropertyAll(Colo.white),
+              foregroundColor: MaterialStatePropertyAll(Colo.black),
               backgroundColor: MaterialStatePropertyAll(Colo.yellowshade300))),
       textButtonTheme: const TextButtonThemeData(style: ButtonStyle()));
 }

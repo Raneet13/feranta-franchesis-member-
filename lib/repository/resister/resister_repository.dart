@@ -256,7 +256,8 @@ class ResisterRepository {
       required nominee_name,
       required nominee_rltn,
       required nominee_add,
-      required nominee_dob}) async {
+      required nominee_dob,
+      required licenceType}) async {
     late var response;
 
     try {
@@ -297,7 +298,8 @@ class ResisterRepository {
         'nominee_name': nominee_name,
         'nominee_rltn': nominee_rltn,
         'nominee_add': nominee_add,
-        'nominee_dob': nominee_dob
+        'nominee_dob': nominee_dob,
+        'license_type': licenceType
       });
 
       response = await NetworkApiService()
@@ -371,9 +373,9 @@ class ResisterRepository {
       required nominee_name,
       required nominee_rltn,
       required nominee_add,
-      required nominee_dob}) async {
+      required nominee_dob,
+      required licenceType}) async {
     late var response;
-    ShowToast(msg: "village:${address2}");
     try {
       FormData formData = FormData.fromMap({
         'user_id': userI,
@@ -412,7 +414,8 @@ class ResisterRepository {
         'nominee_name': nominee_name,
         'nominee_rltn': nominee_rltn,
         'nominee_add': nominee_add,
-        'nominee_dob': nominee_dob
+        'nominee_dob': nominee_dob,
+        'license_type': licenceType
       });
       response = await NetworkApiService()
           .postApi(url: AppUrl.update_boarding_mmber, formData: formData);

@@ -33,7 +33,7 @@ class CustomElButton extends StatelessWidget {
           ),
           child: Text(
             buttoonname,
-            style: TextStyle(color: Colo.white, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colo.black, fontWeight: FontWeight.bold),
           )),
     );
   }

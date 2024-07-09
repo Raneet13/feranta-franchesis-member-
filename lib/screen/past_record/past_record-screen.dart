@@ -34,7 +34,8 @@ class _PastRecordScreenState extends State<PastRecordScreen>
         ..viewAllrecord();
 
       await Provider.of<VehicleViewmodel>(context, listen: false)
-          .allVechicleListViewModel();
+        ..allVechicleListViewModel()
+        ..getAllMaster();
     });
   }
 
@@ -93,7 +94,7 @@ class _PastRecordScreenState extends State<PastRecordScreen>
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black12),
                           color: record.initialIndex == 0
-                              ? Colors.amber.shade600
+                              ? Colo.primaryColor
                               : null,
                           borderRadius: BorderRadius.circular(12)),
                       child: Text("Record"),
@@ -107,10 +108,12 @@ class _PastRecordScreenState extends State<PastRecordScreen>
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black12),
                           color: record.initialIndex == 1
-                              ? Colors.amber.shade600
+                              ? Colo.primaryColor
                               : null,
                           borderRadius: BorderRadius.circular(12)),
-                      child: Text("Vechicle"),
+                      child: Text(
+                        "Vehicle",
+                      ),
                     ),
                   ),
                 ],
@@ -121,7 +124,7 @@ class _PastRecordScreenState extends State<PastRecordScreen>
                   physics: const NeverScrollableScrollPhysics(),
                   controller: record.tabController,
                   children: [
-                    record.allrecord == null
+                    record.datewseRecord == null && record.allrecord == null
                         ? Center(
                             child: CircularProgressIndicator(),
                           )
@@ -149,112 +152,559 @@ class _PastRecordScreenState extends State<PastRecordScreen>
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(top: 70),
-                                    child:
-                                        record.filter == true &&
-                                                record.datewseRecord != null
-                                            ? record.datewseRecord!.length == 0
-                                                ? ListView.builder(
-                                                    padding: EdgeInsets.only(
-                                                        bottom: 15),
-                                                    shrinkWrap: true,
-                                                    itemCount: 1,
-                                                    itemBuilder:
-                                                        (context, inde) {
-                                                      return SizedBox(
-                                                        height: MediaQuery.of(
-                                                                    context)
+                                    child: record.datewseRecord != null
+                                        ? record.datewseRecord!.length == 0
+                                            ? ListView.builder(
+                                                padding:
+                                                    EdgeInsets.only(bottom: 15),
+                                                shrinkWrap: true,
+                                                itemCount: 1,
+                                                itemBuilder: (context, inde) {
+                                                  return SizedBox(
+                                                    height:
+                                                        MediaQuery.of(context)
                                                                 .size
                                                                 .height *
                                                             0.8,
-                                                        child: Center(
-                                                          child: Text(
-                                                              "No Record Available"),
-                                                        ),
-                                                      );
-                                                    })
-                                                : ListView.builder(
-                                                    padding: EdgeInsets.only(
-                                                        bottom: 15),
-                                                    shrinkWrap: true,
-                                                    itemCount: record
-                                                        .datewseRecord!.length,
-                                                    itemBuilder:
-                                                        (context, inde) {
-                                                      return Container(
-                                                        // margin: EdgeInsets.all(10),
-                                                        padding:
-                                                            EdgeInsets.all(10),
-                                                        margin: EdgeInsets.only(
-                                                            top: 8,
-                                                            left: 15,
-                                                            right: 15),
-                                                        decoration: BoxDecoration(
-                                                            color: Colors.white,
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  blurRadius: 2)
+                                                    child: Center(
+                                                      child: Text(
+                                                          "No Record Available"),
+                                                    ),
+                                                  );
+                                                })
+                                            : ListView.builder(
+                                                padding:
+                                                    EdgeInsets.only(bottom: 15),
+                                                shrinkWrap: true,
+                                                itemCount: record
+                                                    .datewseRecord!.length,
+                                                itemBuilder: (context, inde) {
+                                                  return Container(
+                                                    // margin: EdgeInsets.all(10),
+                                                    padding: EdgeInsets.all(10),
+                                                    margin: EdgeInsets.only(
+                                                        top: 8,
+                                                        left: 15,
+                                                        right: 15),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                              color:
+                                                                  Colors.black,
+                                                              blurRadius: 2)
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12)),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      // mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                        SizedBox(
+                                                          child: Column(
+                                                            // mainAxisSize: MainAxisSize.max,
+                                                            children: [
+                                                              Row(
+                                                                children: [
+                                                                  SizedBox(
+                                                                      width: mediaQuery
+                                                                              .width *
+                                                                          0.3,
+                                                                      child: Text(
+                                                                          'Date & Time: ')),
+                                                                  Text(
+                                                                    DateFormat(
+                                                                            'dd/MM/yyyy  hh:mm a')
+                                                                        .format(DateTime.parse(record
+                                                                            .datewseRecord![inde]
+                                                                            .createdDate!))
+                                                                        .toString(),
+                                                                    style: TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              // Row(
+                                                              //   children: [
+                                                              //     SizedBox(
+                                                              //         width: mediaQuery.width * 0.3,
+                                                              //         child: Text('Franchise')),
+                                                              //     Text(
+                                                              //       "Sahu Motor",
+                                                              //       style: TextStyle(
+                                                              //           fontWeight: FontWeight.bold),
+                                                              //     ),
+                                                              //   ],
+                                                              // ),
                                                             ],
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        12)),
-                                                        child: Column(
+                                                          ),
+                                                        ),
+                                                        Divider(
+                                                          color: Colors.black26,
+                                                        ),
+                                                        Align(
+                                                          alignment: Alignment
+                                                              .bottomRight,
+                                                          child: Material(
+                                                            color: Colors
+                                                                .amber[100],
+                                                            shape: OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                                borderSide:
+                                                                    BorderSide
+                                                                        .none),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      left: 8,
+                                                                      right: 8),
+                                                              child: Text(
+                                                                "${record.datewseRecord![inde].userType == "5" ? "Customer" : ""}${record.datewseRecord![inde].userType == "3" ? "Owner" : ""}${record.datewseRecord![inde].userType == "4" ? "Driver" : ""}",
+                                                                style: TextStyle(
+                                                                    color: Colo
+                                                                        .black,
+                                                                    fontSize:
+                                                                        12),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            SizedBox(
+                                                                width: mediaQuery
+                                                                        .width *
+                                                                    0.3,
+                                                                child: Text(
+                                                                  'ID',
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .labelSmall,
+                                                                )),
+                                                            Text(
+                                                              "${record.datewseRecord![inde].id ?? ""}",
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .bodyMedium,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            SizedBox(
+                                                                width: mediaQuery
+                                                                        .width *
+                                                                    0.3,
+                                                                child: Text(
+                                                                  'Name',
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .labelSmall,
+                                                                )),
+                                                            Text(
+                                                              "${record.datewseRecord![inde].fullName ?? ""}",
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .bodyMedium,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            SizedBox(
+                                                                width: mediaQuery
+                                                                        .width *
+                                                                    0.3,
+                                                                child: Text(
+                                                                  'Phone Number',
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .labelSmall,
+                                                                )),
+                                                            Text(
+                                                              "${record.datewseRecord![inde].contactNo ?? ""}",
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .bodyMedium,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            SizedBox(
+                                                                width: mediaQuery
+                                                                        .width *
+                                                                    0.3,
+                                                                child: Text(
+                                                                  'Email',
+                                                                  style: Theme.of(
+                                                                          context)
+                                                                      .textTheme
+                                                                      .labelSmall,
+                                                                )),
+                                                            Text(
+                                                              "${record.datewseRecord![inde].email ?? ""}",
+                                                              style: Theme.of(
+                                                                      context)
+                                                                  .textTheme
+                                                                  .bodyMedium,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .start,
+                                                                  .spaceBetween,
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .center,
-                                                          // mainAxisSize: MainAxisSize.min,
                                                           children: [
-                                                            SizedBox(
-                                                              child: Column(
-                                                                // mainAxisSize: MainAxisSize.max,
-                                                                children: [
-                                                                  Row(
-                                                                    children: [
-                                                                      SizedBox(
-                                                                          width: mediaQuery.width *
-                                                                              0.3,
-                                                                          child:
-                                                                              Text('Date & Time: ')),
-                                                                      Text(
-                                                                        DateFormat('dd/MM/yyyy  hh:mm a')
-                                                                            .format(DateTime.parse(record.datewseRecord![inde].createdDate!))
-                                                                            .toString(),
-                                                                        style: TextStyle(
-                                                                            fontWeight:
-                                                                                FontWeight.bold),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  // Row(
-                                                                  //   children: [
-                                                                  //     SizedBox(
-                                                                  //         width: mediaQuery.width * 0.3,
-                                                                  //         child: Text('Franchise')),
-                                                                  //     Text(
-                                                                  //       "Sahu Motor",
-                                                                  //       style: TextStyle(
-                                                                  //           fontWeight: FontWeight.bold),
-                                                                  //     ),
-                                                                  //   ],
-                                                                  // ),
-                                                                ],
+                                                            Material(
+                                                              color: Colors
+                                                                  .amber[100],
+                                                              shape: OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10),
+                                                                  borderSide:
+                                                                      BorderSide
+                                                                          .none),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left: 8,
+                                                                        right:
+                                                                            8),
+                                                                child: Text(
+                                                                  "${record.datewseRecord![inde].toJson().containsValue("") || record.datewseRecord![inde].toJson().containsValue(null) ? "Incomplete" : "Complete"}",
+                                                                  style: TextStyle(
+                                                                      color: Colo
+                                                                          .black,
+                                                                      fontSize:
+                                                                          12),
+                                                                ),
                                                               ),
                                                             ),
-                                                            Divider(
-                                                              color: Colors
-                                                                  .black26,
-                                                            ),
-                                                            Align(
-                                                              alignment: Alignment
-                                                                  .bottomRight,
-                                                              child: Material(
+                                                            record.datewseRecord![inde]
+                                                                        .userType ==
+                                                                    "5"
+                                                                ? SizedBox()
+                                                                : TextButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      if (record
+                                                                              .datewseRecord![
+                                                                                  inde]
+                                                                              .userType ==
+                                                                          "3") {
+                                                                        context.push(
+                                                                            '/home/ownerResister',
+                                                                            extra: {
+                                                                              'id': "0",
+                                                                              'owner': record.datewseRecord![inde]
+                                                                            });
+                                                                      } else if (record
+                                                                              .datewseRecord![
+                                                                                  inde]
+                                                                              .userType ==
+                                                                          "4") {
+                                                                        context.push(
+                                                                            '/home/resister_driver',
+                                                                            extra: {
+                                                                              'id': "0",
+                                                                              'driver': record.datewseRecord![inde]
+                                                                            });
+                                                                      } else if (record
+                                                                              .datewseRecord![inde]
+                                                                              .userType ==
+                                                                          "5") {
+                                                                        context.push(
+                                                                            '/home/customerResister',
+                                                                            extra: {
+                                                                              'id': "0",
+                                                                              'customer': record.datewseRecord![inde]
+                                                                            });
+                                                                      } else {
+                                                                        ShowToast(
+                                                                            msg:
+                                                                                "You are not Owner");
+                                                                      }
+                                                                    },
+                                                                    child: Text(
+                                                                        "Edit",
+                                                                        style: TextStyle(
+                                                                            decoration:
+                                                                                TextDecoration.underline)),
+                                                                  ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  );
+                                                })
+                                        : RefreshIndicator(
+                                            onRefresh: () =>
+                                                Provider.of<RecordViewmodel>(
+                                                        context,
+                                                        listen: false)
+                                                    .viewAllrecord(),
+                                            child: ListView.builder(
+                                                padding:
+                                                    EdgeInsets.only(bottom: 15),
+                                                shrinkWrap: true,
+                                                itemCount: record.allrecord!
+                                                    .response!.userList!.length,
+                                                itemBuilder: (context, int) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      // Provider.of<DriverViewmodel>(context, listen: false)
+                                                      //     .defaultPanelState = PanelState.CLOSED; //fullDtlsTrip
+                                                      // context.push('/mytrip/fullDtlsTrip', extra: {'id': "1"});
+
+                                                      /// context.push('/home/driverfindscr', extra: {'id': "0"});
+                                                    },
+                                                    child: Container(
+                                                      // margin: EdgeInsets.all(10),
+                                                      padding:
+                                                          EdgeInsets.all(10),
+                                                      margin: EdgeInsets.only(
+                                                          top: 8,
+                                                          left: 15,
+                                                          right: 15),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          boxShadow: [
+                                                            BoxShadow(
                                                                 color: Colors
-                                                                    .amber[100],
+                                                                    .black,
+                                                                blurRadius: 2)
+                                                          ],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      12)),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        // mainAxisSize: MainAxisSize.min,
+                                                        children: [
+                                                          SizedBox(
+                                                            child: Column(
+                                                              // mainAxisSize: MainAxisSize.max,
+                                                              children: [
+                                                                Row(
+                                                                  children: [
+                                                                    SizedBox(
+                                                                        width: mediaQuery.width *
+                                                                            0.3,
+                                                                        child: Text(
+                                                                            'Date & Time: ')),
+                                                                    Text(
+                                                                      DateFormat(
+                                                                              'dd/MM/yyyy  hh:mm a')
+                                                                          .format(DateTime.parse(record
+                                                                              .allrecord!
+                                                                              .response!
+                                                                              .userList![int]
+                                                                              .createdDate!))
+                                                                          .toString(),
+                                                                      style: TextStyle(
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                // Row(
+                                                                //   children: [
+                                                                //     SizedBox(
+                                                                //         width: mediaQuery.width * 0.3,
+                                                                //         child: Text('Franchise')),
+                                                                //     Text(
+                                                                //       "Sahu Motor",
+                                                                //       style: TextStyle(
+                                                                //           fontWeight: FontWeight.bold),
+                                                                //     ),
+                                                                //   ],
+                                                                // ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Divider(
+                                                            color:
+                                                                Colors.black26,
+                                                          ),
+                                                          Align(
+                                                            alignment: Alignment
+                                                                .bottomRight,
+                                                            child: Material(
+                                                              color: Colors
+                                                                  .amber[100],
+                                                              shape: OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10),
+                                                                  borderSide:
+                                                                      BorderSide
+                                                                          .none),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        left: 8,
+                                                                        right:
+                                                                            8),
+                                                                child: Text(
+                                                                  "${record.allrecord!.response!.userList![int].userType == "5" ? "Customer" : ""}${record.allrecord!.response!.userList![int].userType == "3" ? "Owner" : ""}${record.allrecord!.response!.userList![int].userType == "4" ? "Driver" : ""}",
+                                                                  style: TextStyle(
+                                                                      color: Colo
+                                                                          .black,
+                                                                      fontSize:
+                                                                          12),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              SizedBox(
+                                                                  width: mediaQuery
+                                                                          .width *
+                                                                      0.3,
+                                                                  child: Text(
+                                                                    'ID',
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .labelSmall,
+                                                                  )),
+                                                              Text(
+                                                                "${record.allrecord!.response!.userList![int].id ?? ""}",
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .bodyMedium,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              SizedBox(
+                                                                  width: mediaQuery
+                                                                          .width *
+                                                                      0.3,
+                                                                  child: Text(
+                                                                    'Name',
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .labelSmall,
+                                                                  )),
+                                                              Text(
+                                                                "${record.allrecord!.response!.userList![int].fullName ?? ""}",
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .bodyMedium,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              SizedBox(
+                                                                  width: mediaQuery
+                                                                          .width *
+                                                                      0.3,
+                                                                  child: Text(
+                                                                    'Phone Number',
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .labelSmall,
+                                                                  )),
+                                                              Text(
+                                                                "${record.allrecord!.response!.userList![int].contactNo ?? ""}",
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .bodyMedium,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Row(
+                                                            children: [
+                                                              SizedBox(
+                                                                  width: mediaQuery
+                                                                          .width *
+                                                                      0.3,
+                                                                  child: Text(
+                                                                    'Email',
+                                                                    style: Theme.of(
+                                                                            context)
+                                                                        .textTheme
+                                                                        .labelSmall,
+                                                                  )),
+                                                              Text(
+                                                                "${record.allrecord!.response!.userList![int].email ?? ""}",
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .bodyMedium,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Material(
+                                                                color: record
+                                                                            .allrecord!
+                                                                            .response!
+                                                                            .userList![
+                                                                                int]
+                                                                            .toJson()
+                                                                            .containsValue(
+                                                                                "") ||
+                                                                        record
+                                                                            .allrecord!
+                                                                            .response!
+                                                                            .userList![
+                                                                                int]
+                                                                            .toJson()
+                                                                            .containsValue(
+                                                                                null)
+                                                                    ? Colo
+                                                                        .primaryColor
+                                                                    : Colo
+                                                                        .black,
                                                                 shape: OutlineInputBorder(
                                                                     borderRadius:
                                                                         BorderRadius.circular(
@@ -271,596 +721,146 @@ class _PastRecordScreenState extends State<PastRecordScreen>
                                                                           right:
                                                                               8),
                                                                   child: Text(
-                                                                    "${record.datewseRecord![inde].userType == "5" ? "Customer" : ""}${record.datewseRecord![inde].userType == "3" ? "Owner" : ""}${record.datewseRecord![inde].userType == "4" ? "Driver" : ""}",
+                                                                    "${record.allrecord!.response!.userList![int].toJson().containsValue("") || record.allrecord!.response!.userList![int].toJson().containsValue(null) ? "Incomplete" : "Complete"}",
                                                                     style: TextStyle(
-                                                                        color: Colors
-                                                                            .amber,
+                                                                        color: Colo
+                                                                            .black,
                                                                         fontSize:
                                                                             12),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                SizedBox(
-                                                                    width: mediaQuery
-                                                                            .width *
-                                                                        0.3,
-                                                                    child: Text(
-                                                                      'ID',
-                                                                      style: Theme.of(
-                                                                              context)
-                                                                          .textTheme
-                                                                          .labelSmall,
-                                                                    )),
-                                                                Text(
-                                                                  "${record.datewseRecord![inde].id ?? ""}",
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .bodyMedium,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                SizedBox(
-                                                                    width: mediaQuery
-                                                                            .width *
-                                                                        0.3,
-                                                                    child: Text(
-                                                                      'Name',
-                                                                      style: Theme.of(
-                                                                              context)
-                                                                          .textTheme
-                                                                          .labelSmall,
-                                                                    )),
-                                                                Text(
-                                                                  "${record.datewseRecord![inde].fullName ?? ""}",
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .bodyMedium,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                SizedBox(
-                                                                    width: mediaQuery
-                                                                            .width *
-                                                                        0.3,
-                                                                    child: Text(
-                                                                      'Phone Number',
-                                                                      style: Theme.of(
-                                                                              context)
-                                                                          .textTheme
-                                                                          .labelSmall,
-                                                                    )),
-                                                                Text(
-                                                                  "${record.datewseRecord![inde].contactNo ?? ""}",
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .bodyMedium,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              children: [
-                                                                SizedBox(
-                                                                    width: mediaQuery
-                                                                            .width *
-                                                                        0.3,
-                                                                    child: Text(
-                                                                      'Email',
-                                                                      style: Theme.of(
-                                                                              context)
-                                                                          .textTheme
-                                                                          .labelSmall,
-                                                                    )),
-                                                                Text(
-                                                                  "${record.datewseRecord![inde].email ?? ""}",
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .bodyMedium,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Material(
-                                                                  color: Colors
-                                                                          .amber[
-                                                                      100],
-                                                                  shape: OutlineInputBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10),
-                                                                      borderSide:
-                                                                          BorderSide
-                                                                              .none),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsets
-                                                                        .only(
-                                                                        left: 8,
-                                                                        right:
-                                                                            8),
-                                                                    child: Text(
-                                                                      "${record.datewseRecord![inde].toJson().containsValue("") || record.datewseRecord![inde].toJson().containsValue(null) ? "Incomplete" : "Complete"}",
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .amber,
-                                                                          fontSize:
-                                                                              12),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                TextButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    if (record
-                                                                            .datewseRecord![
-                                                                                inde]
-                                                                            .userType ==
-                                                                        "3") {
-                                                                      context.push(
-                                                                          '/home/ownerResister',
-                                                                          extra: {
-                                                                            'id':
-                                                                                "0",
-                                                                            'owner':
-                                                                                record.datewseRecord![inde]
-                                                                          });
-                                                                    } else if (record
-                                                                            .datewseRecord![
-                                                                                inde]
-                                                                            .userType ==
-                                                                        "4") {
-                                                                      context.push(
-                                                                          '/home/resister_driver',
-                                                                          extra: {
-                                                                            'id':
-                                                                                "0",
-                                                                            'driver':
-                                                                                record.datewseRecord![inde]
-                                                                          });
-                                                                    } else if (record
-                                                                            .datewseRecord![inde]
-                                                                            .userType ==
-                                                                        "5") {
-                                                                      context.push(
-                                                                          '/home/customerResister',
-                                                                          extra: {
-                                                                            'id':
-                                                                                "0",
-                                                                            'customer':
-                                                                                record.datewseRecord![inde]
-                                                                          });
-                                                                    } else {
-                                                                      ShowToast(
-                                                                          msg:
-                                                                              "You are not Owner");
-                                                                    }
-                                                                  },
-                                                                  child: Text(
-                                                                      "Edit",
-                                                                      style: TextStyle(
-                                                                          decoration:
-                                                                              TextDecoration.underline)),
-                                                                ),
-                                                              ],
-                                                            )
-                                                          ],
-                                                        ),
-                                                      );
-                                                    })
-                                            : RefreshIndicator(
-                                                onRefresh: () => Provider.of<
-                                                            RecordViewmodel>(
-                                                        context,
-                                                        listen: false)
-                                                    .viewAllrecord(),
-                                                child: ListView.builder(
-                                                    padding: EdgeInsets.only(
-                                                        bottom: 15),
-                                                    shrinkWrap: true,
-                                                    itemCount: record
-                                                        .allrecord!
-                                                        .response!
-                                                        .userList!
-                                                        .length,
-                                                    itemBuilder:
-                                                        (context, int) {
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          // Provider.of<DriverViewmodel>(context, listen: false)
-                                                          //     .defaultPanelState = PanelState.CLOSED; //fullDtlsTrip
-                                                          // context.push('/mytrip/fullDtlsTrip', extra: {'id': "1"});
-
-                                                          /// context.push('/home/driverfindscr', extra: {'id': "0"});
-                                                        },
-                                                        child: Container(
-                                                          // margin: EdgeInsets.all(10),
-                                                          padding:
-                                                              EdgeInsets.all(
-                                                                  10),
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  top: 8,
-                                                                  left: 15,
-                                                                  right: 15),
-                                                          decoration: BoxDecoration(
-                                                              color:
-                                                                  Colors.white,
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    blurRadius:
-                                                                        2)
-                                                              ],
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          12)),
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            // mainAxisSize: MainAxisSize.min,
-                                                            children: [
-                                                              SizedBox(
-                                                                child: Column(
-                                                                  // mainAxisSize: MainAxisSize.max,
-                                                                  children: [
-                                                                    Row(
-                                                                      children: [
-                                                                        SizedBox(
-                                                                            width: mediaQuery.width *
-                                                                                0.3,
-                                                                            child:
-                                                                                Text('Date & Time: ')),
-                                                                        Text(
-                                                                          DateFormat('dd/MM/yyyy  hh:mm a')
-                                                                              .format(DateTime.parse(record.allrecord!.response!.userList![int].createdDate!))
-                                                                              .toString(),
-                                                                          style:
-                                                                              TextStyle(fontWeight: FontWeight.bold),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    // Row(
-                                                                    //   children: [
-                                                                    //     SizedBox(
-                                                                    //         width: mediaQuery.width * 0.3,
-                                                                    //         child: Text('Franchise')),
-                                                                    //     Text(
-                                                                    //       "Sahu Motor",
-                                                                    //       style: TextStyle(
-                                                                    //           fontWeight: FontWeight.bold),
-                                                                    //     ),
-                                                                    //   ],
-                                                                    // ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Divider(
-                                                                color: Colors
-                                                                    .black26,
-                                                              ),
-                                                              Align(
-                                                                alignment: Alignment
-                                                                    .bottomRight,
-                                                                child: Material(
-                                                                  color: Colors
-                                                                          .amber[
-                                                                      100],
-                                                                  shape: OutlineInputBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10),
-                                                                      borderSide:
-                                                                          BorderSide
-                                                                              .none),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsets
-                                                                        .only(
-                                                                        left: 8,
-                                                                        right:
-                                                                            8),
-                                                                    child: Text(
-                                                                      "${record.allrecord!.response!.userList![int].userType == "5" ? "Customer" : ""}${record.allrecord!.response!.userList![int].userType == "3" ? "Owner" : ""}${record.allrecord!.response!.userList![int].userType == "4" ? "Driver" : ""}",
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .amber,
-                                                                          fontSize:
-                                                                              12),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Row(
-                                                                children: [
-                                                                  SizedBox(
-                                                                      width: mediaQuery
-                                                                              .width *
-                                                                          0.3,
+                                                              record
+                                                                          .allrecord!
+                                                                          .response!
+                                                                          .userList![
+                                                                              int]
+                                                                          .userType ==
+                                                                      "5"
+                                                                  ? SizedBox()
+                                                                  : InkWell(
+                                                                      onTap:
+                                                                          () {
+                                                                        if (record.allrecord!.response!.userList![int].userType ==
+                                                                            "3") {
+                                                                          context.push(
+                                                                              '/home/ownerResister',
+                                                                              extra: {
+                                                                                'id': "0",
+                                                                                'owner': record.allrecord!.response!.userList![int]
+                                                                              });
+                                                                        } else if (record.allrecord!.response!.userList![int].userType ==
+                                                                            "4") {
+                                                                          context.push(
+                                                                              '/home/resister_driver',
+                                                                              extra: {
+                                                                                'id': "0",
+                                                                                'driver': record.allrecord!.response!.userList![int]
+                                                                              });
+                                                                        } else if (record.allrecord!.response!.userList![int].userType ==
+                                                                            "4") {
+                                                                          context.push(
+                                                                              '/home/resister_driver',
+                                                                              extra: {
+                                                                                'id': "0",
+                                                                                'driver': record.allrecord!.response!.userList![int]
+                                                                              });
+                                                                        } else if (record.allrecord!.response!.userList![int].userType ==
+                                                                            "5") {
+                                                                          context.push(
+                                                                              '/home/customerResister',
+                                                                              extra: {
+                                                                                'id': "0",
+                                                                                'customer': record.allrecord!.response!.userList![int]
+                                                                              });
+                                                                        } else {
+                                                                          ShowToast(
+                                                                              msg: "You are not edit");
+                                                                        }
+                                                                      },
                                                                       child:
                                                                           Text(
-                                                                        'ID',
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .labelSmall,
-                                                                      )),
-                                                                  Text(
-                                                                    "${record.allrecord!.response!.userList![int].id ?? ""}",
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .bodyMedium,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Row(
-                                                                children: [
-                                                                  SizedBox(
-                                                                      width: mediaQuery
-                                                                              .width *
-                                                                          0.3,
-                                                                      child:
-                                                                          Text(
-                                                                        'Name',
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .labelSmall,
-                                                                      )),
-                                                                  Text(
-                                                                    "${record.allrecord!.response!.userList![int].fullName ?? ""}",
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .bodyMedium,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Row(
-                                                                children: [
-                                                                  SizedBox(
-                                                                      width: mediaQuery
-                                                                              .width *
-                                                                          0.3,
-                                                                      child:
-                                                                          Text(
-                                                                        'Phone Number',
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .labelSmall,
-                                                                      )),
-                                                                  Text(
-                                                                    "${record.allrecord!.response!.userList![int].contactNo ?? ""}",
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .bodyMedium,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Row(
-                                                                children: [
-                                                                  SizedBox(
-                                                                      width: mediaQuery
-                                                                              .width *
-                                                                          0.3,
-                                                                      child:
-                                                                          Text(
-                                                                        'Email',
-                                                                        style: Theme.of(context)
-                                                                            .textTheme
-                                                                            .labelSmall,
-                                                                      )),
-                                                                  Text(
-                                                                    "${record.allrecord!.response!.userList![int].email ?? ""}",
-                                                                    style: Theme.of(
-                                                                            context)
-                                                                        .textTheme
-                                                                        .bodyMedium,
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Material(
-                                                                    color: record.allrecord!.response!.userList![int].toJson().containsValue("") ||
-                                                                            record.allrecord!.response!.userList![int].toJson().containsValue(
-                                                                                null)
-                                                                        ? Colo
-                                                                            .primaryColor
-                                                                        : Colo
-                                                                            .black,
-                                                                    shape: OutlineInputBorder(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(
-                                                                                10),
-                                                                        borderSide:
-                                                                            BorderSide.none),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding: const EdgeInsets
-                                                                          .only(
-                                                                          left:
-                                                                              8,
-                                                                          right:
-                                                                              8),
-                                                                      child:
-                                                                          Text(
-                                                                        "${record.allrecord!.response!.userList![int].toJson().containsValue("") || record.allrecord!.response!.userList![int].toJson().containsValue(null) ? "Incomplete" : "Complete"}",
+                                                                        "Edit",
                                                                         style: TextStyle(
-                                                                            color:
-                                                                                Colo.white,
-                                                                            fontSize: 12),
+                                                                            decoration:
+                                                                                TextDecoration.underline),
                                                                       ),
                                                                     ),
-                                                                  ),
-                                                                  InkWell(
-                                                                    onTap: () {
-                                                                      if (record
-                                                                              .allrecord!
-                                                                              .response!
-                                                                              .userList![
-                                                                                  int]
-                                                                              .userType ==
-                                                                          "3") {
-                                                                        context.push(
-                                                                            '/home/ownerResister',
-                                                                            extra: {
-                                                                              'id': "0",
-                                                                              'owner': record.allrecord!.response!.userList![int]
-                                                                            });
-                                                                      } else if (record
-                                                                              .allrecord!
-                                                                              .response!
-                                                                              .userList![
-                                                                                  int]
-                                                                              .userType ==
-                                                                          "4") {
-                                                                        context.push(
-                                                                            '/home/resister_driver',
-                                                                            extra: {
-                                                                              'id': "0",
-                                                                              'driver': record.allrecord!.response!.userList![int]
-                                                                            });
-                                                                      } else if (record
-                                                                              .allrecord!
-                                                                              .response!
-                                                                              .userList![
-                                                                                  int]
-                                                                              .userType ==
-                                                                          "4") {
-                                                                        context.push(
-                                                                            '/home/resister_driver',
-                                                                            extra: {
-                                                                              'id': "0",
-                                                                              'driver': record.allrecord!.response!.userList![int]
-                                                                            });
-                                                                      } else if (record
-                                                                              .allrecord!
-                                                                              .response!
-                                                                              .userList![int]
-                                                                              .userType ==
-                                                                          "5") {
-                                                                        context.push(
-                                                                            '/home/customerResister',
-                                                                            extra: {
-                                                                              'id': "0",
-                                                                              'customer': record.allrecord!.response!.userList![int]
-                                                                            });
-                                                                      } else {
-                                                                        ShowToast(
-                                                                            msg:
-                                                                                "You are not edit");
-                                                                      }
-                                                                    },
-                                                                    child: Text(
-                                                                      "Edit",
-                                                                      style: TextStyle(
-                                                                          decoration:
-                                                                              TextDecoration.underline),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              )
                                                             ],
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }),
-                                              ),
-                                  ),
-                                  Visibility(
-                                    visible: record.showFilterOption,
-                                    child: Positioned(
-                                        top: 50,
-                                        right: 20,
-                                        child: Container(
-                                          height: 130,
-                                          width: 150,
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey.shade300,
-                                              borderRadius:
-                                                  BorderRadius.circular(15)),
-                                          padding: EdgeInsets.all(10),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            // mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              InkWell(
-                                                onTap: () => record
-                                                  ..filter = true
-                                                  ..selectDate(context),
-                                                child: Container(
-                                                  height: 40,
-                                                  width: double.maxFinite,
-                                                  alignment: Alignment.center,
-                                                  decoration: BoxDecoration(
-                                                      // color: Colors.red,
-                                                      border: Border.all(
-                                                          color: Colors.grey),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12)),
-                                                  child: Text(
-                                                    "Date",
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyMedium,
-                                                  ),
-
-                                                  // height: 150,
-                                                  // width: 200,
-                                                ),
-                                              ),
-                                              // Container(
-                                              //   height: 40,
-                                              //   width: double.maxFinite,
-                                              //   alignment: Alignment.center,
-                                              //   decoration: BoxDecoration(
-                                              //       // color: Colors.red,
-                                              //       border: Border.all(
-                                              //           color: Colors.grey),
-                                              //       borderRadius:
-                                              //           BorderRadius.circular(12)),
-                                              //   child: Text(
-                                              //     "Driving License",
-                                              //     style: Theme.of(context)
-                                              //         .textTheme
-                                              //         .bodyMedium,
-                                              //   ),
-                                              // ),
-                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                }),
                                           ),
-                                        )),
                                   ),
+                                  // Visibility(
+                                  //   visible: record.showFilterOption,
+                                  //   child: Positioned(
+                                  //       top: 50,
+                                  //       right: 20,
+                                  //       child: Container(
+                                  //         height: 130,
+                                  //         width: 150,
+                                  //         decoration: BoxDecoration(
+                                  //             color: Colors.grey.shade300,
+                                  //             borderRadius:
+                                  //                 BorderRadius.circular(15)),
+                                  //         padding: EdgeInsets.all(10),
+                                  //         child: Column(
+                                  //           mainAxisAlignment:
+                                  //               MainAxisAlignment.spaceEvenly,
+                                  //           // mainAxisSize: MainAxisSize.max,
+                                  //           children: [
+                                  //             InkWell(
+                                  //               onTap: () => record
+                                  //                 ..filter = true
+                                  //                 ..selectDate(context),
+                                  //               child: Container(
+                                  //                 height: 40,
+                                  //                 width: double.maxFinite,
+                                  //                 alignment: Alignment.center,
+                                  //                 decoration: BoxDecoration(
+                                  //                     // color: Colors.red,
+                                  //                     border: Border.all(
+                                  //                         color: Colors.grey),
+                                  //                     borderRadius:
+                                  //                         BorderRadius.circular(
+                                  //                             12)),
+                                  //                 child: Text(
+                                  //                   "Date",
+                                  //                   style: Theme.of(context)
+                                  //                       .textTheme
+                                  //                       .bodyMedium,
+                                  //                 ),
+
+                                  //                 // height: 150,
+                                  //                 // width: 200,
+                                  //               ),
+                                  //             ),
+                                  //             // Container(
+                                  //             //   height: 40,
+                                  //             //   width: double.maxFinite,
+                                  //             //   alignment: Alignment.center,
+                                  //             //   decoration: BoxDecoration(
+                                  //             //       // color: Colors.red,
+                                  //             //       border: Border.all(
+                                  //             //           color: Colors.grey),
+                                  //             //       borderRadius:
+                                  //             //           BorderRadius.circular(12)),
+                                  //             //   child: Text(
+                                  //             //     "Driving License",
+                                  //             //     style: Theme.of(context)
+                                  //             //         .textTheme
+                                  //             //         .bodyMedium,
+                                  //             //   ),
+                                  //             // ),
+                                  //           ],
+                                  //         ),
+                                  //       )),
+                                  // ),
+
                                   Positioned(
                                     top: 0,
                                     left: 0,
@@ -900,10 +900,17 @@ class _PastRecordScreenState extends State<PastRecordScreen>
                                                       .bodySmall,
                                                   controller:
                                                       record.textfieldText,
-                                                  onChanged: (numbe) => record
-                                                    ..filter = true
-                                                    ..licensenoWiserecord(
-                                                        numbe),
+                                                  onChanged: (numbe) {
+                                                    // ShowToast(
+                                                    //     msg: record
+                                                    //         .textfieldText
+                                                    //         .text);
+                                                    // record
+                                                    // ..filter = true
+                                                    record.licensenoWiserecord(
+                                                        record.textfieldText
+                                                            .text);
+                                                  },
                                                   decoration: InputDecoration(
                                                       contentPadding:
                                                           EdgeInsets.only(

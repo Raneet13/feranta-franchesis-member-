@@ -1,3 +1,4 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:feranta_franchise/view_model/auth/login-viewmodel.dart';
 import 'package:feranta_franchise/view_model/map_viewmodel/mao_view_modedl_provider.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../static/color.dart';
+import '../back_to_close/systum_back_close_app.dart';
 
 class BottomNav extends StatefulWidget {
   Widget child;
@@ -42,13 +44,21 @@ class _BottomNavState extends State<BottomNav> {
     //         _selectedIndex = widget.index!;
     //       })
     //     : _selectedIndex = 0;
+
+    BackButtonInterceptor.add(backTocloseApp().myInterceptor);
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       Provider.of<LoginViewmodel>(context, listen: false).checkCheckinOutTrue();
       // await Provider.of<MapViewModelProvider>(context, listen: false)
       //     .locationPermissionRequest();
     });
-    ;
-    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    BackButtonInterceptor.remove(backTocloseApp().myInterceptor);
+    super.dispose();
   }
 
   @override
@@ -66,7 +76,7 @@ class _BottomNavState extends State<BottomNav> {
           currentIndex: widget.index,
           selectedItemColor: Colo.black,
           selectedIconTheme: IconThemeData(color: Colo.black),
-          unselectedIconTheme: IconThemeData(color: Colors.grey.shade300),
+          unselectedIconTheme: IconThemeData(color: Colo.black),
           selectedLabelStyle: TextStyle(
             color: Colo.black,
           ),

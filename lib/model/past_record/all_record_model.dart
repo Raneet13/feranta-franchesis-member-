@@ -76,6 +76,7 @@ class UserList {
   String? userType;
   String? isDriver;
   String? licenseNo;
+  dynamic licenseType;
   String? licenseExpireDate;
   String? licenseImg;
   String? cityId;
@@ -88,7 +89,7 @@ class UserList {
   String? block;
   String? ditrict;
   String? fatherName;
-  dynamic spouseName;
+  String? spouseName;
   String? motherName;
   String? nomineeName;
   String? nomineeRltn;
@@ -112,8 +113,8 @@ class UserList {
   dynamic accountDetails;
   dynamic benefName;
   dynamic merchantAgrrement;
-  String? deviceToken;
-  dynamic franchiseId;
+  dynamic deviceToken;
+  String? franchiseId;
   String? isAdmin;
   String? createdBy;
   String? createdDate;
@@ -145,6 +146,7 @@ class UserList {
       this.userType,
       this.isDriver,
       this.licenseNo,
+      this.licenseType,
       this.licenseExpireDate,
       this.licenseImg,
       this.cityId,
@@ -214,6 +216,7 @@ class UserList {
     userType = json['user_type'];
     isDriver = json['is_driver'];
     licenseNo = json['license_no'];
+    licenseType = json['license_type'];
     licenseExpireDate = json['license_expire_date'];
     licenseImg = json['license_img'];
     cityId = json['city_id'];
@@ -285,6 +288,7 @@ class UserList {
     data['user_type'] = this.userType;
     data['is_driver'] = this.isDriver;
     data['license_no'] = this.licenseNo;
+    data['license_type'] = this.licenseType;
     data['license_expire_date'] = this.licenseExpireDate;
     data['license_img'] = this.licenseImg;
     data['city_id'] = this.cityId;

@@ -145,7 +145,7 @@ class _ProfileScrenState extends State<ProfileScren> {
                                         ),
                                       ),
                                       Text(
-                                        "Feranta Frenchise",
+                                        "${profile.profileDetailsModel!.response!.userDetails!.fullName ?? ""}",
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyLarge,
@@ -354,9 +354,13 @@ class _ProfileScrenState extends State<ProfileScren> {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(12.0),
-                                    child: CustomElButton(
-                                      buttoonname: "Logout",
-                                      onclick: () => showLogoutDialog(context),
+                                    child: SizedBox(
+                                      width: double.infinity,
+                                      child: ElevatedButton(
+                                        child: Text("Logout"),
+                                        onPressed: () =>
+                                            showLogoutDialog(context),
+                                      ),
                                     ),
                                   ),
                                 ],

@@ -89,15 +89,23 @@ class RecordViewmodel extends ChangeNotifier {
   // }
   Future licensenoWiserecord(String lcnNumber) async {
     isLoadingTrue();
+    // if (lcnNumber == "") {
+    //   filter = false;
+    // } else {
     if (lcnNumber == "") {
       filter = false;
     } else {
       datewseRecord = allrecord!.response!.userList!
-          .where((element) =>
-              element.licenseNo!.contains(lcnNumber) ||
-              element.contactNo!.contains(lcnNumber))
+          .where((element) => element.contactNo!.contains(lcnNumber))
           .toList();
     }
+    // datewseRecord = allrecord!.response!.userList!
+    //     .where((element) =>
+    //         element.licenseNo!.contains(lcnNumber) ||
+    //         element.contactNo!.contains(lcnNumber))
+    //     .toList();
+    // print(datewseRecord);
+    // }
     isLoadingFalse();
     notifyListeners();
   }

@@ -54,6 +54,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           obscureText: widget.obscureText,
           style: TextStyle(color: Colors.black54),
           inputFormatters: widget.inputFormater,
+
           onChanged: (text) {
             if (widget.onChanged != null) {
               widget.onChanged!(text);

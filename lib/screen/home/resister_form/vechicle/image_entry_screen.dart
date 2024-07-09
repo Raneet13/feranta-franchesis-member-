@@ -115,7 +115,7 @@ class _ImageEntryPdfState extends State<ImageEntryPdf> {
                     child: const Text(
                       "Submit",
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     )),

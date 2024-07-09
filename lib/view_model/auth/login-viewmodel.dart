@@ -58,8 +58,10 @@ class LoginViewmodel extends ChangeNotifier {
     isloadingTrue();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     // ShowToast(msg: "${password.text != "" ? "no" : "yes"}");
-    if (mobNumber.text.length != 10 || password.text == "") {
-      ShowToast(msg: "Enter your 10 digit Mobile number and password");
+    if (mobNumber.text.length != 10) {
+      ShowToast(msg: "Enter your 10 digit Mobile Number First");
+    } else if (password.text == "") {
+      ShowToast(msg: "Enter Password");
     } else {
       var data = await AuthApiRepository()
           .loginRepo(phone: mobNumber.text, password: password.text);

@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           alignment: Alignment.center,
                           child: Text("CheckIn",
-                              style: Theme.of(context).textTheme.bodySmall)),
+                              style: Theme.of(context).textTheme.displaySmall)),
                     )),
                     SizedBox(
                       width: 10,
@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Text(
                             "CheckOut",
-                            style: Theme.of(context).textTheme.bodySmall,
+                            style: Theme.of(context).textTheme.displaySmall,
                           )),
                     ))
                   ],
