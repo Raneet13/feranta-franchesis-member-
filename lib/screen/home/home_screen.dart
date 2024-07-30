@@ -1,3 +1,4 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:feranta_franchise/static/color.dart';
 import 'package:feranta_franchise/static/flutter_toast_message/toast_messge.dart';
 import 'package:feranta_franchise/view_model/auth/login-viewmodel.dart';
@@ -6,8 +7,38 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../back_to_close/systum_back_close_app.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    // _selectedIndex = widget.Index;
+    // widget.index != null
+    //     ? setState(() {
+    //         _selectedIndex = widget.index!;
+    //       })
+    //     : _selectedIndex = 0;
+
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      BackButtonInterceptor.add(backTocloseApp(context).myInterceptor);
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    BackButtonInterceptor.remove(backTocloseApp(context).myInterceptor);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

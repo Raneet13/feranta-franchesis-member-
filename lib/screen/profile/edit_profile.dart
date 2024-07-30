@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:feranta_franchise/configs/app_url.dart';
 import 'package:feranta_franchise/configs/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:badges/badges.dart' as badges;
@@ -68,10 +69,13 @@ class _EditProfiletlsState extends State<EditProfiletls> {
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: InkWell(
                         onTap: () async {
-                          await profile.insertProfileImage();
+                          await profile.insertProfileImage(context);
                         },
                         child: badges.Badge(
                           // badgeColor: primaryColor,
+                          badgeStyle: badges.BadgeStyle(
+                            badgeColor: Colors.black,
+                          ),
                           position:
                               badges.BadgePosition.custom(bottom: 2, end: 10),
                           badgeContent: const Icon(
@@ -112,7 +116,7 @@ class _EditProfiletlsState extends State<EditProfiletls> {
                     CustomTextField(
                       controller: profile.nameController,
                       KeyBoardType: TextInputType.name,
-                      hint: 'name',
+                      hint: 'Your Name',
                     ),
                     SizedBox(
                       height: height * 0.02,
@@ -124,7 +128,7 @@ class _EditProfiletlsState extends State<EditProfiletls> {
                     CustomTextField(
                       controller: profile.emailController,
                       KeyBoardType: TextInputType.emailAddress,
-                      hint: "xyz@gmail.com",
+                      hint: "Your Email Address",
                     ),
                     SizedBox(
                       height: height * 0.02,
@@ -136,7 +140,11 @@ class _EditProfiletlsState extends State<EditProfiletls> {
                     CustomTextField(
                       controller: profile.phoneController,
                       KeyBoardType: TextInputType.phone,
-                      hint: "1234567890",
+                      hint: "Your Phone Number",
+                      inputFormater: [
+                        LengthLimitingTextInputFormatter(10),
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
                     ),
                   ],
                 ),
@@ -158,7 +166,7 @@ class _EditProfiletlsState extends State<EditProfiletls> {
                   child: ElevatedButton(
                       onPressed: () async {
                         if (profile.nameController.text != "" &&
-                            profile.emailController.text != "") {
+                            profile.phoneController.text != "") {
                           await profile.updateProfileViewmodel();
                         } else {
                           ShowToast(msg: "Please Fill all the Field");

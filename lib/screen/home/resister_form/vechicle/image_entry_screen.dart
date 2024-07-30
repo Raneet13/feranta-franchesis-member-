@@ -40,7 +40,7 @@ class _ImageEntryPdfState extends State<ImageEntryPdf> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   InkWell(
-                    onTap: () => val.insertDemoImage(),
+                    onTap: () => val.insertDemoImage(context),
                     child: val.seeDemo != null
                         ? Image.file(
                             height: 150,

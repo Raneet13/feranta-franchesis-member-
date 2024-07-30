@@ -107,9 +107,6 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                           context, widget.ownerDetails!.id, true);
                     } else if (loginD.termsCheck &&
                         loginD.criminalCheck &&
-                        loginD.frontimg != null &&
-                        loginD.backimg != null &&
-                        loginD.img != null &&
                         loginD.city != "") {
                       await loginD.ownerRegister(context);
                     } else {
@@ -175,11 +172,11 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         SizedBox(
                                           width: 5,
                                         ),
-                                        Icon(
-                                          Icons.star,
-                                          size: 12,
-                                          color: Colors.red,
-                                        )
+                                        // Icon(
+                                        //   Icons.star,
+                                        //   size: 12,
+                                        //   color: Colors.red,
+                                        // )
                                       ],
                                     ),
                                     Container(
@@ -238,7 +235,7 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                                   child: Icon(
                                                     Icons.edit,
                                                     size: 25,
-                                                    color: Colors.red,
+                                                    color: Colors.black,
                                                   ),
                                                 ),
                                               ))
@@ -357,11 +354,11 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               MainAxisAlignment.start,
                                           children: [
                                             Text("Enter Email"),
-                                            Icon(
-                                              Icons.star,
-                                              color: Colors.red,
-                                              size: 12,
-                                            )
+                                            // Icon(
+                                            //   Icons.star,
+                                            //   color: Colors.red,
+                                            //   size: 12,
+                                            // )
                                           ],
                                         ),
                                         SizedBox(
@@ -467,6 +464,9 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             maxLines: 1,
                                             controller: val.contact,
                                             keyboardType: TextInputType.number,
+                                            validator: (value) =>
+                                                ValidateAll.validateMobile(
+                                                    value),
                                             inputFormatters: <TextInputFormatter>[
                                               LengthLimitingTextInputFormatter(
                                                   10),
@@ -1236,7 +1236,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text("Select State"),
+                                          Row(children: [
+                                            const Text("Select State"),
+                                            Icon(
+                                              Icons.star,
+                                              color: Colors.red,
+                                              size: 12,
+                                            )
+                                          ]),
                                           DropdownButton<chooselocation.State>(
                                             // value:val.state==""? val
                                             //     .masterModel!.response!.state!.first:val.state,
@@ -1648,11 +1655,11 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                             SizedBox(
                                               width: 5,
                                             ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 12,
-                                              color: Colors.red,
-                                            )
+                                            // Icon(
+                                            //   Icons.star,
+                                            //   size: 12,
+                                            //   color: Colors.red,
+                                            // )
                                           ],
                                         ),
                                         SizedBox(
@@ -1667,9 +1674,9 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                               FilteringTextInputFormatter
                                                   .digitsOnly,
                                             ],
-                                            validator: (input) =>
-                                                ValidateAll.validateAadhar(
-                                                    input),
+                                            // validator: (input) =>
+                                            //     ValidateAll.validateAadhar(
+                                            //         input),
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -1751,14 +1758,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         const Row(
                                           children: [
                                             Text("Enter Aadhaar Front Side"),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 12,
-                                              color: Colors.red,
-                                            )
+                                            // SizedBox(
+                                            //   width: 5,
+                                            // ),
+                                            // Icon(
+                                            //   Icons.star,
+                                            //   size: 12,
+                                            //   color: Colors.red,
+                                            // )
                                           ],
                                         ),
                                         InkWell(
@@ -1857,14 +1864,14 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                         const Row(
                                           children: [
                                             Text("Enter Aadhaar Back Side"),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 12,
-                                              color: Colors.red,
-                                            )
+                                            // SizedBox(
+                                            //   width: 5,
+                                            // ),
+                                            // Icon(
+                                            //   Icons.star,
+                                            //   size: 12,
+                                            //   color: Colors.red,
+                                            // )
                                           ],
                                         ),
                                         InkWell(
@@ -3201,6 +3208,49 @@ class _SignUpPageState extends State<OwnerResisterPage> {
                                           ),
                                         ),
                                       ],
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text("Enter Cheque image"),
+                                        InkWell(
+                                          onTap: () => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Document_Upload(
+                                                          fileName: "cheque"))),
+                                          child: Container(
+                                            height: 48,
+                                            width: double.infinity,
+                                            padding:
+                                                const EdgeInsets.only(left: 15),
+                                            alignment: Alignment.centerLeft,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey.shade200,
+                                                border: Border.all(
+                                                    color: Colors.black38),
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: val.cheque != null
+                                                ? Text("${val.cheque!.path}")
+                                                : val.cheque_update != null
+                                                    ? Text(
+                                                        "${val.cheque_update}")
+                                                    : const Text(
+                                                        "Upload cheque image"),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
                                     ),
                                   ],
                                 ),

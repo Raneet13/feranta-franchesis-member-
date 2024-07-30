@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +22,7 @@ import '../../repository/vechicle/vechicle_repository.dart';
 import '../../static/flutter_toast_message/toast_messge.dart';
 
 class VehicleViewmodel extends ChangeNotifier {
+  final ImagePicker _picker = ImagePicker();
   OwnerModel? ownerModel;
   bool isLoading = false;
   VechcleRecordModel? vechcleRecordModel;
@@ -396,17 +398,54 @@ class VehicleViewmodel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future insertDemoImage() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+  Future insertDemoImage(BuildContext context) async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            content: Text("Choose the medium of your Image"),
+            actions: <Widget>[
+              ListTile(
+                leading: Icon(Icons.photo_library),
+                title: Text('Photo Library'),
+                onTap: () {
+                  _pickImagelogo(ImageSource.gallery);
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.photo_camera),
+                title: Text('Camera'),
+                onTap: () {
+                  _pickImagelogo(ImageSource.camera);
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
 
-    if (result != null) {
-      var compressImage =
-          await compressFile(file: File(result.files.single.path!));
+  Future<void> _pickImagelogo(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
+    final LostDataResponse response = await _picker.retrieveLostData();
+
+    if (response.isEmpty) {
+      if (_picker != null) {
+        var compressImage = await compressFile(file: File(pickedFile!.path));
+
+        seeDemo = File(compressImage!.path);
+      } else {
+        ShowToast(msg: "You Don't Sellect Any Image");
+      }
+      notifyListeners();
+    } else {
+      var compressImage = await compressFile(file: File(response.file!.path));
 
       seeDemo = File(compressImage!.path);
-    } else {
-      // print(result);
-      // User canceled the picker
+
+      notifyListeners();
     }
     notifyListeners();
   }

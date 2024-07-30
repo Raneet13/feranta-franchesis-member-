@@ -124,9 +124,6 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                           context, widget.driverDetails!.id);
                     } else if (loginD.termsCheck &&
                         loginD.criminalCheck &&
-                        loginD.img != null &&
-                        loginD.frontimg != null &&
-                        loginD.backimg != null &&
                         loginD.city != "" &&
                         loginD.drivingExpiryController.text != "") {
                       await loginD.userRegister(context);
@@ -193,11 +190,11 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         SizedBox(
                                           width: 5,
                                         ),
-                                        Icon(
-                                          Icons.star,
-                                          size: 12,
-                                          color: Colors.red,
-                                        )
+                                        // Icon(
+                                        //   Icons.star,
+                                        //   size: 12,
+                                        //   color: Colors.red,
+                                        // )
                                       ],
                                     ),
                                     Container(
@@ -256,7 +253,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                                   child: Icon(
                                                     Icons.edit,
                                                     size: 25,
-                                                    color: Colors.red,
+                                                    color: Colors.black,
                                                   ),
                                                 ),
                                               ))
@@ -290,8 +287,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: TextFormField(
                                             maxLines: 1,
                                             controller: val.name,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
+                                            keyboardType: TextInputType.text,
                                             validator: (value) =>
                                                 ValidateAll.inputValidate(
                                                     value),
@@ -380,11 +376,11 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             SizedBox(
                                               width: 5,
                                             ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 12,
-                                              color: Colors.red,
-                                            )
+                                            // Icon(
+                                            //   Icons.star,
+                                            //   size: 12,
+                                            //   color: Colors.red,
+                                            // )
                                           ],
                                         ),
                                         SizedBox(
@@ -392,8 +388,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: TextFormField(
                                             maxLines: 1,
                                             controller: val.email,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
+                                            keyboardType: TextInputType.text,
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -769,8 +764,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: TextFormField(
                                             maxLines: 1,
                                             controller: val.father_name,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
+                                            keyboardType: TextInputType.text,
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -854,8 +848,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: TextFormField(
                                             maxLines: 1,
                                             controller: val.mother_name,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
+                                            keyboardType: TextInputType.text,
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -1087,8 +1080,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: TextFormField(
                                             maxLines: 4,
                                             controller: val.address1,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
+                                            keyboardType: TextInputType.text,
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -1263,7 +1255,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text("Select State"),
+                                          Row(children: [
+                                            const Text("Select State"),
+                                            Icon(
+                                              Icons.star,
+                                              color: Colors.red,
+                                              size: 12,
+                                            )
+                                          ]),
                                           DropdownButton<chooselocation.State>(
                                             // value:val.state==""? val
                                             //     .masterModel!.response!.state!.first:val.state,
@@ -1669,14 +1668,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         const Row(
                                           children: [
                                             Text("Enter Aadhaar Number"),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 12,
-                                              color: Colors.red,
-                                            )
+                                            // SizedBox(
+                                            //   width: 5,
+                                            // ),
+                                            // Icon(
+                                            //   Icons.star,
+                                            //   size: 12,
+                                            //   color: Colors.red,
+                                            // )
                                           ],
                                         ),
                                         SizedBox(
@@ -1685,9 +1684,9 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                             maxLines: 1,
                                             controller: val.ahdarno,
                                             keyboardType: TextInputType.number,
-                                            validator: (value) =>
-                                                ValidateAll.validateAadhar(
-                                                    value),
+                                            // validator: (value) =>
+                                            //     ValidateAll.validateAadhar(
+                                            //         value),
                                             inputFormatters: <TextInputFormatter>[
                                               LengthLimitingTextInputFormatter(
                                                   12),
@@ -1774,14 +1773,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         const Row(
                                           children: [
                                             Text("Enter Aadhaar Front Side"),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 12,
-                                              color: Colors.red,
-                                            )
+                                            // SizedBox(
+                                            //   width: 5,
+                                            // ),
+                                            // Icon(
+                                            //   Icons.star,
+                                            //   size: 12,
+                                            //   color: Colors.red,
+                                            // )
                                           ],
                                         ),
                                         InkWell(
@@ -1828,14 +1827,14 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         const Row(
                                           children: [
                                             Text("Enter Aadhaar back Side"),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 12,
-                                              color: Colors.red,
-                                            )
+                                            // SizedBox(
+                                            //   width: 5,
+                                            // ),
+                                            // Icon(
+                                            //   Icons.star,
+                                            //   size: 12,
+                                            //   color: Colors.red,
+                                            // )
                                           ],
                                         ),
                                         InkWell(
@@ -1924,46 +1923,6 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                     const SizedBox(
                                       height: 16,
                                     ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Text("Enter Cheque image"),
-                                        InkWell(
-                                          onTap: () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Document_Upload(
-                                                          fileName: "cheque"))),
-                                          child: Container(
-                                            height: 48,
-                                            width: double.infinity,
-                                            padding:
-                                                const EdgeInsets.only(left: 15),
-                                            alignment: Alignment.centerLeft,
-                                            decoration: BoxDecoration(
-                                                color: Colors.grey.shade200,
-                                                border: Border.all(
-                                                    color: Colors.black38),
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: val.cheque != null
-                                                ? Text("${val.cheque!.path}")
-                                                : val.cheque_update != null
-                                                    ? Text(
-                                                        "${val.cheque_update}")
-                                                    : const Text(
-                                                        "Upload cheque image"),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 16,
-                                    ),
                                   ],
                                 ),
                               ),
@@ -1993,7 +1952,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "Driver Details",
+                                  "Driver Licence Details",
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ),
@@ -2036,8 +1995,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: TextFormField(
                                             maxLines: 1,
                                             controller: val.license_no,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
+                                            keyboardType: TextInputType.text,
                                             validator: (value) =>
                                                 ValidateAll.inputValidate(
                                                     value),
@@ -2415,7 +2373,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                     //         maxLines: 1,
                                     //         controller: val.engineNumberField,
                                     //         keyboardType:
-                                    //             TextInputType.emailAddress,
+                                    //             TextInputType.text,
                                     //         validator: (input) =>
                                     //             ValidateAll.inputValidate(
                                     //                 input),
@@ -2502,7 +2460,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                     //         maxLines: 1,
                                     //         controller: val.rcNumberField,
                                     //         keyboardType:
-                                    //             TextInputType.emailAddress,
+                                    //             TextInputType.text,
                                     //         validator: (input) =>
                                     //             ValidateAll.inputValidate(
                                     //                 input),
@@ -2589,7 +2547,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                     //         maxLines: 1,
                                     //         controller: val.license_no,
                                     //         keyboardType:
-                                    //             TextInputType.emailAddress,
+                                    //             TextInputType.text,
                                     //         validator: (input) =>
                                     //             ValidateAll.inputValidate(
                                     //                 input),
@@ -2711,8 +2669,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: TextFormField(
                                             maxLines: 1,
                                             controller: val.ac_name,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
+                                            keyboardType: TextInputType.text,
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -2884,8 +2841,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: TextFormField(
                                             maxLines: 1,
                                             controller: val.bank_name,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
+                                            keyboardType: TextInputType.text,
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -2968,8 +2924,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: TextFormField(
                                             maxLines: 1,
                                             controller: val.branch_name,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
+                                            keyboardType: TextInputType.text,
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -3052,8 +3007,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: TextFormField(
                                             maxLines: 1,
                                             controller: val.ifsc,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
+                                            keyboardType: TextInputType.text,
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -3121,6 +3075,49 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                         ),
                                       ],
                                     ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text("Enter Cheque image"),
+                                        InkWell(
+                                          onTap: () => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Document_Upload(
+                                                          fileName: "cheque"))),
+                                          child: Container(
+                                            height: 48,
+                                            width: double.infinity,
+                                            padding:
+                                                const EdgeInsets.only(left: 15),
+                                            alignment: Alignment.centerLeft,
+                                            decoration: BoxDecoration(
+                                                color: Colors.grey.shade200,
+                                                border: Border.all(
+                                                    color: Colors.black38),
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            child: val.cheque != null
+                                                ? Text("${val.cheque!.path}")
+                                                : val.cheque_update != null
+                                                    ? Text(
+                                                        "${val.cheque_update}")
+                                                    : const Text(
+                                                        "Upload cheque image"),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
                                   ],
                                 ),
                               ),
@@ -3168,8 +3165,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: TextFormField(
                                             maxLines: 1,
                                             controller: val.nomineeName,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
+                                            keyboardType: TextInputType.text,
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
@@ -3337,8 +3333,7 @@ class _SignUpPageState extends State<SignUpDriverPage> {
                                           child: TextFormField(
                                             maxLines: 4,
                                             controller: val.nomineeAddress,
-                                            keyboardType:
-                                                TextInputType.emailAddress,
+                                            keyboardType: TextInputType.text,
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,

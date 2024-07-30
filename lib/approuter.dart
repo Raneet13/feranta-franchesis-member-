@@ -1,3 +1,4 @@
+import 'package:feranta_franchise/screen/location_permission/location_permissin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -50,6 +51,12 @@ class AppRoute {
         builder: (context, state) {
           return LognScreen();
         },
+      ),
+      GoRoute(
+        path: '/permission',
+        name: "Permission",
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const PermissionPhone(),
       ),
       GoRoute(
           path: '/imageupload',

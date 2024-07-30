@@ -45,7 +45,6 @@ class _BottomNavState extends State<BottomNav> {
     //       })
     //     : _selectedIndex = 0;
 
-    BackButtonInterceptor.add(backTocloseApp().myInterceptor);
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       Provider.of<LoginViewmodel>(context, listen: false).checkCheckinOutTrue();
@@ -54,12 +53,12 @@ class _BottomNavState extends State<BottomNav> {
     });
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    BackButtonInterceptor.remove(backTocloseApp().myInterceptor);
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   BackButtonInterceptor.remove(backTocloseApp().myInterceptor);
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

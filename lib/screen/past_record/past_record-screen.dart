@@ -1,3 +1,4 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:feranta_franchise/screen/past_record/vechicle/vechicle_list_widget.dart';
 import 'package:feranta_franchise/static/flutter_toast_message/toast_messge.dart';
 import 'package:feranta_franchise/view_model/vechicle_viewwModel/vechicle_view_model.dart';
@@ -9,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../static/color.dart';
 import '../../view_model/allRecordViewmodel/all-record_viewmodel.dart';
+import '../back_to_close/systum_back_close_app.dart';
 
 class PastRecordScreen extends StatefulWidget {
   const PastRecordScreen({super.key});
@@ -25,6 +27,7 @@ class _PastRecordScreenState extends State<PastRecordScreen>
 
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      BackButtonInterceptor.add(backTocloseApp(context).myInterceptor);
       var recordViewModel =
           await Provider.of<RecordViewmodel>(context, listen: false);
       recordViewModel
@@ -42,6 +45,7 @@ class _PastRecordScreenState extends State<PastRecordScreen>
   @override
   void dispose() {
     // TODO: implement dispose
+    BackButtonInterceptor.remove(backTocloseApp(context).myInterceptor);
     Provider.of<RecordViewmodel>(context, listen: false)
         .tabController
         .dispose();

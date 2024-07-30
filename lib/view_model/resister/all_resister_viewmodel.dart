@@ -64,6 +64,7 @@ class ResisterViewmodel extends ChangeNotifier {
   String state = "";
   String city = "";
   // pinCode.text = "";
+  final GlobalKey alertKey = GlobalKey();
   String block = "";
   String ditrict = "";
   String blood_group = "";
@@ -142,6 +143,7 @@ class ResisterViewmodel extends ChangeNotifier {
         context: context,
         builder: (context) {
           return AlertDialog(
+            key: alertKey,
             backgroundColor: Colors.white,
             content: Text("Choose the medium of your Image"),
             actions: <Widget>[
@@ -168,28 +170,46 @@ class ResisterViewmodel extends ChangeNotifier {
 
   Future<void> _pickImagelogo(ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
+    final LostDataResponse response = await _picker.retrieveLostData();
 
-    if (pickedFile != null) {
-      var compressImage = await compressFile(file: File(pickedFile.path));
+    if (response.isEmpty) {
+      if (pickedFile != null) {
+        var compressImage = await compressFile(file: File(pickedFile.path));
+        img = File(compressImage!.path);
+
+        notifyListeners();
+      } else {
+        ShowToast(msg: 'No image selected.');
+      }
+    } else {
+      var compressImage = await compressFile(file: File(response.file!.path));
       img = File(compressImage!.path);
 
       notifyListeners();
-    } else {
-      ShowToast(msg: 'No image selected.');
     }
+    notifyListeners();
   }
 
   Future<void> _pickImage(ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
+    final LostDataResponse response = await _picker.retrieveLostData();
 
-    if (pickedFile != null) {
-      var compressImage = await compressFile(file: File(pickedFile.path));
+    if (response.isEmpty) {
+      if (pickedFile != null) {
+        var compressImage = await compressFile(file: File(pickedFile.path));
+        seeDemo = File(compressImage!.path);
+
+        notifyListeners();
+      } else {
+        ShowToast(msg: 'No image selected.');
+      }
+    } else {
+      var compressImage = await compressFile(file: File(response.file!.path));
       seeDemo = File(compressImage!.path);
 
       notifyListeners();
-    } else {
-      ShowToast(msg: 'No image selected.');
     }
+    notifyListeners();
   }
 
   insertDemoImage(BuildContext context) {
@@ -197,6 +217,7 @@ class ResisterViewmodel extends ChangeNotifier {
         context: context,
         builder: (context) {
           return AlertDialog(
+            key: alertKey,
             backgroundColor: Colors.white,
             content: Text("Choose the medium of your Image"),
             actions: <Widget>[
@@ -537,6 +558,7 @@ class ResisterViewmodel extends ChangeNotifier {
         context: context,
         builder: (context) {
           return AlertDialog(
+            key: alertKey,
             backgroundColor: Colors.white,
             content: Text("Choose the medium of your Image"),
             actions: <Widget>[
@@ -574,16 +596,26 @@ class ResisterViewmodel extends ChangeNotifier {
 
   Future<void> _pickImagelogoCus(ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
+    final LostDataResponse response = await _picker.retrieveLostData();
 
-    if (pickedFile != null) {
-      var compressImage = await compressFile(file: File(pickedFile.path));
+    if (response.isEmpty) {
+      if (pickedFile != null) {
+        var compressImage = await compressFile(file: File(pickedFile.path));
+
+        customerImage = File(compressImage!.path);
+
+        notifyListeners();
+      } else {
+        ShowToast(msg: 'No image selected.');
+      }
+    } else {
+      var compressImage = await compressFile(file: File(response.file!.path));
 
       customerImage = File(compressImage!.path);
 
       notifyListeners();
-    } else {
-      ShowToast(msg: 'No image selected.');
     }
+    notifyListeners();
   }
 
   customerRegister(BuildContext context) async {

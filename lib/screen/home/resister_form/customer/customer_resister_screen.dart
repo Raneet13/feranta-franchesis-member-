@@ -70,10 +70,8 @@ class _CustomerResisterState extends State<CustomerResister> {
                   if (widget.customerDetails != null) {
                     await customer.updatecustomerRegisterView(
                         context, widget.customerDetails!.id);
-                  } else if (customer.customerImage != null) {
-                    await customer.customerRegister(context);
                   } else {
-                    ShowToast(msg: "Enter profile image");
+                    await customer.customerRegister(context);
                   }
                   // ShowToast(msg: "Form is validate");
                 } else {
@@ -101,11 +99,11 @@ class _CustomerResisterState extends State<CustomerResister> {
                       SizedBox(
                         width: 5,
                       ),
-                      Icon(
-                        Icons.star,
-                        size: 12,
-                        color: Colors.red,
-                      )
+                      // Icon(
+                      //   Icons.star,
+                      //   size: 12,
+                      //   color: Colors.red,
+                      // )
                     ],
                   ),
                   Container(
@@ -113,6 +111,9 @@ class _CustomerResisterState extends State<CustomerResister> {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: badges.Badge(
                       // badgeColor: primaryColor,
+                      badgeStyle: badges.BadgeStyle(
+                        badgeColor: Colors.black,
+                      ),
                       position: badges.BadgePosition.custom(bottom: 2, end: 10),
                       badgeContent: InkWell(
                         onTap: () async {
@@ -178,7 +179,7 @@ class _CustomerResisterState extends State<CustomerResister> {
                         child: TextFormField(
                           maxLines: 1,
                           controller: customer.cname, // val.name,
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.text,
                           validator: (input) =>
                               ValidateAll.inputValidate(input),
                           style: const TextStyle(
@@ -340,11 +341,11 @@ class _CustomerResisterState extends State<CustomerResister> {
                           SizedBox(
                             width: 5,
                           ),
-                          Icon(
-                            Icons.star,
-                            size: 12,
-                            color: Colors.red,
-                          )
+                          // Icon(
+                          //   Icons.star,
+                          //   size: 12,
+                          //   color: Colors.red,
+                          // )
                         ],
                       ),
                       SizedBox(
@@ -352,9 +353,9 @@ class _CustomerResisterState extends State<CustomerResister> {
                         child: TextFormField(
                           maxLines: 1,
                           controller: customer.cemail, // val.name,
-                          keyboardType: TextInputType.emailAddress,
-                          validator: (input) =>
-                              ValidateAll.validateEmail(input),
+                          keyboardType: TextInputType.text,
+                          // validator: (input) =>
+                          //     ValidateAll.validateEmail(input),
                           style: const TextStyle(
                             color: Colors.black,
                             fontSize: 12,

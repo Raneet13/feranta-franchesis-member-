@@ -40,16 +40,17 @@ class _SplashScreenState extends State<SplashScreen> {
                   final SharedPreferences prefs =
                       await SharedPreferences.getInstance();
                   String? userId = await prefs.getString("userId");
+                  String? permission = await prefs.getString("locEnDs");
 //         bool? onScreen = await prefs.getBool('onScreen');
                   if (userId != null) {
                     context.pushReplacement('/home', extra: {'id': "0"});
                   } else {
 //           // context.go('/login');
-//           if (onScreen == true) {
-                    context.pushReplacement('/login');
-//           } else
-//             context.go('/on');
-//         }
+                    if (permission != null) {
+                      context.pushReplacement('/login');
+                    } else
+                      context.pushReplacement('/permission');
+                    // }
 //       });
 
 //       // context.go('/home', extra: {'id': "0"});

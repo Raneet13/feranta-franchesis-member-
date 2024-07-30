@@ -1,4 +1,6 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:feranta_franchise/screen/back_to_close/systum_back_close_app.dart';
 import 'package:feranta_franchise/view_model/auth/login-viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -18,9 +20,17 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    Provider.of<LoginViewmodel>(context, listen: false).checkInOutHistory();
-    // });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BackButtonInterceptor.add(backTocloseApp(context).myInterceptor);
+      Provider.of<LoginViewmodel>(context, listen: false).checkInOutHistory();
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    BackButtonInterceptor.remove(backTocloseApp(context).myInterceptor);
+    super.dispose();
   }
 
   @override

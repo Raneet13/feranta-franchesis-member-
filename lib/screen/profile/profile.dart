@@ -1,3 +1,4 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:feranta_franchise/screen/profile/profile_shimmer.dart';
 import 'package:flutter/cupertino.dart';
@@ -5,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../configs/app_url.dart';
 import '../../configs/custom_elivated_button.dart';
 import '../../static/color.dart';
 import '../../view_model/auth/login-viewmodel.dart';
 import '../../view_model/profile/profile_viewmodel.dart';
+import '../back_to_close/systum_back_close_app.dart';
 import 'edit_profile.dart';
 
 class ProfileScren extends StatefulWidget {
@@ -26,9 +29,18 @@ class _ProfileScrenState extends State<ProfileScren> {
     // TODO: implement initState
 
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) =>
-        Provider.of<ProfileViewmodel>(context, listen: false)
-            .viewProfiledetails());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BackButtonInterceptor.add(backTocloseApp(context).myInterceptor);
+      Provider.of<ProfileViewmodel>(context, listen: false)
+          .viewProfiledetails();
+    });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    BackButtonInterceptor.remove(backTocloseApp(context).myInterceptor);
+    super.dispose();
   }
 
   void showLogoutDialog(BuildContext context) {
@@ -303,6 +315,41 @@ class _ProfileScrenState extends State<ProfileScren> {
                                                     'url':
                                                         AppUrl.ferantaCustomer
                                                   }),
+                                                  leading: const Icon(
+                                                    Icons.contact_mail,
+                                                    size: 20,
+                                                  ),
+                                                  title: Text("Contact Us",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyMedium),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Container(
+                                                // height: 50,
+                                                margin: const EdgeInsets.all(3),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color: Colors.grey.shade100,
+                                                    boxShadow: const [
+                                                      BoxShadow(
+                                                          color: Colors.grey,
+                                                          blurRadius: 5.0)
+                                                    ]),
+                                                child: ListTile(
+                                                  onTap: () =>
+                                                      launch('tel:08062097473'),
+                                                  // context
+                                                  //   .push('/web', extra: {
+                                                  // 'id': '2',
+                                                  // 'url':
+                                                  //     AppUrl.ferantaCustomer
+                                                  //}),
                                                   leading: const Icon(
                                                     Icons.support_agent,
                                                     size: 20,
